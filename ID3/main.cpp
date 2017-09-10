@@ -18,12 +18,12 @@ vector<bool> labels;
 float label_entropy = 0;
 float label_majority_error = 0;
 vector<string> names;
-
+int treeDepth = 0;
 typedef struct TreeNode {
 public:
 	string attribute;
 	int attributeNum;
-	vector<TreeNode *> branches;
+	vector<TreeNode> branches;
 	bool leaf;
 	bool label_value;
 } TreeNode;
@@ -296,13 +296,14 @@ float computeOverallME(vector<bool> feature) {
 
 void removeColumnFromTable(int maxGainFeatureIndex) {
 
-	for(int i = 0; i < atrributetable.size(); i++){
-		if(atrributetable.at(i).size() > maxGainFeatureIndex){
-			atrributetable.at(i).erase(atrributetable.at(i).begin() + maxGainFeatureIndex);
+	for (int i = 0; i < atrributetable.size(); i++) {
+		if (atrributetable.at(i).size() > maxGainFeatureIndex) {
+			atrributetable.at(i).erase(
+					atrributetable.at(i).begin() + maxGainFeatureIndex);
 		}
 	}
 	//decrease feature count
-	NUM_FEATURES --;
+	NUM_FEATURES--;
 
 	//print out the table to check.
 //	for (int i = 0; i < atrributetable.size(); i++) {
@@ -314,6 +315,28 @@ void removeColumnFromTable(int maxGainFeatureIndex) {
 //		cout << endl;
 //	}
 
+}
+void printTree(TreeNode* root, int space) {
+	if (root->branches.size() == 0) {
+		cout << root->attribute << endl;
+		return;
+	}
+	space += 10;
+	printTree(&root->branches.at(0), space);
+	cout << endl;
+	for (int i = 0; i < space; i++) {
+		cout << " ";
+	}
+	cout << root->attribute << endl;
+}
+void printTreeDriver(TreeNode* root) {
+	printTree(root, 0);
+}
+
+void removeRowFromTable(int rowToDelete) {
+	if (atrributetable.size() > rowToDelete) {
+		atrributetable.erase(atrributetable.begin() + rowToDelete);
+	}
 }
 
 TreeNode ID3() {
@@ -339,7 +362,7 @@ TreeNode ID3() {
 		currentNode.leaf = true;
 
 		//A = attribute in Attributes that BEST classifies S.
-		//find majority (betwen true and false) and set that to node.label_value
+		//find majority (between true and false) and set that to node.label_value
 		int numTrue = 0, numFalse = 0;
 		for (int i = 0; i < names.size(); i++) {
 			if (labels.at(i)) {
@@ -375,6 +398,49 @@ TreeNode ID3() {
 		//now we need to remove that attribute column from the attribute table.
 		removeColumnFromTable(maxGainFeatureIndex);
 
+		//size
+		int count = 0;
+		//create children branches
+		for (int i = 0; i < 2; i++) {
+			cout << "creating child branches " << i << endl;
+			TreeNode child;
+			for (int j = 0; j < atrributetable.size(); j++) {
+				if (atrributetable.at(j).at(maxGainFeatureIndex) == false) {
+					names.erase(names.begin() + j);
+					labels.erase(labels.begin() + j);
+					removeRowFromTable(j);
+				}else{
+					count++;
+				}
+			}
+			//if we need to set a pure label / leaf node
+			if (count == 0 || treeDepth >= 2) {
+				float positivep = 0, negativep = 0; //set these to = 0
+				for (int i = 0; i < names.size(); i++) {
+					if (labels.at(i)) {
+						positivep++;
+					} else {
+						negativep++;
+					}
+				}
+
+				cout << "pushing back child w/ label value = " ;
+				if(positivep > negativep){
+					child.label_value = true;
+					cout <<" true " <<endl;
+				}else{
+					child.label_value = false;
+					cout <<" false " <<endl;
+				}
+				child.leaf = true;
+				currentNode.branches.push_back(child);
+			}else{
+				cout << "\n***Recursing***" << endl;
+				treeDepth++;
+				currentNode.branches.push_back(ID3());
+			}
+		}
+
 	}
 
 }
@@ -385,22 +451,7 @@ TreeNode createTreeDriver() {
 	return root;
 }
 
-void printTree(TreeNode* root, int space) {
-	if (root->branches.size() == 0) {
-		cout << root->attribute << endl;
-		return;
-	}
-	space += 10;
-	printTree(root->branches.at(0), space);
-	cout << endl;
-	for (int i = 0; i < space; i++) {
-		cout << " ";
-	}
-	cout << root->attribute << endl;
-}
-void printTreeDriver(TreeNode* root) {
-	printTree(root, 0);
-}
+
 
 int main(int argc, char* argv[]) {
 
