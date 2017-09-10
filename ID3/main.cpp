@@ -12,41 +12,38 @@
 
 using namespace std;
 
-class TreeNode {
-public:
-	string attirbute;
-	vector<TreeNode *> branches;
-	TreeNode();
-};
+int NUM_FEATURES = 6;
+vector<vector<bool> > atrributetable;
+vector<bool> labels;
+float label_entropy = 0;
+float label_majority_error = 0;
+vector<string> names;
 
-class DecisionTree {
+typedef struct TreeNode {
 public:
-	TreeNode * root;
-	TreeNode createTreeDriver();
-};
+	string attribute;
+	int attributeNum;
+	vector<TreeNode *> branches;
+	bool leaf;
+	bool label_value;
+} TreeNode;
 
 class MatrixWrapper {
 
 public:
-	int NUM_FEATURES = 6;
-	vector<vector<bool> > atrributetable;
-	vector<bool> labels;
-	float label_entropy = 0;
-	float label_majority_error = 0;
-	vector<string> names;
-	int height = 0, width = 0;
+
 	MatrixWrapper(char* file);
 	void populateAttributeTable(vector<string> names,
 			vector<vector<bool> >* attributetable);
 
 	void printAttributeTable(vector<vector<bool> >* atrributetable);
 
-	void computeLabelEntropy(vector<bool> labels);
+//	void computeLabelEntropy(vector<bool> labels);
 
-	float computerFeatureGain(vector<bool> labels,
-			vector<vector<bool> > atrributetable, int featureNumber);
+//	float computeFeatureGain(vector<bool> labels,
+//	vector<vector<bool> > atrributetable, int featureNumber);
 
-	void computeOverallME(vector<bool> feature);
+//	float computeOverallME(vector<bool> feature);
 
 	/*
 	 *   	0. Is their first name longer than their last name?
@@ -189,7 +186,7 @@ void MatrixWrapper::printAttributeTable(vector<vector<bool> >* atrributetable) {
 	}
 }
 
-void MatrixWrapper::computeLabelEntropy(vector<bool> labels) {
+void computeLabelEntropy(vector<bool> labels) {
 	//Entropy(S) = H(S) = -p_+log_2(p_+)-p_-log_2(p_-)
 	float positivep, negativep;
 	for (int i = 0; i < labels.size(); i++) {
@@ -214,7 +211,7 @@ void MatrixWrapper::computeLabelEntropy(vector<bool> labels) {
 	cout << "H(S) = " << label_entropy << endl;
 }
 
-float MatrixWrapper::computerFeatureGain(vector<bool> labels,
+float computeFeatureGain(vector<bool> labels,
 		vector<vector<bool> > atrributetable, int featureNumber) {
 
 	//Gain(S, Feature) = H(S) - summation |S_v| / |S| H(S_v)
@@ -277,7 +274,7 @@ float MatrixWrapper::computerFeatureGain(vector<bool> labels,
 
 }
 
-void MatrixWrapper::computeOverallME(vector<bool> feature) {
+float computeOverallME(vector<bool> feature) {
 	float positivep, negativep;
 	for (int i = 0; i < feature.size(); i++) {
 		if (feature.at(i)) {
@@ -293,34 +290,128 @@ void MatrixWrapper::computeOverallME(vector<bool> feature) {
 		label_majority_error = 1 - (negativep / feature.size());
 	}
 
-	cout << "Label ME = " << label_majority_error << endl;
+//	cout << "Label ME = " << label_majority_error << endl;
+	return label_majority_error;
 }
 
+void removeColumnFromTable(int maxGainFeatureIndex) {
 
-
-
-int main(int argc, char* argv[]) {
-//	MatrixWrapper Matrix("Updated_Dataset/updated_train.txt");
-	MatrixWrapper Matrix(
-			"Updated_Dataset/Updated_CVSplits/updated_training00.txt");
-	Matrix.populateAttributeTable(Matrix.names, &Matrix.atrributetable);
-	Matrix.printAttributeTable(&Matrix.atrributetable);
-	Matrix.computeLabelEntropy(Matrix.labels);
-	Matrix.computeOverallME(Matrix.labels);
-
-
-	int maxGainFeatureIndex = 0;
-	float maxGain = 0;
-	for (int i = 0; i < Matrix.NUM_FEATURES; i++) {
-		float temp = Matrix.computerFeatureGain(Matrix.labels,
-				Matrix.atrributetable, i);
-		if (temp > maxGain) {
-			maxGain = temp;
-			maxGainFeatureIndex = i;
+	for(int i = 0; i < atrributetable.size(); i++){
+		if(atrributetable.at(i).size() > maxGainFeatureIndex){
+			atrributetable.at(i).erase(atrributetable.at(i).begin() + maxGainFeatureIndex);
 		}
 	}
-	cout << "Root node is feature # : " << maxGainFeatureIndex << endl;
+	//decrease feature count
+	NUM_FEATURES --;
 
+	//print out the table to check.
+//	for (int i = 0; i < atrributetable.size(); i++) {
+//		for (int j = 0; j < NUM_FEATURES; j++) {
+//			if (j == 0)
+//				cout << names.at(i) << ": \t\t";
+//			cout << atrributetable.at(i).at(j);
+//		}
+//		cout << endl;
+//	}
 
+}
+
+TreeNode ID3() {
+//	MatrixWrapper matrix;
+	//if all examples have same label: return a single node tree w/ the label.
+	bool sameFlag = true;
+	bool firstLabel = labels.at(0);
+	for (int i = 0; i < labels.size(); i++) {
+		if (!(labels.at(i) && (firstLabel))) {
+			sameFlag = false;
+			i = labels.size();
+		}
+	}
+
+	TreeNode currentNode;
+	if (sameFlag) {
+		currentNode.leaf = true;
+		currentNode.attribute = "all";
+		return currentNode;
+	} else {
+		//calculate information gain by using matrix wrapper methods.
+
+		currentNode.leaf = true;
+
+		//A = attribute in Attributes that BEST classifies S.
+		//find majority (betwen true and false) and set that to node.label_value
+		int numTrue = 0, numFalse = 0;
+		for (int i = 0; i < names.size(); i++) {
+			if (labels.at(i)) {
+				numTrue++;
+			} else {
+				numFalse++;
+			}
+		}
+		//currentNode.label_value = (numTrue > numFalse);
+		//for each possible value v of that A can take
+		//add a new tree branch corresponding to A=v
+		//Let s_v be the subset of examples in S w/ A=v
+		//if s_v is empty:
+		//add lead node w/ common value of Label in S
+		//ID3(S_v, Attributes - {A}, Label)
+
+		computeLabelEntropy(labels);
+		computeOverallME(labels);
+
+		int maxGainFeatureIndex = 0;
+		float maxGain = 0;
+		for (int i = 0; i < NUM_FEATURES; i++) {
+			float temp = computeFeatureGain(labels, atrributetable, i);
+			if (temp > maxGain) {
+				maxGain = temp;
+				maxGainFeatureIndex = i;
+			}
+		}
+		cout << "Root node is feature # : " << maxGainFeatureIndex << endl;
+
+		//we have a root node ladies and gentleman
+		currentNode.attributeNum = maxGainFeatureIndex;
+		//now we need to remove that attribute column from the attribute table.
+		removeColumnFromTable(maxGainFeatureIndex);
+
+	}
+
+}
+
+TreeNode createTreeDriver() {
+
+	TreeNode root = ID3();
+	return root;
+}
+
+void printTree(TreeNode* root, int space) {
+	if (root->branches.size() == 0) {
+		cout << root->attribute << endl;
+		return;
+	}
+	space += 10;
+	printTree(root->branches.at(0), space);
+	cout << endl;
+	for (int i = 0; i < space; i++) {
+		cout << " ";
+	}
+	cout << root->attribute << endl;
+}
+void printTreeDriver(TreeNode* root) {
+	printTree(root, 0);
+}
+
+int main(int argc, char* argv[]) {
+
+	//	MatrixWrapper Matrix("Updated_Dataset/updated_train.txt");
+	MatrixWrapper matrix(
+			"Updated_Dataset/Updated_CVSplits/updated_training00.txt");
+	matrix.populateAttributeTable(names, &atrributetable);
+	//Matrix.printAttributeTable(&Matrix.atrributetable);
+
+	TreeNode root;
+	root = createTreeDriver();
+	printTreeDriver(&root);
 	return 0;
 }
