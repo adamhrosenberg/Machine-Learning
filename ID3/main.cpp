@@ -297,7 +297,7 @@ float computeOverallME(vector<bool> feature) {
 void removeColumnFromTable(int maxGainFeatureIndex) {
 
 	for (int i = 0; i < atrributetable.size(); i++) {
-		if (atrributetable.at(i).size() > maxGainFeatureIndex) {
+		if (atrributetable.at(i).size() > maxGainFeatureIndex && atrributetable.at(i).size() > 1) {
 			atrributetable.at(i).erase(
 					atrributetable.at(i).begin() + maxGainFeatureIndex);
 		}
@@ -395,8 +395,7 @@ TreeNode ID3() {
 
 		//we have a root node ladies and gentleman
 		currentNode.attributeNum = maxGainFeatureIndex;
-		//now we need to remove that attribute column from the attribute table.
-		removeColumnFromTable(maxGainFeatureIndex);
+
 
 		//size
 		int count = 0;
@@ -405,7 +404,7 @@ TreeNode ID3() {
 			cout << "creating child branches " << i << endl;
 			TreeNode child;
 			for (int j = 0; j < atrributetable.size(); j++) {
-				if (atrributetable.at(j).at(maxGainFeatureIndex) == false) {
+				if (!(atrributetable.at(j).at(maxGainFeatureIndex))) {
 					names.erase(names.begin() + j);
 					labels.erase(labels.begin() + j);
 					removeRowFromTable(j);
@@ -413,8 +412,10 @@ TreeNode ID3() {
 					count++;
 				}
 			}
+			//now we need to remove that attribute column from the attribute table.
+			removeColumnFromTable(maxGainFeatureIndex);
 			//if we need to set a pure label / leaf node
-			if (count == 0 || treeDepth >= 2) {
+			if (count == 0) {
 				float positivep = 0, negativep = 0; //set these to = 0
 				for (int i = 0; i < names.size(); i++) {
 					if (labels.at(i)) {
@@ -442,7 +443,7 @@ TreeNode ID3() {
 		}
 
 	}
-
+	return currentNode;
 }
 
 TreeNode createTreeDriver() {
