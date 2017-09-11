@@ -30,7 +30,8 @@ class MatrixWrapper {
 
 public:
 
-	MatrixWrapper(char* file, vector<string> * names, vector<bool> * labels, vector<vector<bool> > * atrributetable);
+	MatrixWrapper(char* file, vector<string> * names, vector<bool> * labels,
+			vector<vector<bool> > * atrributetable);
 	void populateAttributeTable(vector<string> names,
 			vector<vector<bool> >* attributetable);
 
@@ -104,7 +105,8 @@ public:
  * Constructor for Matrix class. Takes in the file
  * to feed into the vector<vector<string>> Matrix.
  */
-MatrixWrapper::MatrixWrapper(char* file, vector<string> * names, vector<bool> * labels, vector<vector<bool> > * atrributetable) {
+MatrixWrapper::MatrixWrapper(char* file, vector<string> * names,
+		vector<bool> * labels, vector<vector<bool> > * atrributetable) {
 	int linenum = 0;
 	//feed in text file here
 	ifstream pipein(file);
@@ -173,12 +175,13 @@ void MatrixWrapper::populateAttributeTable(vector<string> names,
 	}
 }
 
-void MatrixWrapper::printAttributeTable(vector<vector<bool> > * atrributetable) {
+void MatrixWrapper::printAttributeTable(
+		vector<vector<bool> > * atrributetable) {
 	for (int i = 0; i < 15; i++) {
 		for (int j = 0; j < NUM_FEATURES; j++) {
 			if (j == 0)
 //				cout << names.at(i) << ": \t\t";
-			cout << atrributetable->at(i).at(j);
+				cout << atrributetable->at(i).at(j);
 		}
 		cout << endl;
 	}
@@ -201,34 +204,41 @@ float computeLabelEntropy(vector<vector<bool> > atrributetable,
 		}
 
 		if (positivep != 0 && negativep != 0) {
-			positivep = positivep / (float)labels.size();
-			negativep = negativep / (float)labels.size();
-			label_entropy = -positivep * log2f(positivep)
-					- negativep * log2f(negativep);
+			double posP = positivep / (float) labels.size();
+			double negP = negativep / (float) labels.size();
+			label_entropy = -posP * log2f(posP)
+					- negP * log2f(negP);
 		} else {
-			label_entropy = 0;
+			cout << "Returning 0" << endl;
+			return 0;
 		}
 
 		cout << "H(S) = " << label_entropy << endl;
 		return label_entropy;
 	}
 
+	int countV = 0;
 	//not calculating full table.
 	for (int i = 0; i < atrributetable.size(); i++) {
+
 		if (atrributetable.at(i).at(featureNumber) == value) {
-			positivep++;
-		} else {
-			negativep++;
+			countV++;
+			if(labels.at(i)){
+				positivep++;
+			}else{
+				negativep++;
+			}
+
 		}
 	}
 
 	if (positivep != 0 && negativep != 0) {
-		positivep = positivep / (float)labels.size();
-		negativep = negativep / (float)labels.size();
+		positivep = positivep / (float) labels.size();
+		negativep = negativep / (float) labels.size();
 		label_entropy = -positivep * log2f(positivep)
 				- negativep * log2f(negativep);
 	} else {
-		label_entropy = 0;
+		return 0;
 	}
 
 	cout << "H(S) = " << label_entropy << endl;
@@ -240,66 +250,98 @@ float computeFeatureGain(vector<bool> labels,
 
 	//Gain(S, Feature) = H(S) - summation |S_v| / |S| H(S_v)
 	//for i < attributetable.size()
+	vector<bool> trues;
+	vector<bool> falses;
 
-	float numberOfYes, numberOfNo;
-	float positivep = 0, negativep = 0;
-	float gain, expectedYesH, expectedNoH;
-	float total = numberOfYes + numberOfNo;
-	float noFraction = numberOfNo / total;
-	float yesFraction = numberOfYes / total;
-	float secondterm, yesTerm, noTerm;
-	vector<vector<bool> > yesSet;
-	vector<vector<bool> > noSet;
+	vector<vector<bool> > trueAtts;
+	vector<vector<bool> > falseAtts;
 
-	//first calculate yes/no expected entropy.
+	double entropy_s = computeLabelEntropy(atrributetable, labels,
+			featureNumber, false, true);
+
 	for (int i = 0; i < atrributetable.size(); i++) {
 		if (atrributetable.at(i).at(featureNumber)) {
-			numberOfYes++; //number of YES in column
-			yesSet.push_back(atrributetable.at(i));
-			if (labels.at(i)) {
-				positivep++; //number of YES with label YES.
-			}
+			trueAtts.push_back(atrributetable.at(i));
+			trues.push_back(labels.at(i));
 		} else {
-			numberOfNo++;
-			noSet.push_back(atrributetable.at(i));
-			if (labels.at(i)) {
-				negativep++; //number of NO with label YES
-			}
+			falseAtts.push_back(atrributetable.at(i));
+			falses.push_back(labels.at(i));
 		}
 	}
 
-	gain = computeLabelEntropy(atrributetable, labels, NUM_FEATURES - 1, true,
-			true)
-			- ((yesFraction
-					* computeLabelEntropy(yesSet, labels, featureNumber, true,
-							false)
-					+ (noFraction
-							* computeLabelEntropy(noSet, labels, featureNumber,
-									false, false))));
-	cout << "Gain(Feature_" << featureNumber << "):" << gain << endl;
+	double yesH = computeLabelEntropy(trueAtts, trues, featureNumber, true,
+			false);
+	double noH = computeLabelEntropy(falseAtts, falses, featureNumber, false,
+			false);
+
+	yesH *= (((float) trues.size()) / ((float) labels.size()));
+	noH *= (((float) falses.size()) / ((float) labels.size()));
+
+	double gain = entropy_s - (yesH + noH);
 	return gain;
+//	float numberOfYes, numberOfNo;
+//	float positivep = 0, negativep = 0;
+//	float gain, expectedYesH, expectedNoH;
+//
+//	float secondterm, yesTerm, noTerm;
+//	vector<vector<bool> > yesSet;
+//	vector<vector<bool> > noSet;
+//
+//
+//	//float noFraction = numberOfNo / total;
+//	//float yesFraction = numberOfYes / total;
+//	float total;
+//	float noFraction, yesFraction;
+//
+//	//first calculate yes/no expected entropy.
+//	for (int i = 0; i < atrributetable.size(); i++) {
+//		if (atrributetable.at(i).at(featureNumber)) {
+//			numberOfYes++; //number of YES in column
+//			yesSet.push_back(atrributetable.at(i));
+//			if (labels.at(i)) {
+//				positivep++; //number of YES with label YES.
+//			}
+//		} else {
+//			numberOfNo++;
+//			noSet.push_back(atrributetable.at(i));
+//			if (labels.at(i)) {
+//				negativep++; //number of NO with label YES
+//			}
+//		}
+//	}
+//
+//	gain = computeLabelEntropy(atrributetable, labels, NUM_FEATURES - 1, true,
+//			true)
+//			- ((yesFraction
+//					* computeLabelEntropy(yesSet, labels, featureNumber, true,
+//							false)
+//					+ (noFraction
+//							* computeLabelEntropy(noSet, labels, featureNumber,
+//									false, false))));
+//	cout << "Gain(Feature_" << featureNumber << "):" << gain << endl;
+//	return gain;
 
 }
 
 /*float computeOverallME(vector<bool> feature) {
-	float positivep, negativep;
-	for (int i = 0; i < feature.size(); i++) {
-		if (feature.at(i)) {
-			positivep++;
-		} else {
-			negativep++;
-		}
-	}
+ float positivep, negativep;
+ for (int i = 0; i < feature.size(); i++) {
+ if (feature.at(i)) {
+ positivep++;
+ } else {
+ negativep++;
+ }
+ }
 
-	if (positivep > negativep) {
-		label_majority_error = 1 - (positivep / feature.size());
-	} else {
-		label_majority_error = 1 - (negativep / feature.size());
-	}
+ if (positivep > negativep) {
+ label_majority_error = 1 - (positivep / feature.size());
+ } else {
+ label_majority_error = 1 - (negativep / feature.size());
+ }
 
-//	cout << "Label ME = " << label_majority_error << endl;
-	return label_majority_error;
-}*/
+ //	cout << "Label ME = " << label_majority_error << endl;
+ return label_majority_error;
+ }*/
 
 void removeColumnFromTable(int maxGainFeatureIndex) {
 
@@ -366,126 +408,127 @@ TreeNode ID3(vector<vector<bool> > atrributetable, vector<string> names,
 		currentNode.attribute = "all";
 		currentNode.attributeNum = 0;
 		return currentNode;
-	} else {
+	}
 
-		if (reductionSet.size() >= NUM_FEATURES) {
-			currentNode.leaf = true;
-			int posCount = 0, negCount = 0;
-			for (int i = 0; i < names.size(); i++) {
-				if (labels.at(i)) {
-					posCount++;
-				} else {
-					negCount++;
-				}
-				if (posCount >= negCount) {
-					currentNode.label_value = true;
-				} else {
-					currentNode.label_value = false;
-				}
+	if (reductionSet.size() >= NUM_FEATURES) {
+		currentNode.leaf = true;
+		int posCount = 0, negCount = 0;
+		for (int i = 0; i < names.size(); i++) {
+			if (labels.at(i)) {
+				posCount++;
+			} else {
+				negCount++;
 			}
-			return currentNode;
-
-		}
-		//computeLabelEntropy(atrributetable, NUM_FEATURES - 1, true);
-		//computeOverallME(labels);
-
-		int maxGainFeatureIndex = 0;
-		float maxGain = 0;
-		for (int i = 0; i < NUM_FEATURES; i++) {
-			if (!reductionSet.count(i)) {
-				float temp = computeFeatureGain(labels, atrributetable, i);
-				if (temp >= maxGain) {
-					maxGain = temp;
-					maxGainFeatureIndex = i;
-				}
-			}
-		}
-		cout << "Root node is feature # : " << maxGainFeatureIndex << endl;
-
-		//we have a root node ladies and gentleman
-		currentNode.attributeNum = maxGainFeatureIndex;
-
-		vector<vector<bool> > tempAttTable;
-		vector<string> tempNames;
-		vector<bool> tempLabels;
-
-		//size
-//		int count = 0; //magnitude of new set.
-		//create children branches
-		for (int i = 0; i < BINARY; i++) {
-			cout << "creating child branches " << i << endl;
-			TreeNode child;
-			for (int j = 0; j < atrributetable.size(); j++) {
-				bool flag;
-				if (i == 0)
-					flag = false;
-				else if (i == 1)
-					flag = true;
-
-				if (atrributetable.at(j).at(maxGainFeatureIndex)) {
-					//names.erase(names.begin() + j);
-					//labels.erase(labels.begin() + j);
-					//removeRowFromTable(j);
-//					count++;
-					tempAttTable.push_back(atrributetable.at(j));
-					tempNames.push_back(names.at(j));
-					tempLabels.push_back(labels.at(j));
-				}
-			}
-			int posCount = 0, negCount = 0;
-			for (int i = 0; i < names.size(); i++) {
-				if (labels.at(i)) {
-					posCount++;
-				} else {
-					negCount++;
-				}
-			}
-			if (posCount > negCount) {
+			if (posCount >= negCount) {
 				currentNode.label_value = true;
 			} else {
 				currentNode.label_value = false;
 			}
-			reductionSet.insert(maxGainFeatureIndex);
+		}
+		cout << "Returning leaf noe" << endl;
+		return currentNode;
 
-			//now we need to remove that attribute column from the attribute table.
+	}
+	//computeLabelEntropy(atrributetable, NUM_FEATURES - 1, true);
+	//computeOverallME(labels);
 
-			//if we need to set a pure label / leaf node
-			if (tempNames.size() == 0) {
-				float positivep = 0, negativep = 0; //set these to = 0
-				for (int i = 0; i < names.size(); i++) {
-					if (labels.at(i)) {
-						positivep++;
-					} else {
-						negativep++;
-					}
-				}
-
-				cout << "returning back child w/ label value = ";
-				if (positivep > negativep) {
-					child.label_value = true;
-					cout << " true " << endl;
-				} else {
-					child.label_value = false;
-					cout << " false " << endl;
-				}
-				child.leaf = true;
-				return child;
-//				currentNode.branches.push_back(child);
-			} else {
-				cout << "\n***Recursing***" << " branch size: "
-						<< currentNode.branches.size() << endl;
-				treeDepth++;
-				currentNode.leaf = false;
-				currentNode.branches.push_back(
-						ID3(tempAttTable, tempNames, tempLabels, reductionSet));
+	int maxGainFeatureIndex = 0;
+	float maxGain = 0;
+	for (int i = 0; i < atrributetable.at(0).size(); i++) {
+		if (!reductionSet.count(i)) {
+			float temp = computeFeatureGain(labels, atrributetable, i);
+			if (temp >= maxGain) {
+				maxGain = temp;
+				maxGainFeatureIndex = i;
 			}
+		}
+	}
+	cout << "Root node is feature # : " << maxGainFeatureIndex << endl;
+
+	//we have a root node ladies and gentleman
+	currentNode.attributeNum = maxGainFeatureIndex;
+	set<int>::iterator it;
+	reductionSet.insert(maxGainFeatureIndex);
+
+	//size
+//		int count = 0; //magnitude of new set.
+	//create children branches
+	for (int i = 0; i < BINARY; i++) {
+		vector<vector<bool> > tempAttTable;
+		vector<string> tempNames;
+		vector<bool> tempLabels;
+		cout << "creating child branches " << i << endl;
+		TreeNode child;
+		for (int j = 0; j < atrributetable.size(); j++) {
+			bool flag;
+			if (i == 0)
+				flag = false;
+			else if (i == 1)
+				flag = true;
+
+			if (atrributetable.at(j).at(maxGainFeatureIndex) == (bool) i) {
+				//names.erase(names.begin() + j);
+				//labels.erase(labels.begin() + j);
+				//removeRowFromTable(j);
+//					count++;
+				tempAttTable.push_back(atrributetable.at(j));
+				tempNames.push_back(names.at(j));
+				tempLabels.push_back(labels.at(j));
+			}
+		}
+
+		/*	int posCount = 0, negCount = 0;
+		 for (int i = 0; i < names.size(); i++) {
+		 if (labels.at(i)) {
+		 posCount++;
+		 } else {
+		 negCount++;
+		 }
+		 }
+		 if (posCount > negCount) {
+		 currentNode.label_value = true;
+		 } else {
+		 currentNode.label_value = false;
+		 }*/
+//		reductionSet.insert(maxGainFeatureIndex);
+		//now we need to remove that attribute column from the attribute table.
+		//if we need to set a pure label / leaf node
+		if (tempNames.size() == 0) {
+			float positivep = 0, negativep = 0; //set these to = 0
+			for (int k = 0; k < names.size(); k++) {
+				if (labels.at(k)) {
+					positivep++;
+				} else {
+					negativep++;
+				}
+			}
+
+			cout << "returning back child w/ label value = ";
+			if (positivep > negativep) {
+				child.label_value = true;
+				cout << " true " << endl;
+			} else {
+				child.label_value = false;
+				cout << " false " << endl;
+			}
+			child.leaf = true;
+//			return child;
+			currentNode.branches.push_back(child);
+		} else {
+			cout << "\n***Recursing***" << " branch size: "
+					<< currentNode.branches.size() << endl;
+			treeDepth++;
+			currentNode.leaf = false;
+			currentNode.branches.push_back(
+					ID3(tempAttTable, tempNames, tempLabels, reductionSet));
 		}
 
 	}
 	return currentNode;
 }
 
-TreeNode createTreeDriver(vector<vector<bool> > atrributetable, vector<string> names, vector<bool> labels) {
+TreeNode createTreeDriver(vector<vector<bool> > atrributetable,
+		vector<string> names, vector<bool> labels) {
 
 	set<int> reductionSet;
 	TreeNode root = ID3(atrributetable, names, labels, reductionSet);
@@ -500,7 +543,8 @@ int main(int argc, char* argv[]) {
 	vector<string> names;
 
 	MatrixWrapper matrix(
-			"Updated_Dataset/Updated_CVSplits/updated_training00.txt",&names, &labels, &atrributetable);
+			"Updated_Dataset/Updated_CVSplits/updated_training00.txt", &names,
+			&labels, &atrributetable);
 	matrix.populateAttributeTable(names, &atrributetable);
 	//Matrix.printAttributeTable(&Matrix.atrributetable);
 
