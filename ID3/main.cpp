@@ -206,14 +206,13 @@ float computeLabelEntropy(vector<vector<bool> > atrributetable,
 		if (positivep != 0 && negativep != 0) {
 			double posP = positivep / (float) labels.size();
 			double negP = negativep / (float) labels.size();
-			label_entropy = -posP * log2f(posP)
-					- negP * log2f(negP);
+			label_entropy = -posP * log2f(posP) - negP * log2f(negP);
 		} else {
 			cout << "Returning 0" << endl;
 			return 0;
 		}
 
-		cout << "H(S) = " << label_entropy << endl;
+		//cout << "Overall H(S) = " << label_entropy << endl;
 		return label_entropy;
 	}
 
@@ -223,9 +222,9 @@ float computeLabelEntropy(vector<vector<bool> > atrributetable,
 
 		if (atrributetable.at(i).at(featureNumber) == value) {
 			countV++;
-			if(labels.at(i)){
+			if (labels.at(i)) {
 				positivep++;
-			}else{
+			} else {
 				negativep++;
 			}
 
@@ -241,7 +240,7 @@ float computeLabelEntropy(vector<vector<bool> > atrributetable,
 		return 0;
 	}
 
-	cout << "H(S) = " << label_entropy << endl;
+//	cout << "H(S) = " << label_entropy << endl;
 	return label_entropy;
 }
 
@@ -406,11 +405,13 @@ TreeNode ID3(vector<vector<bool> > atrributetable, vector<string> names,
 	if (sameFlag) {
 		currentNode.leaf = true;
 		currentNode.attribute = "all";
-		currentNode.attributeNum = 0;
+//		currentNode.attributeNum = 0;
+		currentNode.label_value = labels.at(0);
 		return currentNode;
 	}
 
 	if (reductionSet.size() >= NUM_FEATURES) {
+		cout << "reduction set is full" << endl;
 		currentNode.leaf = true;
 		int posCount = 0, negCount = 0;
 		for (int i = 0; i < names.size(); i++) {
@@ -419,15 +420,16 @@ TreeNode ID3(vector<vector<bool> > atrributetable, vector<string> names,
 			} else {
 				negCount++;
 			}
-			if (posCount >= negCount) {
-				currentNode.label_value = true;
-			} else {
-				currentNode.label_value = false;
-			}
-		}
-		cout << "Returning leaf noe" << endl;
-		return currentNode;
 
+		}
+		if (posCount > negCount) {
+			currentNode.label_value = true;
+		} else {
+			currentNode.label_value = false;
+		}
+		//todo set att num.
+		cout << "Returning leaf node w/ full reduction set." << endl;
+		return currentNode;
 	}
 	//computeLabelEntropy(atrributetable, NUM_FEATURES - 1, true);
 	//computeOverallME(labels);
@@ -441,6 +443,7 @@ TreeNode ID3(vector<vector<bool> > atrributetable, vector<string> names,
 				maxGain = temp;
 				maxGainFeatureIndex = i;
 			}
+			//cout << endl;
 		}
 	}
 	cout << "Root node is feature # : " << maxGainFeatureIndex << endl;
@@ -512,7 +515,7 @@ TreeNode ID3(vector<vector<bool> > atrributetable, vector<string> names,
 				cout << " false " << endl;
 			}
 			child.leaf = true;
-//			return child;
+//			return child; //currentNode
 			currentNode.branches.push_back(child);
 		} else {
 			cout << "\n***Recursing***" << " branch size: "
@@ -532,8 +535,26 @@ TreeNode createTreeDriver(vector<vector<bool> > atrributetable,
 
 	set<int> reductionSet;
 	TreeNode root = ID3(atrributetable, names, labels, reductionSet);
+	cout << "\n\n\nFINISHED" << endl;
 	return root;
+
 }
+
+bool goDownPath(TreeNode node,  vector<bool>attRow){
+	if (node.leaf)
+		return node.label_value;
+
+	bool action = attRow.at(node.attributeNum);
+	bool answer = false;
+
+	if(action)
+		answer = goDownPath(node.branches.at(0), attRow);
+	else
+		answer = goDownPath(node.branches.at(1), attRow);
+	return answer;
+}
+
+
 
 int main(int argc, char* argv[]) {
 
@@ -541,6 +562,7 @@ int main(int argc, char* argv[]) {
 	vector<vector<bool> > atrributetable;
 	vector<bool> labels;
 	vector<string> names;
+	float  numRight = 0, numWrong = 0;
 
 	MatrixWrapper matrix(
 			"Updated_Dataset/Updated_CVSplits/updated_training00.txt", &names,
@@ -550,6 +572,23 @@ int main(int argc, char* argv[]) {
 
 	TreeNode root;
 	root = createTreeDriver(atrributetable, names, labels);
-	printTreeDriver(&root);
+//	printTreeDriver(&root);
+	vector<bool> testAnswers;
+
+	for(int i = 0; i < names.size(); i++){
+		bool action = goDownPath(root, atrributetable.at(i));
+		testAnswers.push_back(action);
+	}
+
+	for(int i = 0; i < testAnswers.size(); i++){
+		if(testAnswers.at(i) == labels.at(i)){
+			numRight++ ;
+		}else{
+			numWrong++;
+		}
+	}
+
+	cout << "Corerct: " << numRight << "/"<< numRight + numWrong << endl;
+
 	return 0;
 }
