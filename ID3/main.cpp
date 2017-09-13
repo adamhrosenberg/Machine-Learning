@@ -1,3 +1,8 @@
+/**
+ * Adam Rosenberg
+ * ID3
+ */
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <iostream>
@@ -355,6 +360,20 @@ void printTreeDriver(TreeNode* root) {
 	printTree(root, 0);
 }
 
+bool goDownPath(TreeNode node, vector<bool> attRow) {
+	if (node.leaf)
+		return node.label_value;
+
+	bool action = attRow.at(node.attributeNum);
+	bool answer = false;
+
+	if (action)
+		answer = goDownPath(node.branches.at(0), attRow);
+	else
+		answer = goDownPath(node.branches.at(1), attRow);
+	return answer;
+}
+
 TreeNode ID3(vector<vector<bool> > atrributetable, vector<string> names,
 		vector<bool> labels, int maxDepth, int currentDepth,
 		set<int> reductionSet) {
@@ -526,20 +545,6 @@ TreeNode createTreeDriver(vector<vector<bool> > atrributetable,
 
 }
 
-bool goDownPath(TreeNode node, vector<bool> attRow) {
-	if (node.leaf)
-		return node.label_value;
-
-	bool action = attRow.at(node.attributeNum);
-	bool answer = false;
-
-	if (action)
-		answer = goDownPath(node.branches.at(0), attRow);
-	else
-		answer = goDownPath(node.branches.at(1), attRow);
-	return answer;
-}
-
 int main(int argc, char* argv[]) {
 
 	vector<string> fileNames;
@@ -658,7 +663,6 @@ int main(int argc, char* argv[]) {
 
 	//testing with a depth of 4 training vs test.//////////////////////////////////////
 
-
 	fileNames.at(0) = "Updated_Dataset/updated_train.txt";
 	fileNames.at(1) = "Updated_Dataset/updated_test.txt";
 
@@ -689,13 +693,13 @@ int main(int argc, char* argv[]) {
 	}
 
 	float percent = numRight / (numRight + numWrong);
+	cout << "Training percent: " << percent << endl;
 
 	float numRight2 = 0, numWrong2 = 0;
 	vector<vector<bool> > atrributetable2;
 	vector<bool> labels2;
 	vector<string> names2;
-	MatrixWrapper matrix2(fileNames.at(1), &names2, &labels2,
-			&atrributetable2);
+	MatrixWrapper matrix2(fileNames.at(1), &names2, &labels2, &atrributetable2);
 
 	matrix2.populateAttributeTable(names2, &atrributetable2);
 
@@ -704,8 +708,8 @@ int main(int argc, char* argv[]) {
 
 	vector<bool> testAnswers2;
 
-	cout << names.size() << " " << names2.size()<<endl;
-	for (int i = 0; i < names2.size()-10; i++) {
+//	cout << names.size() << " " << names2.size()<<endl;
+	for (int i = 0; i < names2.size(); i++) {
 		bool action = goDownPath(root, atrributetable2.at(i));
 		testAnswers2.push_back(action);
 	}
@@ -720,9 +724,29 @@ int main(int argc, char* argv[]) {
 
 	float percent2 = numRight2 / (numRight2 + numWrong2);
 
+	cout << "\n\n\n***Training file against test file accuracy " << percent2
+			<< "%, with a depth of: " << 4 << endl;
 
-	cout << "\n\n\n***Training file against test file accuracy "
-			<< percent2 << "%, with a depth of: " << 4 << endl;
+	vector<bool> testAnswers3;
+
+	numRight2 = 0; numWrong2 = 0;
+	//	cout << names.size() << " " << names2.size()<<endl;
+	for (int i = 0; i < names2.size(); i++) {
+		bool action = goDownPath(root2, atrributetable2.at(i));
+		testAnswers3.push_back(action);
+	}
+
+	for (int i = 0; i < testAnswers2.size(); i++) {
+		if (testAnswers3.at(i) == labels2.at(i)) {
+			numRight2++;
+		} else {
+			numWrong2++;
+		}
+	}
+
+	float percent3 = numRight2 / (numRight2 + numWrong2);
+
+	cout << "Test percent " << percent3 << endl;
 
 	return 0;
 }
