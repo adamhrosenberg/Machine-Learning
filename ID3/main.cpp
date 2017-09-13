@@ -552,12 +552,12 @@ int main(int argc, char* argv[]) {
 	fileNames.push_back(
 			"Updated_Dataset/Updated_CVSplits/updated_training03.txt");
 
-	float numRight = 0, numWrong = 0;
-
-
 	for (int index = 0; index < fileNames.size(); index++) {
 		cout << endl;
+
 		for (int innerIndex = 1; innerIndex < NUM_FEATURES; innerIndex++) {
+			cout << "\nCreating decision tree " <<endl;
+			float numRight = 0, numWrong = 0;
 			vector<vector<bool> > atrributetable;
 			vector<bool> labels;
 			vector<string> names;
@@ -567,7 +567,8 @@ int main(int argc, char* argv[]) {
 			matrix.populateAttributeTable(names, &atrributetable);
 
 			TreeNode root;
-			root = createTreeDriver(atrributetable, names, labels, innerIndex, 0);
+			root = createTreeDriver(atrributetable, names, labels, innerIndex,
+					0);
 
 			vector<bool> testAnswers;
 
@@ -586,8 +587,53 @@ int main(int argc, char* argv[]) {
 
 			float percent = numRight / (numRight + numWrong);
 
-			cout << "File #" << fileNames.at(index).substr(50) << " accuracy =  " << percent << "%, with a depth of: "
+			cout << "File #" << fileNames.at(index).substr(50)
+					<< " accuracy =  " << percent << "%, with a depth of: "
 					<< innerIndex << endl;
+
+			//cross validation.
+
+			cout << "\n4 fold cross validation" << endl;
+			for (int fileToCompare = 0; fileToCompare < fileNames.size();
+					fileToCompare++) {
+				//index = file currently comparing.
+
+//				if(fileToCompare == index)
+				float numRight2 = 0, numWrong2 = 0;
+				vector<vector<bool> > atrributetable2;
+				vector<bool> labels2;
+				vector<string> names2;
+				MatrixWrapper matrix2(fileNames.at(fileToCompare), &names2, &labels2,
+						&atrributetable2);
+
+				matrix2.populateAttributeTable(names2, &atrributetable2);
+
+				TreeNode root2;
+				root2 = createTreeDriver(atrributetable2, names2, labels2,
+						index, 0);
+
+				vector<bool> testAnswers2;
+
+				for (int i = 0; i < names.size(); i++) {
+					bool action = goDownPath(root, atrributetable2.at(i));
+					testAnswers2.push_back(action);
+				}
+
+				for (int i = 0; i < testAnswers.size(); i++) {
+					if (testAnswers2.at(i) == labels.at(i)) {
+						numRight2++;
+					} else {
+						numWrong2++;
+					}
+				}
+
+				float percent2 = numRight2 / (numRight2 + numWrong2);
+
+				cout << "File #" << fileNames.at(index).substr(50) << " against File #" << fileNames.at(fileToCompare).substr(50)
+						<< " accuracy =  " << percent2 << "%, with a depth of: "
+						<< innerIndex << endl;
+					//done comparing against.
+			}
 		}
 
 	}
