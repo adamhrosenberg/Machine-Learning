@@ -30,7 +30,7 @@ class MatrixWrapper {
 
 public:
 
-	MatrixWrapper(char* file, vector<string> * names, vector<bool> * labels,
+	MatrixWrapper(string file, vector<string> * names, vector<bool> * labels,
 			vector<vector<bool> > * atrributetable);
 	void populateAttributeTable(vector<string> names,
 			vector<vector<bool> >* attributetable);
@@ -126,11 +126,11 @@ public:
  * Constructor for Matrix class. Takes in the file
  * to feed into the vector<vector<string>> Matrix.
  */
-MatrixWrapper::MatrixWrapper(char* file, vector<string> * names,
+MatrixWrapper::MatrixWrapper(string file, vector<string> * names,
 		vector<bool> * labels, vector<vector<bool> > * atrributetable) {
 	int linenum = 0;
 	//feed in text file here
-	ifstream pipein(file);
+	ifstream pipein(file.c_str());
 
 	//for each line in the file..
 	for (string line; getline(pipein, line);) {
@@ -543,44 +543,54 @@ bool goDownPath(TreeNode node, vector<bool> attRow) {
 int main(int argc, char* argv[]) {
 
 	vector<string> fileNames;
-	fileNames.push_back("Updated_Dataset/Updated_CVSplits/updated_training00.txt");
-	fileNames.push_back("Updated_Dataset/Updated_CVSplits/updated_training01.txt");
-	fileNames.push_back("Updated_Dataset/Updated_CVSplits/updated_training02.txt");
-	fileNames.push_back("Updated_Dataset/Updated_CVSplits/updated_training03.txt");
+	fileNames.push_back(
+			"Updated_Dataset/Updated_CVSplits/updated_training00.txt");
+	fileNames.push_back(
+			"Updated_Dataset/Updated_CVSplits/updated_training01.txt");
+	fileNames.push_back(
+			"Updated_Dataset/Updated_CVSplits/updated_training02.txt");
+	fileNames.push_back(
+			"Updated_Dataset/Updated_CVSplits/updated_training03.txt");
 
-	vector<vector<bool> > atrributetable;
-	vector<bool> labels;
-	vector<string> names;
 	float numRight = 0, numWrong = 0;
 
 
-	MatrixWrapper matrix(
-			"Updated_Dataset/Updated_CVSplits/updated_training00.txt", &names,
-			&labels, &atrributetable);
+	for (int index = 0; index < fileNames.size(); index++) {
+		cout << endl;
+		for (int innerIndex = 1; innerIndex < NUM_FEATURES; innerIndex++) {
+			vector<vector<bool> > atrributetable;
+			vector<bool> labels;
+			vector<string> names;
+			MatrixWrapper matrix(fileNames.at(index), &names, &labels,
+					&atrributetable);
 
+			matrix.populateAttributeTable(names, &atrributetable);
 
-	matrix.populateAttributeTable(names, &atrributetable);
+			TreeNode root;
+			root = createTreeDriver(atrributetable, names, labels, innerIndex, 0);
 
-	TreeNode root;
-	root = createTreeDriver(atrributetable, names, labels, 6, 0);
+			vector<bool> testAnswers;
 
-	vector<bool> testAnswers;
+			for (int i = 0; i < names.size(); i++) {
+				bool action = goDownPath(root, atrributetable.at(i));
+				testAnswers.push_back(action);
+			}
 
-	for (int i = 0; i < names.size(); i++) {
-		bool action = goDownPath(root, atrributetable.at(i));
-		testAnswers.push_back(action);
-	}
+			for (int i = 0; i < testAnswers.size(); i++) {
+				if (testAnswers.at(i) == labels.at(i)) {
+					numRight++;
+				} else {
+					numWrong++;
+				}
+			}
 
-	for (int i = 0; i < testAnswers.size(); i++) {
-		if (testAnswers.at(i) == labels.at(i)) {
-			numRight++;
-		} else {
-			numWrong++;
+			float percent = numRight / (numRight + numWrong);
+
+			cout << "File #" << fileNames.at(index).substr(50) << " accuracy =  " << percent << "%, with a depth of: "
+					<< innerIndex << endl;
 		}
+
 	}
-
-	cout << "Training00 accuracy: " << numRight << "/" << numRight + numWrong << endl;
-
 
 	return 0;
 }
