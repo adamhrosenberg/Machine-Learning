@@ -552,11 +552,13 @@ int main(int argc, char* argv[]) {
 	fileNames.push_back(
 			"Updated_Dataset/Updated_CVSplits/updated_training03.txt");
 
+	vector<int> depthMaxes; //size of max
+	float max = 0;
 	for (int index = 0; index < fileNames.size(); index++) {
 		cout << endl;
 
 		for (int innerIndex = 1; innerIndex < NUM_FEATURES; innerIndex++) {
-			cout << "\nCreating decision tree " <<endl;
+			cout << "\nCreating decision tree " << endl;
 			float numRight = 0, numWrong = 0;
 			vector<vector<bool> > atrributetable;
 			vector<bool> labels;
@@ -586,14 +588,20 @@ int main(int argc, char* argv[]) {
 			}
 
 			float percent = numRight / (numRight + numWrong);
+			if (max < percent) {
+				max = percent;
+				depthMaxes.push_back(innerIndex);
+			}
 
 			cout << "File #" << fileNames.at(index).substr(50)
 					<< " accuracy =  " << percent << "%, with a depth of: "
 					<< innerIndex << endl;
 
+///////////////////////////////////////////////////////////////////////////////////////////////
 			//cross validation.
 
 			cout << "\n4 fold cross validation" << endl;
+			max = 0;
 			for (int fileToCompare = 0; fileToCompare < fileNames.size();
 					fileToCompare++) {
 				//index = file currently comparing.
@@ -603,8 +611,8 @@ int main(int argc, char* argv[]) {
 				vector<vector<bool> > atrributetable2;
 				vector<bool> labels2;
 				vector<string> names2;
-				MatrixWrapper matrix2(fileNames.at(fileToCompare), &names2, &labels2,
-						&atrributetable2);
+				MatrixWrapper matrix2(fileNames.at(fileToCompare), &names2,
+						&labels2, &atrributetable2);
 
 				matrix2.populateAttributeTable(names2, &atrributetable2);
 
@@ -628,15 +636,93 @@ int main(int argc, char* argv[]) {
 				}
 
 				float percent2 = numRight2 / (numRight2 + numWrong2);
+				if (max < percent2) {
+					max = percent;
+					depthMaxes.push_back(innerIndex);
+				}
 
-				cout << "File #" << fileNames.at(index).substr(50) << " against File #" << fileNames.at(fileToCompare).substr(50)
+				cout << "File #" << fileNames.at(index).substr(50)
+						<< " against File #"
+						<< fileNames.at(fileToCompare).substr(50)
 						<< " accuracy =  " << percent2 << "%, with a depth of: "
 						<< innerIndex << endl;
-					//done comparing against.
+				//done comparing against.
 			}
 		}
 
 	}
+
+//	for(int i = 0; i < depthMaxes.size()-1; i++){
+//		cout << <<depthMaxes.at(i) << endl;
+//	}
+
+	//testing with a depth of 4 training vs test.//////////////////////////////////////
+
+
+	fileNames.at(0) = "Updated_Dataset/updated_train.txt";
+	fileNames.at(1) = "Updated_Dataset/updated_test.txt";
+
+	float numRight = 0, numWrong = 0;
+	vector<vector<bool> > atrributetable;
+	vector<bool> labels;
+	vector<string> names;
+	MatrixWrapper matrix(fileNames.at(0), &names, &labels, &atrributetable);
+
+	matrix.populateAttributeTable(names, &atrributetable);
+
+	TreeNode root;
+	root = createTreeDriver(atrributetable, names, labels, 4, 0);
+
+	vector<bool> testAnswers;
+
+	for (int i = 0; i < names.size(); i++) {
+		bool action = goDownPath(root, atrributetable.at(i));
+		testAnswers.push_back(action);
+	}
+
+	for (int i = 0; i < testAnswers.size(); i++) {
+		if (testAnswers.at(i) == labels.at(i)) {
+			numRight++;
+		} else {
+			numWrong++;
+		}
+	}
+
+	float percent = numRight / (numRight + numWrong);
+
+	float numRight2 = 0, numWrong2 = 0;
+	vector<vector<bool> > atrributetable2;
+	vector<bool> labels2;
+	vector<string> names2;
+	MatrixWrapper matrix2(fileNames.at(1), &names2, &labels2,
+			&atrributetable2);
+
+	matrix2.populateAttributeTable(names2, &atrributetable2);
+
+	TreeNode root2;
+	root2 = createTreeDriver(atrributetable2, names2, labels2, 4, 0);
+
+	vector<bool> testAnswers2;
+
+	cout << names.size() << " " << names2.size()<<endl;
+	for (int i = 0; i < names2.size()-10; i++) {
+		bool action = goDownPath(root, atrributetable2.at(i));
+		testAnswers2.push_back(action);
+	}
+
+	for (int i = 0; i < testAnswers2.size(); i++) {
+		if (testAnswers2.at(i) == labels.at(i)) {
+			numRight2++;
+		} else {
+			numWrong2++;
+		}
+	}
+
+	float percent2 = numRight2 / (numRight2 + numWrong2);
+
+
+	cout << "\n\n\n***Training file against test file accuracy "
+			<< percent2 << "%, with a depth of: " << 4 << endl;
 
 	return 0;
 }
