@@ -124,7 +124,7 @@ vector<double> basicPerceptron(vector<vector<point> > matrix, vector<int> labels
 
 	}
 
-	cout << "Num right " << numRight << "/" << numWrong + numRight;
+	cout << "Num right " << numRight << "/" << numWrong + numRight << endl;
 //	cout << predictions.size() << labels.size() << endl;
 
 	return weights;
