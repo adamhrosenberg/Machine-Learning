@@ -191,11 +191,11 @@ perceptronReturn perceptronDriver(string path, vector<double> weights) {
 				learningRate.at(i), weights);
 		basicAccuracies.push_back(pr.accuracy);
 		accuracySum += pr.accuracy;
-		cout << "Basic Perceptron accuracy = " << pr.accuracy
-				<< "% with a learning rate of: " << learningRate.at(i) << endl;
+//		cout << "Basic Perceptron accuracy = " << pr.accuracy
+//				<< "% with a learning rate of: " << learningRate.at(i) << endl;
 		if (i == learningRate.size() - 1) {
-			cout << "Mean accuracy for Basic Perceptron: "
-					<< accuracySum / learningRate.size() << "%" << endl;
+//			cout << "Mean accuracy for Basic Perceptron: "
+//					<< accuracySum / learningRate.size() << "%" << endl;
 			return pr;
 		}
 	}
@@ -229,7 +229,6 @@ void crossValidate(vector<string> files, int against) {
 
 	perceptronReturn pr(perceptronDriver(files.at(against), weights));
 	cout << "Training complete. Testings files  (04 - against) against: " << files.at(against) << " = " <<  pr.accuracy << endl;
-	//here i need to print the average of each learning rate.
 	weights = pr.weights;
 	cout << endl;
 }

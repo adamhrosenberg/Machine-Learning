@@ -191,11 +191,11 @@ perceptronReturn perceptronDriver(string path, vector<double> weights) {
 				learningRate.at(i), weights);
 		basicAccuracies.push_back(pr.accuracy);
 		accuracySum += pr.accuracy;
-		cout << "Basic Perceptron accuracy = " << pr.accuracy
-				<< "% with a learning rate of: " << learningRate.at(i) << endl;
+//		cout << "Basic Perceptron accuracy = " << pr.accuracy
+//				<< "% with a learning rate of: " << learningRate.at(i) << endl;
 		if (i == learningRate.size() - 1) {
-			cout << "Mean accuracy for Basic Perceptron: "
-					<< accuracySum / learningRate.size() << "%" << endl;
+//			cout << "Mean accuracy for Basic Perceptron: "
+//					<< accuracySum / learningRate.size() << "%" << endl;
 			return pr;
 		}
 	}
