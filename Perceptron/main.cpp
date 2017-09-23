@@ -12,15 +12,14 @@ struct point {
 	double x, y;
 };
 
-struct perceptronReturn{
+struct perceptronReturn {
 	double accuracy;
 	vector<double> weights;
-	perceptronReturn(double _accuracy, vector<double> _weights){
+	perceptronReturn(double _accuracy, vector<double> _weights) {
 		accuracy = _accuracy;
 		weights = _weights;
 	}
 };
-
 
 vector<point> fill(string line) {
 	//we have a line. now split line by spaces to have a new vector.
@@ -60,7 +59,7 @@ vector<point> fill(string line) {
 	int count = 0;
 
 	//fill an empty row.
-	for(int i = 1; i < 69; i++){
+	for (int i = 1; i < 69; i++) {
 		point p;
 		p.x = i;
 		p.y = 0;
@@ -78,55 +77,56 @@ vector<point> fill(string line) {
 		point nonZero;
 		nonZero.x = temp.at(i).x; //the index into row.
 		nonZero.y = NORMALIZED_VALUE;
-		row[nonZero.x-1] = nonZero;
+		row[nonZero.x - 1] = nonZero;
 	}
 	return row;
 }
 
-double dotP(vector<double>weights, vector<point>row){
+double dotP(vector<double> weights, vector<point> row) {
 	double result = 0;
-	for(int i = 0; i < row.size(); i++){
+	for (int i = 0; i < row.size(); i++) {
 		result += weights.at(i) * row.at(i).y;
 	}
 	return result;
 }
 
-void update(vector<double> * weights, double trainingY, vector<point> row, double r){
-	for(int i = 0; i < row.size(); i++){
+void update(vector<double> * weights, double trainingY, vector<point> row,
+		double r) {
+	for (int i = 0; i < row.size(); i++) {
 		//were at the bias and do b += ry;
-		if(i == row.size()-1){
-			double weight = weights->at(i)+ (r * trainingY);
+		if (i == row.size() - 1) {
+			double weight = weights->at(i) + (r * trainingY);
 			weights->at(i) = weight;
-		}else{
+		} else {
 			//not at the bias.
-			double weight = weights->at(i)+ (r * trainingY * row.at(i).y);
+			double weight = weights->at(i) + (r * trainingY * row.at(i).y);
 			weights->at(i) = weight;
 		}
 	}
 }
 
-double checkAccuracy(vector<int> labels, vector<int> predictions){
+double checkAccuracy(vector<int> labels, vector<int> predictions) {
 //	cout << labels.size() << predictions.size() << endl;
 
 	return 0.01;
 }
 
-perceptronReturn basicPerceptron(vector<vector<point> > matrix, vector<int> labels, double r){
+perceptronReturn basicPerceptron(vector<vector<point> > matrix,
+		vector<int> labels, double r, vector<double> weights) {
 //	vector<double> weights(69, 0.0); //weights vector. TODO init w/ small values. . last element is the bias.
-
-	vector<double>weights;
-	srand(time(NULL));
-	for(int i = 0; i <matrix[0].size(); i++){
-		double randomInitValue = rand() % (20000) - (10000);
-		randomInitValue /= 100000;
-		weights.push_back(randomInitValue);
-//		cout << randomInitValue << endl;
-	}
+//
+//	vector<double> weights;
+//	srand(time(NULL));
+//	for (int i = 0; i < matrix[0].size(); i++) {
+//		double randomInitValue = rand() % (20000) - (10000);
+//		randomInitValue /= 100000;
+//		weights.push_back(randomInitValue);
+////		cout << randomInitValue << endl;
+//	}
 	vector<double> predictions;
 	double numRight = 0;
 	double numWrong = 0;
 	double trainingY = 0;
-
 
 	//for each example in the training set
 	for (int i = 0; i < matrix.size(); i++) {
@@ -135,18 +135,18 @@ perceptronReturn basicPerceptron(vector<vector<point> > matrix, vector<int> labe
 		//take the dot product of the weights matrix and the row of the matrix we're currently in
 		double prediction = dotP(weights, matrix.at(i));
 		//add this prediction to the prediction vector to check accuracy.
-		if(prediction > 0){
+		if (prediction > 0) {
 			prediction = 1;
-		}else if(prediction <= 0){
+		} else if (prediction <= 0) {
 			prediction = -1;
 		}
 
 //		predictions.push_back(prediction);
 
-		if(prediction != trainingY){
-			numWrong ++;
+		if (prediction != trainingY) {
+			numWrong++;
 			update(&weights, trainingY, matrix.at(i), r);
-		}else{
+		} else {
 			numRight++;
 		}
 	}
@@ -154,15 +154,13 @@ perceptronReturn basicPerceptron(vector<vector<point> > matrix, vector<int> labe
 	perceptronReturn pr(accuracy, weights);
 	return pr;
 }
-int main() {
 
-	string path = "Dataset/phishing.train";
+perceptronReturn perceptronDriver(string path, vector<double> weights) {
 	ifstream pipein(path.c_str());
 
 	vector<string> tempLines; //used to temp store the file to go through it.
 	vector<vector<point> > matrix; //matrix of input data.
 	vector<int> labels; // -1, +1 label vector.
-
 
 	//read in the file. push file lines to another vector and handle the labels. O(2n) to make it look a little cleaner
 	for (string line; getline(pipein, line);) {
@@ -174,13 +172,11 @@ int main() {
 		}
 	}
 
-
 	//for each line of the file. create a row of the matrix based on the data. add that row to the matrix. each row is 67 long. 0-66. first x in the 0th element has a value of 1.
 	for (int i = 0; i < tempLines.size(); i++) {
 		vector<point> row = fill(tempLines.at(i));
 		matrix.push_back(row);
 	}
-
 
 	vector<double> learningRate;
 	learningRate.push_back(1);
@@ -190,24 +186,65 @@ int main() {
 	vector<double> basicAccuracies;
 	double accuracySum = 0;
 	//call perceptron with each value of r
-	for(int i = 0; i < learningRate.size(); i++){
-		perceptronReturn pr = basicPerceptron(matrix, labels, learningRate.at(i));
+	for (int i = 0; i < learningRate.size(); i++) {
+		perceptronReturn pr = basicPerceptron(matrix, labels,
+				learningRate.at(i), weights);
 		basicAccuracies.push_back(pr.accuracy);
 		accuracySum += pr.accuracy;
-		cout << "Basic Perceptron accuracy = " << pr.accuracy << "% with a learning rate of: " << learningRate.at(i) << endl;
-		if(i == learningRate.size()-1){
-			cout << "Mean accuracy for Basic Perceptron: " << accuracySum / learningRate.size() << "%" << endl;
-
-			for(int i = 0; i < pr.weights.size(); i++){
-				cout << pr.weights.at(i) << endl;
-			}
+//		cout << "Basic Perceptron accuracy = " << pr.accuracy
+//				<< "% with a learning rate of: " << learningRate.at(i) << endl;
+		if (i == learningRate.size() - 1) {
+//			cout << "Mean accuracy for Basic Perceptron: "
+//					<< accuracySum / learningRate.size() << "%" << endl;
+			return pr;
 		}
+	}
+}
 
+void crossValidate(vector<string> files, int against) {
+	//against is the file we are testing against
+
+	//fill in weights w/ random values to start the cross validation.
+	vector<double> weights;
+	srand(time(NULL));
+	for (int i = 0; i < 69; i++) {
+		double randomInitValue = rand() % (20000) - (10000);
+		randomInitValue /= 100000;
+		weights.push_back(randomInitValue);
+		//		cout << randomInitValue << endl;
 	}
 
 
+	//for each file we have, training on the files except for the one we're testing against.
+	for (int i = 0; i < files.size(); i++) {
+		if(i != against){
+//			cout << "Perceptron for file: " << files.at(i) << " =" << endl;
+			perceptronReturn pr(perceptronDriver(files.at(i), weights));
+			weights = pr.weights;
+//			cout << endl;
+		}
+	}
 
+	//data is all trained. now test against against.
 
+	perceptronReturn pr(perceptronDriver(files.at(against), weights));
+	cout << "Testings files against: " << files.at(against) << " = " <<  pr.accuracy << endl;
+	weights = pr.weights;
+	cout << endl;
+}
+
+int main() {
+	vector<string> files;
+	files.push_back("Dataset/CVSplits/training00.data");
+	files.push_back("Dataset/CVSplits/training01.data");
+	files.push_back("Dataset/CVSplits/training02.data");
+	files.push_back("Dataset/CVSplits/training03.data");
+	files.push_back("Dataset/CVSplits/training04.data");
+
+	for(int i = 0; i < files.size(); i++){
+		//i is the file we're going to test against.
+		crossValidate(files, i);
+	}
 
 	return 0;
 }

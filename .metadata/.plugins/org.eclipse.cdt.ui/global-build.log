@@ -4907,3 +4907,1251 @@ Finished building target: Perceptron
 15:13:00 **** Incremental Build of configuration Debug for project Perceptron ****
 make all 
 make: Nothing to be done for 'all'.
+15:15:56 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp: In function ‘std::vector<point> fill(std::__cxx11::string)’:
+../main.cpp:38:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tokens.size(); i++) {
+                    ^
+../main.cpp:76:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < temp.size(); i++) {
+                    ^
+../main.cpp:59:6: warning: unused variable ‘count’ [-Wunused-variable]
+  int count = 0;
+      ^
+../main.cpp: In function ‘double dotP(std::vector<double>, std::vector<point>)’:
+../main.cpp:87:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp: In function ‘void update(std::vector<double>*, double, std::vector<point>, double)’:
+../main.cpp:95:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp:97:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == row.size() - 1) {
+         ^
+../main.cpp: In function ‘perceptronReturn basicPerceptron(std::vector<std::vector<point> >, std::vector<int>, double)’:
+../main.cpp:120:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < matrix[0].size(); i++) {
+                    ^
+../main.cpp:132:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < matrix.size(); i++) {
+                    ^
+../main.cpp: In function ‘void perceptronDriver(std::__cxx11::string)’:
+../main.cpp:176:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tempLines.size(); i++) {
+                    ^
+../main.cpp:189:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < learningRate.size(); i++) {
+                    ^
+../main.cpp:196:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == learningRate.size() - 1) {
+         ^
+../main.cpp:200:22: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+    for (int i = 0; i < pr.weights.size(); i++) {
+                      ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+15:16:02 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+make: Nothing to be done for 'all'.
+15:16:33 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp: In function ‘std::vector<point> fill(std::__cxx11::string)’:
+../main.cpp:38:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tokens.size(); i++) {
+                    ^
+../main.cpp:76:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < temp.size(); i++) {
+                    ^
+../main.cpp:59:6: warning: unused variable ‘count’ [-Wunused-variable]
+  int count = 0;
+      ^
+../main.cpp: In function ‘double dotP(std::vector<double>, std::vector<point>)’:
+../main.cpp:87:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp: In function ‘void update(std::vector<double>*, double, std::vector<point>, double)’:
+../main.cpp:95:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp:97:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == row.size() - 1) {
+         ^
+../main.cpp: In function ‘perceptronReturn basicPerceptron(std::vector<std::vector<point> >, std::vector<int>, double)’:
+../main.cpp:120:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < matrix[0].size(); i++) {
+                    ^
+../main.cpp:132:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < matrix.size(); i++) {
+                    ^
+../main.cpp: In function ‘void perceptronDriver(std::__cxx11::string)’:
+../main.cpp:176:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tempLines.size(); i++) {
+                    ^
+../main.cpp:189:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < learningRate.size(); i++) {
+                    ^
+../main.cpp:196:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == learningRate.size() - 1) {
+         ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+15:19:31 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp: In function ‘std::vector<point> fill(std::__cxx11::string)’:
+../main.cpp:38:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tokens.size(); i++) {
+                    ^
+../main.cpp:76:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < temp.size(); i++) {
+                    ^
+../main.cpp:59:6: warning: unused variable ‘count’ [-Wunused-variable]
+  int count = 0;
+      ^
+../main.cpp: In function ‘double dotP(std::vector<double>, std::vector<point>)’:
+../main.cpp:87:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp: In function ‘void update(std::vector<double>*, double, std::vector<point>, double)’:
+../main.cpp:95:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp:97:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == row.size() - 1) {
+         ^
+../main.cpp: In function ‘perceptronReturn basicPerceptron(std::vector<std::vector<point> >, std::vector<int>, double)’:
+../main.cpp:120:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < matrix[0].size(); i++) {
+                    ^
+../main.cpp:132:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < matrix.size(); i++) {
+                    ^
+../main.cpp: In function ‘void perceptronDriver(std::__cxx11::string)’:
+../main.cpp:176:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tempLines.size(); i++) {
+                    ^
+../main.cpp:189:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < learningRate.size(); i++) {
+                    ^
+../main.cpp:196:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == learningRate.size() - 1) {
+         ^
+../main.cpp: In function ‘int main()’:
+../main.cpp:205:60: error: in C++98 ‘files’ must be initialized by constructor, not by ‘{...}’
+  vector<string> files = {"Dataset/CVSplits/training00.data"};
+                                                            ^
+../main.cpp:205:60: error: could not convert ‘{"Dataset/CVSplits/training00.data"}’ from ‘<brace-enclosed initializer list>’ to ‘std::vector<std::__cxx11::basic_string<char> >’
+make: *** [main.o] Error 1
+subdir.mk:18: recipe for target 'main.o' failed
+15:20:09 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp: In function ‘std::vector<point> fill(std::__cxx11::string)’:
+../main.cpp:38:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tokens.size(); i++) {
+                    ^
+../main.cpp:76:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < temp.size(); i++) {
+                    ^
+../main.cpp:59:6: warning: unused variable ‘count’ [-Wunused-variable]
+  int count = 0;
+      ^
+../main.cpp: In function ‘double dotP(std::vector<double>, std::vector<point>)’:
+../main.cpp:87:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp: In function ‘void update(std::vector<double>*, double, std::vector<point>, double)’:
+../main.cpp:95:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp:97:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == row.size() - 1) {
+         ^
+../main.cpp: In function ‘perceptronReturn basicPerceptron(std::vector<std::vector<point> >, std::vector<int>, double)’:
+../main.cpp:120:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < matrix[0].size(); i++) {
+                    ^
+../main.cpp:132:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < matrix.size(); i++) {
+                    ^
+../main.cpp: In function ‘void perceptronDriver(std::__cxx11::string)’:
+../main.cpp:176:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tempLines.size(); i++) {
+                    ^
+../main.cpp:189:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < learningRate.size(); i++) {
+                    ^
+../main.cpp:196:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == learningRate.size() - 1) {
+         ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+15:20:11 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+make: Nothing to be done for 'all'.
+15:20:17 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp: In function ‘std::vector<point> fill(std::__cxx11::string)’:
+../main.cpp:38:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tokens.size(); i++) {
+                    ^
+../main.cpp:76:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < temp.size(); i++) {
+                    ^
+../main.cpp:59:6: warning: unused variable ‘count’ [-Wunused-variable]
+  int count = 0;
+      ^
+../main.cpp: In function ‘double dotP(std::vector<double>, std::vector<point>)’:
+../main.cpp:87:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp: In function ‘void update(std::vector<double>*, double, std::vector<point>, double)’:
+../main.cpp:95:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp:97:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == row.size() - 1) {
+         ^
+../main.cpp: In function ‘perceptronReturn basicPerceptron(std::vector<std::vector<point> >, std::vector<int>, double)’:
+../main.cpp:120:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < matrix[0].size(); i++) {
+                    ^
+../main.cpp:132:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < matrix.size(); i++) {
+                    ^
+../main.cpp: In function ‘void perceptronDriver(std::__cxx11::string)’:
+../main.cpp:176:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tempLines.size(); i++) {
+                    ^
+../main.cpp:189:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < learningRate.size(); i++) {
+                    ^
+../main.cpp:196:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == learningRate.size() - 1) {
+         ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+15:20:23 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp: In function ‘std::vector<point> fill(std::__cxx11::string)’:
+../main.cpp:38:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tokens.size(); i++) {
+                    ^
+../main.cpp:76:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < temp.size(); i++) {
+                    ^
+../main.cpp:59:6: warning: unused variable ‘count’ [-Wunused-variable]
+  int count = 0;
+      ^
+../main.cpp: In function ‘double dotP(std::vector<double>, std::vector<point>)’:
+../main.cpp:87:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp: In function ‘void update(std::vector<double>*, double, std::vector<point>, double)’:
+../main.cpp:95:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp:97:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == row.size() - 1) {
+         ^
+../main.cpp: In function ‘perceptronReturn basicPerceptron(std::vector<std::vector<point> >, std::vector<int>, double)’:
+../main.cpp:120:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < matrix[0].size(); i++) {
+                    ^
+../main.cpp:132:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < matrix.size(); i++) {
+                    ^
+../main.cpp: In function ‘void perceptronDriver(std::__cxx11::string)’:
+../main.cpp:176:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tempLines.size(); i++) {
+                    ^
+../main.cpp:189:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < learningRate.size(); i++) {
+                    ^
+../main.cpp:196:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == learningRate.size() - 1) {
+         ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+15:20:34 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp: In function ‘std::vector<point> fill(std::__cxx11::string)’:
+../main.cpp:38:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tokens.size(); i++) {
+                    ^
+../main.cpp:76:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < temp.size(); i++) {
+                    ^
+../main.cpp:59:6: warning: unused variable ‘count’ [-Wunused-variable]
+  int count = 0;
+      ^
+../main.cpp: In function ‘double dotP(std::vector<double>, std::vector<point>)’:
+../main.cpp:87:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp: In function ‘void update(std::vector<double>*, double, std::vector<point>, double)’:
+../main.cpp:95:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp:97:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == row.size() - 1) {
+         ^
+../main.cpp: In function ‘perceptronReturn basicPerceptron(std::vector<std::vector<point> >, std::vector<int>, double)’:
+../main.cpp:120:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < matrix[0].size(); i++) {
+                    ^
+../main.cpp:132:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < matrix.size(); i++) {
+                    ^
+../main.cpp: In function ‘void perceptronDriver(std::__cxx11::string)’:
+../main.cpp:176:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tempLines.size(); i++) {
+                    ^
+../main.cpp:189:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < learningRate.size(); i++) {
+                    ^
+../main.cpp:196:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == learningRate.size() - 1) {
+         ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+15:20:42 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp: In function ‘std::vector<point> fill(std::__cxx11::string)’:
+../main.cpp:38:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tokens.size(); i++) {
+                    ^
+../main.cpp:76:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < temp.size(); i++) {
+                    ^
+../main.cpp:59:6: warning: unused variable ‘count’ [-Wunused-variable]
+  int count = 0;
+      ^
+../main.cpp: In function ‘double dotP(std::vector<double>, std::vector<point>)’:
+../main.cpp:87:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp: In function ‘void update(std::vector<double>*, double, std::vector<point>, double)’:
+../main.cpp:95:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp:97:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == row.size() - 1) {
+         ^
+../main.cpp: In function ‘perceptronReturn basicPerceptron(std::vector<std::vector<point> >, std::vector<int>, double)’:
+../main.cpp:120:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < matrix[0].size(); i++) {
+                    ^
+../main.cpp:132:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < matrix.size(); i++) {
+                    ^
+../main.cpp: In function ‘void perceptronDriver(std::__cxx11::string)’:
+../main.cpp:176:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tempLines.size(); i++) {
+                    ^
+../main.cpp:189:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < learningRate.size(); i++) {
+                    ^
+../main.cpp:196:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == learningRate.size() - 1) {
+         ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+15:20:48 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp: In function ‘std::vector<point> fill(std::__cxx11::string)’:
+../main.cpp:38:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tokens.size(); i++) {
+                    ^
+../main.cpp:76:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < temp.size(); i++) {
+                    ^
+../main.cpp:59:6: warning: unused variable ‘count’ [-Wunused-variable]
+  int count = 0;
+      ^
+../main.cpp: In function ‘double dotP(std::vector<double>, std::vector<point>)’:
+../main.cpp:87:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp: In function ‘void update(std::vector<double>*, double, std::vector<point>, double)’:
+../main.cpp:95:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp:97:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == row.size() - 1) {
+         ^
+../main.cpp: In function ‘perceptronReturn basicPerceptron(std::vector<std::vector<point> >, std::vector<int>, double)’:
+../main.cpp:120:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < matrix[0].size(); i++) {
+                    ^
+../main.cpp:132:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < matrix.size(); i++) {
+                    ^
+../main.cpp: In function ‘void perceptronDriver(std::__cxx11::string)’:
+../main.cpp:176:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tempLines.size(); i++) {
+                    ^
+../main.cpp:189:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < learningRate.size(); i++) {
+                    ^
+../main.cpp:196:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == learningRate.size() - 1) {
+         ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+15:20:52 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp: In function ‘std::vector<point> fill(std::__cxx11::string)’:
+../main.cpp:38:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tokens.size(); i++) {
+                    ^
+../main.cpp:76:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < temp.size(); i++) {
+                    ^
+../main.cpp:59:6: warning: unused variable ‘count’ [-Wunused-variable]
+  int count = 0;
+      ^
+../main.cpp: In function ‘double dotP(std::vector<double>, std::vector<point>)’:
+../main.cpp:87:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp: In function ‘void update(std::vector<double>*, double, std::vector<point>, double)’:
+../main.cpp:95:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp:97:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == row.size() - 1) {
+         ^
+../main.cpp: In function ‘perceptronReturn basicPerceptron(std::vector<std::vector<point> >, std::vector<int>, double)’:
+../main.cpp:120:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < matrix[0].size(); i++) {
+                    ^
+../main.cpp:132:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < matrix.size(); i++) {
+                    ^
+../main.cpp: In function ‘void perceptronDriver(std::__cxx11::string)’:
+../main.cpp:176:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tempLines.size(); i++) {
+                    ^
+../main.cpp:189:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < learningRate.size(); i++) {
+                    ^
+../main.cpp:196:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == learningRate.size() - 1) {
+         ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+15:21:41 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp: In function ‘std::vector<point> fill(std::__cxx11::string)’:
+../main.cpp:38:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tokens.size(); i++) {
+                    ^
+../main.cpp:76:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < temp.size(); i++) {
+                    ^
+../main.cpp:59:6: warning: unused variable ‘count’ [-Wunused-variable]
+  int count = 0;
+      ^
+../main.cpp: In function ‘double dotP(std::vector<double>, std::vector<point>)’:
+../main.cpp:87:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp: In function ‘void update(std::vector<double>*, double, std::vector<point>, double)’:
+../main.cpp:95:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp:97:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == row.size() - 1) {
+         ^
+../main.cpp: In function ‘perceptronReturn basicPerceptron(std::vector<std::vector<point> >, std::vector<int>, double)’:
+../main.cpp:120:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < matrix[0].size(); i++) {
+                    ^
+../main.cpp:132:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < matrix.size(); i++) {
+                    ^
+../main.cpp: In function ‘void perceptronDriver(std::__cxx11::string)’:
+../main.cpp:176:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tempLines.size(); i++) {
+                    ^
+../main.cpp:189:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < learningRate.size(); i++) {
+                    ^
+../main.cpp:196:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == learningRate.size() - 1) {
+         ^
+../main.cpp: In function ‘int main()’:
+../main.cpp:209:19: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for(int i = 0; i < files.size(); i++){
+                   ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+15:21:52 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp: In function ‘std::vector<point> fill(std::__cxx11::string)’:
+../main.cpp:38:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tokens.size(); i++) {
+                    ^
+../main.cpp:76:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < temp.size(); i++) {
+                    ^
+../main.cpp:59:6: warning: unused variable ‘count’ [-Wunused-variable]
+  int count = 0;
+      ^
+../main.cpp: In function ‘double dotP(std::vector<double>, std::vector<point>)’:
+../main.cpp:87:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp: In function ‘void update(std::vector<double>*, double, std::vector<point>, double)’:
+../main.cpp:95:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp:97:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == row.size() - 1) {
+         ^
+../main.cpp: In function ‘perceptronReturn basicPerceptron(std::vector<std::vector<point> >, std::vector<int>, double)’:
+../main.cpp:120:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < matrix[0].size(); i++) {
+                    ^
+../main.cpp:132:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < matrix.size(); i++) {
+                    ^
+../main.cpp: In function ‘void perceptronDriver(std::__cxx11::string)’:
+../main.cpp:176:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tempLines.size(); i++) {
+                    ^
+../main.cpp:189:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < learningRate.size(); i++) {
+                    ^
+../main.cpp:196:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == learningRate.size() - 1) {
+         ^
+../main.cpp: In function ‘int main()’:
+../main.cpp:209:19: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for(int i = 0; i < files.size(); i++){
+                   ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+15:23:25 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp: In function ‘std::vector<point> fill(std::__cxx11::string)’:
+../main.cpp:38:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tokens.size(); i++) {
+                    ^
+../main.cpp:76:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < temp.size(); i++) {
+                    ^
+../main.cpp:59:6: warning: unused variable ‘count’ [-Wunused-variable]
+  int count = 0;
+      ^
+../main.cpp: In function ‘double dotP(std::vector<double>, std::vector<point>)’:
+../main.cpp:87:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp: In function ‘void update(std::vector<double>*, double, std::vector<point>, double)’:
+../main.cpp:95:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp:97:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == row.size() - 1) {
+         ^
+../main.cpp: In function ‘perceptronReturn basicPerceptron(std::vector<std::vector<point> >, std::vector<int>, double)’:
+../main.cpp:120:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < matrix[0].size(); i++) {
+                    ^
+../main.cpp:132:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < matrix.size(); i++) {
+                    ^
+../main.cpp: In function ‘void perceptronDriver(std::__cxx11::string)’:
+../main.cpp:176:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tempLines.size(); i++) {
+                    ^
+../main.cpp:189:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < learningRate.size(); i++) {
+                    ^
+../main.cpp:196:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == learningRate.size() - 1) {
+         ^
+../main.cpp: In function ‘int main()’:
+../main.cpp:210:19: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for(int i = 0; i < files.size(); i++){
+                   ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+15:24:43 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp: In function ‘std::vector<point> fill(std::__cxx11::string)’:
+../main.cpp:38:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tokens.size(); i++) {
+                    ^
+../main.cpp:76:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < temp.size(); i++) {
+                    ^
+../main.cpp:59:6: warning: unused variable ‘count’ [-Wunused-variable]
+  int count = 0;
+      ^
+../main.cpp: In function ‘double dotP(std::vector<double>, std::vector<point>)’:
+../main.cpp:87:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp: In function ‘void update(std::vector<double>*, double, std::vector<point>, double)’:
+../main.cpp:95:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp:97:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == row.size() - 1) {
+         ^
+../main.cpp: In function ‘perceptronReturn basicPerceptron(std::vector<std::vector<point> >, std::vector<int>, double)’:
+../main.cpp:120:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < matrix[0].size(); i++) {
+                    ^
+../main.cpp:132:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < matrix.size(); i++) {
+                    ^
+../main.cpp: In function ‘perceptronReturn perceptronDriver(std::__cxx11::string)’:
+../main.cpp:176:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tempLines.size(); i++) {
+                    ^
+../main.cpp:189:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < learningRate.size(); i++) {
+                    ^
+../main.cpp:196:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == learningRate.size() - 1) {
+         ^
+../main.cpp:199:11: error: ‘pt’ was not declared in this scope
+    return pt;
+           ^
+../main.cpp: In function ‘int main()’:
+../main.cpp:211:19: error: no matching function for call to ‘perceptronReturn::perceptronReturn()’
+  perceptronReturn pr;
+                   ^
+../main.cpp:18:2: note: candidate: perceptronReturn::perceptronReturn(double, std::vector<double>)
+  perceptronReturn(double _accuracy, vector<double> _weights) {
+  ^
+../main.cpp:18:2: note:   candidate expects 2 arguments, 0 provided
+../main.cpp:15:8: note: candidate: perceptronReturn::perceptronReturn(const perceptronReturn&)
+ struct perceptronReturn {
+        ^
+../main.cpp:15:8: note:   candidate expects 1 argument, 0 provided
+../main.cpp:212:19: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for(int i = 0; i < files.size(); i++){
+                   ^
+subdir.mk:18: recipe for target 'main.o' failed
+make: *** [main.o] Error 1
+15:25:05 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp: In function ‘std::vector<point> fill(std::__cxx11::string)’:
+../main.cpp:38:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tokens.size(); i++) {
+                    ^
+../main.cpp:76:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < temp.size(); i++) {
+                    ^
+../main.cpp:59:6: warning: unused variable ‘count’ [-Wunused-variable]
+  int count = 0;
+      ^
+../main.cpp: In function ‘double dotP(std::vector<double>, std::vector<point>)’:
+../main.cpp:87:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp: In function ‘void update(std::vector<double>*, double, std::vector<point>, double)’:
+../main.cpp:95:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp:97:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == row.size() - 1) {
+         ^
+../main.cpp: In function ‘perceptronReturn basicPerceptron(std::vector<std::vector<point> >, std::vector<int>, double)’:
+../main.cpp:120:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < matrix[0].size(); i++) {
+                    ^
+../main.cpp:132:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < matrix.size(); i++) {
+                    ^
+../main.cpp: In function ‘perceptronReturn perceptronDriver(std::__cxx11::string)’:
+../main.cpp:176:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tempLines.size(); i++) {
+                    ^
+../main.cpp:189:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < learningRate.size(); i++) {
+                    ^
+../main.cpp:196:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == learningRate.size() - 1) {
+         ^
+../main.cpp:199:11: error: ‘pt’ was not declared in this scope
+    return pt;
+           ^
+../main.cpp: In function ‘int main()’:
+../main.cpp:212:19: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for(int i = 0; i < files.size(); i++){
+                   ^
+make: *** [main.o] Error 1
+subdir.mk:18: recipe for target 'main.o' failed
+15:25:09 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp: In function ‘std::vector<point> fill(std::__cxx11::string)’:
+../main.cpp:38:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tokens.size(); i++) {
+                    ^
+../main.cpp:76:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < temp.size(); i++) {
+                    ^
+../main.cpp:59:6: warning: unused variable ‘count’ [-Wunused-variable]
+  int count = 0;
+      ^
+../main.cpp: In function ‘double dotP(std::vector<double>, std::vector<point>)’:
+../main.cpp:87:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp: In function ‘void update(std::vector<double>*, double, std::vector<point>, double)’:
+../main.cpp:95:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp:97:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == row.size() - 1) {
+         ^
+../main.cpp: In function ‘perceptronReturn basicPerceptron(std::vector<std::vector<point> >, std::vector<int>, double)’:
+../main.cpp:120:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < matrix[0].size(); i++) {
+                    ^
+../main.cpp:132:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < matrix.size(); i++) {
+                    ^
+../main.cpp: In function ‘perceptronReturn perceptronDriver(std::__cxx11::string)’:
+../main.cpp:176:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tempLines.size(); i++) {
+                    ^
+../main.cpp:189:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < learningRate.size(); i++) {
+                    ^
+../main.cpp:196:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == learningRate.size() - 1) {
+         ^
+../main.cpp:199:11: error: ‘pt’ was not declared in this scope
+    return pt;
+           ^
+../main.cpp: In function ‘int main()’:
+../main.cpp:212:19: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for(int i = 0; i < files.size(); i++){
+                   ^
+make: *** [main.o] Error 1
+subdir.mk:18: recipe for target 'main.o' failed
+15:26:05 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp: In function ‘std::vector<point> fill(std::__cxx11::string)’:
+../main.cpp:38:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tokens.size(); i++) {
+                    ^
+../main.cpp:76:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < temp.size(); i++) {
+                    ^
+../main.cpp:59:6: warning: unused variable ‘count’ [-Wunused-variable]
+  int count = 0;
+      ^
+../main.cpp: In function ‘double dotP(std::vector<double>, std::vector<point>)’:
+../main.cpp:87:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp: In function ‘void update(std::vector<double>*, double, std::vector<point>, double)’:
+../main.cpp:95:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp:97:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == row.size() - 1) {
+         ^
+../main.cpp: In function ‘perceptronReturn basicPerceptron(std::vector<std::vector<point> >, std::vector<int>, double)’:
+../main.cpp:120:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < matrix[0].size(); i++) {
+                    ^
+../main.cpp:132:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < matrix.size(); i++) {
+                    ^
+../main.cpp: In function ‘perceptronReturn perceptronDriver(std::__cxx11::string)’:
+../main.cpp:176:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tempLines.size(); i++) {
+                    ^
+../main.cpp:189:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < learningRate.size(); i++) {
+                    ^
+../main.cpp:196:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == learningRate.size() - 1) {
+         ^
+../main.cpp: In function ‘int main()’:
+../main.cpp:212:19: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for(int i = 0; i < files.size(); i++){
+                   ^
+../main.cpp: In function ‘perceptronReturn perceptronDriver(std::__cxx11::string)’:
+../main.cpp:202:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+15:31:54 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp: In function ‘std::vector<point> fill(std::__cxx11::string)’:
+../main.cpp:38:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tokens.size(); i++) {
+                    ^
+../main.cpp:76:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < temp.size(); i++) {
+                    ^
+../main.cpp:59:6: warning: unused variable ‘count’ [-Wunused-variable]
+  int count = 0;
+      ^
+../main.cpp: In function ‘double dotP(std::vector<double>, std::vector<point>)’:
+../main.cpp:87:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp: In function ‘void update(std::vector<double>*, double, std::vector<point>, double)’:
+../main.cpp:95:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp:97:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == row.size() - 1) {
+         ^
+../main.cpp: In function ‘perceptronReturn basicPerceptron(std::vector<std::vector<point> >, std::vector<int>, double, std::vector<double>)’:
+../main.cpp:132:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < matrix.size(); i++) {
+                    ^
+../main.cpp: In function ‘perceptronReturn perceptronDriver(std::__cxx11::string, std::vector<double>)’:
+../main.cpp:176:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tempLines.size(); i++) {
+                    ^
+../main.cpp:189:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < learningRate.size(); i++) {
+                    ^
+../main.cpp:196:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == learningRate.size() - 1) {
+         ^
+../main.cpp: In function ‘int main()’:
+../main.cpp:221:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < files.size(); i++) {
+                    ^
+../main.cpp: In function ‘perceptronReturn perceptronDriver(std::__cxx11::string, std::vector<double>)’:
+../main.cpp:202:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+15:31:57 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+make: Nothing to be done for 'all'.
+15:34:34 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp: In function ‘std::vector<point> fill(std::__cxx11::string)’:
+../main.cpp:38:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tokens.size(); i++) {
+                    ^
+../main.cpp:76:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < temp.size(); i++) {
+                    ^
+../main.cpp:59:6: warning: unused variable ‘count’ [-Wunused-variable]
+  int count = 0;
+      ^
+../main.cpp: In function ‘double dotP(std::vector<double>, std::vector<point>)’:
+../main.cpp:87:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp: In function ‘void update(std::vector<double>*, double, std::vector<point>, double)’:
+../main.cpp:95:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp:97:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == row.size() - 1) {
+         ^
+../main.cpp: In function ‘perceptronReturn basicPerceptron(std::vector<std::vector<point> >, std::vector<int>, double, std::vector<double>)’:
+../main.cpp:132:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < matrix.size(); i++) {
+                    ^
+../main.cpp: In function ‘perceptronReturn perceptronDriver(std::__cxx11::string, std::vector<double>)’:
+../main.cpp:176:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tempLines.size(); i++) {
+                    ^
+../main.cpp:189:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < learningRate.size(); i++) {
+                    ^
+../main.cpp:196:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == learningRate.size() - 1) {
+         ^
+../main.cpp: In function ‘void crossValidate(std::vector<std::__cxx11::basic_string<char> >)’:
+../main.cpp:214:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < files.size(); i++) {
+                    ^
+../main.cpp: In function ‘perceptronReturn perceptronDriver(std::__cxx11::string, std::vector<double>)’:
+../main.cpp:202:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+15:34:50 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+make: Nothing to be done for 'all'.
+15:38:33 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp: In function ‘std::vector<point> fill(std::__cxx11::string)’:
+../main.cpp:38:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tokens.size(); i++) {
+                    ^
+../main.cpp:76:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < temp.size(); i++) {
+                    ^
+../main.cpp:59:6: warning: unused variable ‘count’ [-Wunused-variable]
+  int count = 0;
+      ^
+../main.cpp: In function ‘double dotP(std::vector<double>, std::vector<point>)’:
+../main.cpp:87:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp: In function ‘void update(std::vector<double>*, double, std::vector<point>, double)’:
+../main.cpp:95:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp:97:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == row.size() - 1) {
+         ^
+../main.cpp: In function ‘perceptronReturn basicPerceptron(std::vector<std::vector<point> >, std::vector<int>, double, std::vector<double>)’:
+../main.cpp:132:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < matrix.size(); i++) {
+                    ^
+../main.cpp: In function ‘perceptronReturn perceptronDriver(std::__cxx11::string, std::vector<double>)’:
+../main.cpp:176:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tempLines.size(); i++) {
+                    ^
+../main.cpp:189:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < learningRate.size(); i++) {
+                    ^
+../main.cpp:196:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == learningRate.size() - 1) {
+         ^
+../main.cpp: In function ‘void crossValidate(std::vector<std::__cxx11::basic_string<char> >, int)’:
+../main.cpp:216:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < files.size(); i++) {
+                    ^
+../main.cpp: In function ‘int main()’:
+../main.cpp:234:19: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for(int i = 0; i < files.size(); i++){
+                   ^
+../main.cpp: In function ‘perceptronReturn perceptronDriver(std::__cxx11::string, std::vector<double>)’:
+../main.cpp:202:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+15:41:06 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp: In function ‘std::vector<point> fill(std::__cxx11::string)’:
+../main.cpp:38:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tokens.size(); i++) {
+                    ^
+../main.cpp:76:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < temp.size(); i++) {
+                    ^
+../main.cpp:59:6: warning: unused variable ‘count’ [-Wunused-variable]
+  int count = 0;
+      ^
+../main.cpp: In function ‘double dotP(std::vector<double>, std::vector<point>)’:
+../main.cpp:87:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp: In function ‘void update(std::vector<double>*, double, std::vector<point>, double)’:
+../main.cpp:95:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp:97:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == row.size() - 1) {
+         ^
+../main.cpp: In function ‘perceptronReturn basicPerceptron(std::vector<std::vector<point> >, std::vector<int>, double, std::vector<double>)’:
+../main.cpp:132:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < matrix.size(); i++) {
+                    ^
+../main.cpp: In function ‘perceptronReturn perceptronDriver(std::__cxx11::string, std::vector<double>)’:
+../main.cpp:176:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tempLines.size(); i++) {
+                    ^
+../main.cpp:189:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < learningRate.size(); i++) {
+                    ^
+../main.cpp:196:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == learningRate.size() - 1) {
+         ^
+../main.cpp: In function ‘void crossValidate(std::vector<std::__cxx11::basic_string<char> >, int)’:
+../main.cpp:219:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < files.size(); i++) {
+                    ^
+../main.cpp: In function ‘int main()’:
+../main.cpp:243:19: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for(int i = 0; i < files.size(); i++){
+                   ^
+../main.cpp: In function ‘perceptronReturn perceptronDriver(std::__cxx11::string, std::vector<double>)’:
+../main.cpp:202:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+15:42:37 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp: In function ‘std::vector<point> fill(std::__cxx11::string)’:
+../main.cpp:38:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tokens.size(); i++) {
+                    ^
+../main.cpp:76:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < temp.size(); i++) {
+                    ^
+../main.cpp:59:6: warning: unused variable ‘count’ [-Wunused-variable]
+  int count = 0;
+      ^
+../main.cpp: In function ‘double dotP(std::vector<double>, std::vector<point>)’:
+../main.cpp:87:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp: In function ‘void update(std::vector<double>*, double, std::vector<point>, double)’:
+../main.cpp:95:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp:97:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == row.size() - 1) {
+         ^
+../main.cpp: In function ‘perceptronReturn basicPerceptron(std::vector<std::vector<point> >, std::vector<int>, double, std::vector<double>)’:
+../main.cpp:132:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < matrix.size(); i++) {
+                    ^
+../main.cpp: In function ‘perceptronReturn perceptronDriver(std::__cxx11::string, std::vector<double>)’:
+../main.cpp:176:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tempLines.size(); i++) {
+                    ^
+../main.cpp:189:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < learningRate.size(); i++) {
+                    ^
+../main.cpp:196:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == learningRate.size() - 1) {
+         ^
+../main.cpp: In function ‘void crossValidate(std::vector<std::__cxx11::basic_string<char> >, int)’:
+../main.cpp:219:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < files.size(); i++) {
+                    ^
+../main.cpp: In function ‘int main()’:
+../main.cpp:244:19: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for(int i = 0; i < files.size(); i++){
+                   ^
+../main.cpp: In function ‘perceptronReturn perceptronDriver(std::__cxx11::string, std::vector<double>)’:
+../main.cpp:202:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+15:43:48 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp: In function ‘std::vector<point> fill(std::__cxx11::string)’:
+../main.cpp:38:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tokens.size(); i++) {
+                    ^
+../main.cpp:76:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < temp.size(); i++) {
+                    ^
+../main.cpp:59:6: warning: unused variable ‘count’ [-Wunused-variable]
+  int count = 0;
+      ^
+../main.cpp: In function ‘double dotP(std::vector<double>, std::vector<point>)’:
+../main.cpp:87:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp: In function ‘void update(std::vector<double>*, double, std::vector<point>, double)’:
+../main.cpp:95:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < row.size(); i++) {
+                    ^
+../main.cpp:97:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == row.size() - 1) {
+         ^
+../main.cpp: In function ‘perceptronReturn basicPerceptron(std::vector<std::vector<point> >, std::vector<int>, double, std::vector<double>)’:
+../main.cpp:132:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < matrix.size(); i++) {
+                    ^
+../main.cpp: In function ‘perceptronReturn perceptronDriver(std::__cxx11::string, std::vector<double>)’:
+../main.cpp:176:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < tempLines.size(); i++) {
+                    ^
+../main.cpp:189:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < learningRate.size(); i++) {
+                    ^
+../main.cpp:196:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i == learningRate.size() - 1) {
+         ^
+../main.cpp: In function ‘void crossValidate(std::vector<std::__cxx11::basic_string<char> >, int)’:
+../main.cpp:219:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < files.size(); i++) {
+                    ^
+../main.cpp: In function ‘int main()’:
+../main.cpp:244:19: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for(int i = 0; i < files.size(); i++){
+                   ^
+../main.cpp: In function ‘perceptronReturn perceptronDriver(std::__cxx11::string, std::vector<double>)’:
+../main.cpp:202:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
