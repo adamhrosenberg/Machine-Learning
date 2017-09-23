@@ -4,12 +4,15 @@
 *.cproject
 *.project
 *.settings
+/RemoteSystemsTempFiles
+/Debug
 # Compiled Object files
 *.slo
 *.lo
 *.o
 *.obj
-
+*.settings
+*.metadata
 # Precompiled Headers
 *.gch
 *.pch
