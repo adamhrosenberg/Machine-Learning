@@ -6,10 +6,21 @@
 #include <sstream>
 
 using namespace std;
+double NORMALIZED_VALUE = 0.18257;
 
 struct point {
 	double x, y;
 };
+
+struct perceptronReturn{
+	double accuracy;
+	vector<double> weights;
+	perceptronReturn(double _accuracy, vector<double> _weights){
+		accuracy = _accuracy;
+		weights = _weights;
+	}
+};
+
 
 vector<point> fill(string line) {
 	//we have a line. now split line by spaces to have a new vector.
@@ -66,7 +77,7 @@ vector<point> fill(string line) {
 	for (int i = 0; i < temp.size(); i++) {
 		point nonZero;
 		nonZero.x = temp.at(i).x; //the index into row.
-		nonZero.y = 0.18257;
+		nonZero.y = NORMALIZED_VALUE;
 		row[nonZero.x-1] = nonZero;
 	}
 	return row;
@@ -80,10 +91,17 @@ double dotP(vector<double>weights, vector<point>row){
 	return result;
 }
 
-vector<double> update(vector<double> * weights, double trainingY, vector<point> row){
+void update(vector<double> * weights, double trainingY, vector<point> row, double r){
 	for(int i = 0; i < row.size(); i++){
-		double weight = weights->at(i)+ (0.01 * trainingY * row.at(i).y);
-		weights->at(i) = weight;
+		//were at the bias and do b += ry;
+		if(i == row.size()-1){
+			double weight = weights->at(i)+ (r * trainingY);
+			weights->at(i) = weight;
+		}else{
+			//not at the bias.
+			double weight = weights->at(i)+ (r * trainingY * row.at(i).y);
+			weights->at(i) = weight;
+		}
 	}
 }
 
@@ -93,13 +111,23 @@ double checkAccuracy(vector<int> labels, vector<int> predictions){
 	return 0.01;
 }
 
-vector<double> basicPerceptron(vector<vector<point> > matrix, vector<int> labels){
-	vector<double> weights(69, 0.0); //weights vector. TODO init w/ small values.
+perceptronReturn basicPerceptron(vector<vector<point> > matrix, vector<int> labels, double r){
+//	vector<double> weights(69, 0.0); //weights vector. TODO init w/ small values. . last element is the bias.
 
+	vector<double>weights;
+	srand(time(NULL));
+	for(int i = 0; i <matrix[0].size(); i++){
+		double randomInitValue = rand() % (20000) - (10000);
+		randomInitValue /= 100000;
+		weights.push_back(randomInitValue);
+//		cout << randomInitValue << endl;
+	}
 	vector<double> predictions;
-	int numRight = 0;
-	int numWrong = 0;
+	double numRight = 0;
+	double numWrong = 0;
 	double trainingY = 0;
+
+
 	//for each example in the training set
 	for (int i = 0; i < matrix.size(); i++) {
 		//make a prediction and compare with training Y
@@ -117,25 +145,14 @@ vector<double> basicPerceptron(vector<vector<point> > matrix, vector<int> labels
 
 		if(prediction != trainingY){
 			numWrong ++;
-			update(&weights, trainingY, matrix.at(i));
+			update(&weights, trainingY, matrix.at(i), r);
 		}else{
 			numRight++;
 		}
-
 	}
-
-	cout << "Num right " << numRight << "/" << numWrong + numRight << endl;
-//	cout << predictions.size() << labels.size() << endl;
-
-	return weights;
-	//printing matrix / label vector
-//	for (int i = 0; i < matrix.size(); i++) {
-//		for (int j = 0; j < matrix[i].size(); j++) {
-//			cout << " (" << matrix.at(i).at(j).x << "," << matrix.at(i).at(j).y
-//					<< "), ";
-//		}
-//		cout << endl;
-//	}
+	double accuracy = numRight / (numRight + numWrong);
+	perceptronReturn pr(accuracy, weights);
+	return pr;
 }
 int main() {
 
@@ -164,11 +181,33 @@ int main() {
 		matrix.push_back(row);
 	}
 
-	//call perceptron with data structures..
-	vector<double> weights = basicPerceptron(matrix, labels);
-	for(int i = 0; i < weights.size(); i++){
-		cout << weights.at(i) << endl;
+
+	vector<double> learningRate;
+	learningRate.push_back(1);
+	learningRate.push_back(0.1);
+	learningRate.push_back(0.01);
+
+	vector<double> basicAccuracies;
+	double accuracySum = 0;
+	//call perceptron with each value of r
+	for(int i = 0; i < learningRate.size(); i++){
+		perceptronReturn pr = basicPerceptron(matrix, labels, learningRate.at(i));
+		basicAccuracies.push_back(pr.accuracy);
+		accuracySum += pr.accuracy;
+		cout << "Basic Perceptron accuracy = " << pr.accuracy << "% with a learning rate of: " << learningRate.at(i) << endl;
+		if(i == learningRate.size()-1){
+			cout << "Mean accuracy for Basic Perceptron: " << accuracySum / learningRate.size() << "%" << endl;
+
+			for(int i = 0; i < pr.weights.size(); i++){
+				cout << pr.weights.at(i) << endl;
+			}
+		}
+
 	}
+
+
+
+
 
 	return 0;
 }
