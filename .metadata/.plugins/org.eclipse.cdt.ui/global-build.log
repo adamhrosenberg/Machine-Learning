@@ -10951,3 +10951,1788 @@ make: Nothing to be done for 'all'.
 11:49:08 **** Incremental Build of configuration Debug for project Perceptron ****
 make all 
 make: Nothing to be done for 'all'.
+11:57:53 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘crossValidateReturn crossValidate(std::vector<std::__cxx11::basic_string<char> >, int, double, int)’:
+../main.cpp:222:53: error: too few arguments to function ‘perceptronReturn perceptronDriver(std::__cxx11::string, std::vector<double>, double, int, bool)’
+      perceptronDriver(files.at(i), weights, r, epoch));
+                                                     ^
+../main.cpp:167:18: note: declared here
+ perceptronReturn perceptronDriver(string path, vector<double> weights, double r,
+                  ^
+../main.cpp:229:75: error: too few arguments to function ‘perceptronReturn perceptronDriver(std::__cxx11::string, std::vector<double>, double, int, bool)’
+  perceptronReturn pr(perceptronDriver(files.at(against), weights, r, epoch));
+                                                                           ^
+../main.cpp:167:18: note: declared here
+ perceptronReturn perceptronDriver(string path, vector<double> weights, double r,
+                  ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:314:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:314:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:314:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+subdir.mk:18: recipe for target 'main.o' failed
+make: *** [main.o] Error 1
+11:58:11 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:314:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:314:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:314:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+11:59:35 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:314:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:314:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:314:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+12:14:14 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:341:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:341:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:341:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+12:14:18 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+make: Nothing to be done for 'all'.
+12:15:24 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+make: Nothing to be done for 'all'.
+12:15:31 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+make: Nothing to be done for 'all'.
+12:15:36 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+make: Nothing to be done for 'all'.
+12:16:00 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void perceptronHelper(std::vector<std::vector<point> >, std::vector<int>, double, std::vector<double>, int, bool)’:
+../main.cpp:159:86: error: a function-definition is not allowed here before ‘{’ token
+    vector<int> labels, double r, vector<double> weights, int epoch, bool compareDev) {
+                                                                                      ^
+../main.cpp:551:1: error: expected ‘}’ at end of input
+ }
+ ^
+subdir.mk:18: recipe for target 'main.o' failed
+make: *** [main.o] Error 1
+12:16:05 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void perceptronHelper(std::vector<std::vector<point> >, std::vector<int>, double, std::vector<double>, int, bool)’:
+../main.cpp:159:86: error: a function-definition is not allowed here before ‘{’ token
+    vector<int> labels, double r, vector<double> weights, int epoch, bool compareDev) {
+                                                                                      ^
+../main.cpp:551:1: error: expected ‘}’ at end of input
+ }
+ ^
+subdir.mk:18: recipe for target 'main.o' failed
+make: *** [main.o] Error 1
+12:16:11 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void perceptronHelper(std::vector<std::vector<point> >, std::vector<int>, double, std::vector<double>, int, bool)’:
+../main.cpp:159:86: error: a function-definition is not allowed here before ‘{’ token
+    vector<int> labels, double r, vector<double> weights, int epoch, bool compareDev) {
+                                                                                      ^
+../main.cpp:551:1: error: expected ‘}’ at end of input
+ }
+ ^
+make: *** [main.o] Error 1
+subdir.mk:18: recipe for target 'main.o' failed
+12:16:34 **** Clean-only build of configuration Debug for project Perceptron ****
+make clean 
+rm -rf  ./main.o  ./main.d  Perceptron
+ 
+12:16:36 **** Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void perceptronHelper(std::vector<std::vector<point> >, std::vector<int>, double, std::vector<double>, int, bool)’:
+../main.cpp:159:86: error: a function-definition is not allowed here before ‘{’ token
+    vector<int> labels, double r, vector<double> weights, int epoch, bool compareDev) {
+                                                                                      ^
+../main.cpp:551:1: error: expected ‘}’ at end of input
+ }
+ ^
+make: *** [main.o] Error 1
+subdir.mk:18: recipe for target 'main.o' failed
+12:16:52 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void perceptronHelper(std::vector<std::vector<point> >, std::vector<int>, double, std::vector<double>, int, bool)’:
+../main.cpp:159:86: error: a function-definition is not allowed here before ‘{’ token
+    vector<int> labels, double r, vector<double> weights, int epoch, bool compareDev) {
+                                                                                      ^
+../main.cpp:551:1: error: expected ‘}’ at end of input
+ }
+ ^
+subdir.mk:18: recipe for target 'main.o' failed
+make: *** [main.o] Error 1
+12:17:34 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:341:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:341:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:341:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+12:17:37 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+make: Nothing to be done for 'all'.
+12:17:40 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:341:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:341:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:341:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+12:18:09 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘perceptronReturn perceptronHelper(std::vector<std::vector<point> >, std::vector<int>, double, std::vector<double>, int, bool)’:
+../main.cpp:118:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:344:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:344:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:344:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+12:18:25 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘perceptronReturn perceptronHelper(std::vector<std::vector<point> >, std::vector<int>, double, std::vector<double>, int, bool)’:
+../main.cpp:160:86: error: a function-definition is not allowed here before ‘{’ token
+    vector<int> labels, double r, vector<double> weights, int epoch, bool compareDev) {
+                                                                                      ^
+../main.cpp:552:1: error: expected ‘}’ at end of input
+ }
+ ^
+../main.cpp:552:1: warning: no return statement in function returning non-void [-Wreturn-type]
+subdir.mk:18: recipe for target 'main.o' failed
+make: *** [main.o] Error 1
+12:18:48 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘perceptronReturn perceptronHelper(std::vector<std::vector<point> >, std::vector<int>, double, std::vector<double>, int, bool)’:
+../main.cpp:160:86: error: a function-definition is not allowed here before ‘{’ token
+    vector<int> labels, double r, vector<double> weights, int epoch, bool compareDev) {
+                                                                                      ^
+../main.cpp:552:1: error: expected ‘}’ at end of input
+ }
+ ^
+../main.cpp:552:1: warning: no return statement in function returning non-void [-Wreturn-type]
+subdir.mk:18: recipe for target 'main.o' failed
+make: *** [main.o] Error 1
+12:19:05 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘perceptronReturn perceptronHelper(std::vector<std::vector<point> >, std::vector<int>, double, std::vector<double>, int, bool)’:
+../main.cpp:160:86: error: a function-definition is not allowed here before ‘{’ token
+    vector<int> labels, double r, vector<double> weights, int epoch, bool compareDev) {
+                                                                                      ^
+../main.cpp:552:1: error: expected ‘}’ at end of input
+ }
+ ^
+../main.cpp:552:1: warning: no return statement in function returning non-void [-Wreturn-type]
+subdir.mk:18: recipe for target 'main.o' failed
+make: *** [main.o] Error 1
+12:19:10 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘perceptronReturn perceptronHelper(std::vector<std::vector<point> >, std::vector<int>, double, std::vector<double>, int, bool)’:
+../main.cpp:160:86: error: a function-definition is not allowed here before ‘{’ token
+    vector<int> labels, double r, vector<double> weights, int epoch, bool compareDev) {
+                                                                                      ^
+../main.cpp:552:1: error: expected ‘}’ at end of input
+ }
+ ^
+../main.cpp:552:1: warning: no return statement in function returning non-void [-Wreturn-type]
+subdir.mk:18: recipe for target 'main.o' failed
+make: *** [main.o] Error 1
+12:19:14 **** Clean-only build of configuration Debug for project Perceptron ****
+make clean 
+rm -rf  ./main.o  ./main.d  Perceptron
+ 
+12:19:15 **** Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘perceptronReturn perceptronHelper(std::vector<std::vector<point> >, std::vector<int>, double, std::vector<double>, int, bool)’:
+../main.cpp:119:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:345:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:345:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:345:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+12:19:32 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:417:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:417:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:417:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+12:21:11 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘perceptronReturn basicPerceptron(std::vector<std::vector<point> >, std::vector<int>, double, std::vector<double>, int, bool)’:
+../main.cpp:234:50: error: too few arguments to function ‘perceptronReturn perceptronHelper(std::vector<std::vector<point> >, std::vector<int>, double, std::vector<double>, int, bool)’
+    perceptronHelper(matrix, labels, r, weights, 1);
+                                                  ^
+../main.cpp:116:18: note: declared here
+ perceptronReturn perceptronHelper(vector<vector<point> > matrix,
+                  ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:396:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:396:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:396:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+make: *** [main.o] Error 1
+subdir.mk:18: recipe for target 'main.o' failed
+12:21:13 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘perceptronReturn basicPerceptron(std::vector<std::vector<point> >, std::vector<int>, double, std::vector<double>, int, bool)’:
+../main.cpp:234:50: error: too few arguments to function ‘perceptronReturn perceptronHelper(std::vector<std::vector<point> >, std::vector<int>, double, std::vector<double>, int, bool)’
+    perceptronHelper(matrix, labels, r, weights, 1);
+                                                  ^
+../main.cpp:116:18: note: declared here
+ perceptronReturn perceptronHelper(vector<vector<point> > matrix,
+                  ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:396:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:396:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:396:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+subdir.mk:18: recipe for target 'main.o' failed
+make: *** [main.o] Error 1
+12:21:43 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘perceptronReturn basicPerceptron(std::vector<std::vector<point> >, std::vector<int>, double, std::vector<double>, int, bool)’:
+../main.cpp:234:50: error: too few arguments to function ‘perceptronReturn perceptronHelper(std::vector<std::vector<point> >, std::vector<int>, double, std::vector<double>, int, bool)’
+    perceptronHelper(matrix, labels, r, weights, 1);
+                                                  ^
+../main.cpp:116:18: note: declared here
+ perceptronReturn perceptronHelper(vector<vector<point> > matrix,
+                  ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:396:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:396:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:396:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+make: *** [main.o] Error 1
+subdir.mk:18: recipe for target 'main.o' failed
+12:21:49 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘perceptronReturn basicPerceptron(std::vector<std::vector<point> >, std::vector<int>, double, std::vector<double>, int, bool)’:
+../main.cpp:234:50: error: too few arguments to function ‘perceptronReturn perceptronHelper(std::vector<std::vector<point> >, std::vector<int>, double, std::vector<double>, int, bool)’
+    perceptronHelper(matrix, labels, r, weights, 1);
+                                                  ^
+../main.cpp:116:18: note: declared here
+ perceptronReturn perceptronHelper(vector<vector<point> > matrix,
+                  ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:396:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:396:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:396:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+make: *** [main.o] Error 1
+subdir.mk:18: recipe for target 'main.o' failed
+12:22:24 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘perceptronReturn basicPerceptron(std::vector<std::vector<point> >, std::vector<int>, double, std::vector<double>, int, bool)’:
+../main.cpp:221:5: error: ‘tempLines’ was not declared in this scope
+     tempLines.push_back(line);
+     ^
+../main.cpp:230:33: error: ‘tempLines’ was not declared in this scope
+    for (unsigned int i = 0; i < tempLines.size(); i++) {
+                                 ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:396:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:396:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:396:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+make: *** [main.o] Error 1
+subdir.mk:18: recipe for target 'main.o' failed
+12:22:40 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘perceptronReturn basicPerceptron(std::vector<std::vector<point> >, std::vector<int>, double, std::vector<double>, int, bool)’:
+../main.cpp:230:33: error: ‘tempLines’ was not declared in this scope
+    for (unsigned int i = 0; i < tempLines.size(); i++) {
+                                 ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:396:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:396:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:396:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+make: *** [main.o] Error 1
+subdir.mk:18: recipe for target 'main.o' failed
+12:22:45 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:396:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:396:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:396:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+12:23:07 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:398:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:398:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:398:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+12:23:57 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:398:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:398:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:398:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+12:25:20 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:398:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:398:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:398:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+12:25:28 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:398:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:398:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:398:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+12:25:33 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:398:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:398:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:398:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+12:25:34 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+make: Nothing to be done for 'all'.
+12:25:47 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+make: Nothing to be done for 'all'.
+12:27:30 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:398:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:398:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:398:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+12:32:24 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:398:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:398:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:398:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+12:33:13 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:398:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:398:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:398:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+12:34:24 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:397:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:397:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:397:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+12:36:05 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘perceptronReturn basicPerceptron(std::vector<std::vector<point> >, std::vector<int>, double, std::vector<double>, int, bool)’:
+../main.cpp:220:84: error: invalid use of void expression
+    perceptronReturn pr(perceptronHelper(matrixDev, labelsDev, r, weights, 1, false));
+                                                                                    ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:384:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:384:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:384:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+subdir.mk:18: recipe for target 'main.o' failed
+make: *** [main.o] Error 1
+12:36:22 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:381:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:381:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:381:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+12:36:24 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+make: Nothing to be done for 'all'.
+12:36:42 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+make: Nothing to be done for 'all'.
+12:37:14 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:381:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:381:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:381:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+12:39:01 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:381:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:381:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:381:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+12:40:20 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:383:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:383:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:383:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+12:41:09 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:383:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:383:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:383:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+12:41:52 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:382:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:382:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:382:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+12:42:12 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:382:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:382:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:382:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+12:43:47 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:466:37: error: ‘weights’ was not declared in this scope
+    perceptronDriver(trainingString, weights, optimalLearningRate,
+                                     ^
+../main.cpp:382:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:382:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:382:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+make: *** [main.o] Error 1
+subdir.mk:18: recipe for target 'main.o' failed
+12:46:42 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:466:37: error: ‘weights’ was not declared in this scope
+    perceptronDriver(trainingString, weights, optimalLearningRate,
+                                     ^
+../main.cpp:382:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:382:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:382:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+make: *** [main.o] Error 1
+subdir.mk:18: recipe for target 'main.o' failed
+12:46:56 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:470:2: error: ‘weights’ was not declared in this scope
+  weights = pr.weights;
+  ^
+../main.cpp:382:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:382:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:382:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+subdir.mk:18: recipe for target 'main.o' failed
+make: *** [main.o] Error 1
+12:47:25 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:470:2: error: ‘weights’ was not declared in this scope
+  weights = pr.weights;
+  ^
+../main.cpp:382:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:382:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:382:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+make: *** [main.o] Error 1
+subdir.mk:18: recipe for target 'main.o' failed
+12:47:32 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:465:37: error: ‘weights’ was not declared in this scope
+    perceptronDriver(trainingString, weights, optimalLearningRate,
+                                     ^
+../main.cpp:381:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:381:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:381:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+subdir.mk:18: recipe for target 'main.o' failed
+make: *** [main.o] Error 1
+12:47:46 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:381:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:381:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:381:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+12:52:39 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:476:4: error: redeclaration of ‘perceptronReturn pr’
+    perceptronDriver(trainingString, weights, optimalLearningRate,
+    ^
+../main.cpp:465:19: note: ‘perceptronReturn pr’ previously declared here
+  perceptronReturn pr(
+                   ^
+../main.cpp:382:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:382:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:382:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+make: *** [main.o] Error 1
+subdir.mk:18: recipe for target 'main.o' failed
+12:52:45 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:476:4: error: redeclaration of ‘perceptronReturn pr’
+    perceptronDriver(trainingString, weights, optimalLearningRate,
+    ^
+../main.cpp:465:19: note: ‘perceptronReturn pr’ previously declared here
+  perceptronReturn pr(
+                   ^
+../main.cpp:382:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:382:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:382:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+subdir.mk:18: recipe for target 'main.o' failed
+make: *** [main.o] Error 1
+12:53:02 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:476:4: error: redeclaration of ‘perceptronReturn pr’
+    perceptronDriver(trainingString, weights, optimalLearningRate,
+    ^
+../main.cpp:465:19: note: ‘perceptronReturn pr’ previously declared here
+  perceptronReturn pr(
+                   ^
+../main.cpp:382:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:382:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:382:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+subdir.mk:18: recipe for target 'main.o' failed
+make: *** [main.o] Error 1
+12:53:15 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:382:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:382:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:382:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+12:53:31 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:382:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:382:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:382:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+12:53:33 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+make: Nothing to be done for 'all'.
+12:55:12 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:405:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:405:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:405:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+12:56:30 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:406:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:406:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:406:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+12:56:58 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:407:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:407:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:407:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+12:58:29 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:409:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:409:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:409:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+12:58:56 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:16:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:16:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:16:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp: In function ‘void simplePerceptronDriver()’:
+../main.cpp:407:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:407:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:407:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 

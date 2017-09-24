@@ -113,9 +113,9 @@ void update(vector<double> * weights, double trainingY, vector<point> row,
 		}
 	}
 }
-
-perceptronReturn basicPerceptron(vector<vector<point> > matrix,
-		vector<int> labels, double r, vector<double> weights, int epoch) {
+void perceptronHelper(vector<vector<point> > matrix,
+		vector<int> labels, double r, vector<double> weights, int epoch,
+		bool compareDev) {
 
 	double numRight = 0;
 	double numWrong = 0;
@@ -124,7 +124,44 @@ perceptronReturn basicPerceptron(vector<vector<point> > matrix,
 
 	meanR epochMean;
 	//for each example in the training set
-	for (int epoch = 0; epoch < 10; epoch++) {
+
+	for (int num = 0; num < epoch; num++) {
+		for (unsigned int i = 0; i < matrix.size(); i++) {
+			//make a prediction and compare with training Y
+			trainingY = labels.at(i); //the label that comes with the data
+			//take the dot product of the weights matrix and the row of the matrix we're currently in
+			double prediction = dotP(weights, matrix.at(i));
+			//add this prediction to the prediction vector to check accuracy.
+			if (prediction > 0) {
+				prediction = 1;
+			} else if (prediction <= 0) {
+				prediction = -1;
+			}
+
+			if (prediction != trainingY) {
+				numWrong++;
+				update(&weights, trainingY, matrix.at(i), r);
+			} else {
+				numRight++;
+			}
+		}
+		accuracy = numRight / (numRight + numWrong);
+		cout << accuracy << "%, ";
+	}
+}
+
+perceptronReturn basicPerceptron(vector<vector<point> > matrix,
+		vector<int> labels, double r, vector<double> weights, int epoch,
+		int compareDev) {
+
+	double numRight = 0;
+	double numWrong = 0;
+	double trainingY = 0;
+	double accuracy = 0;
+
+	meanR epochMean;
+	//for each example in the training set
+	for (int _epoch = 0; _epoch < epoch; _epoch++) {
 		for (unsigned int i = 0; i < matrix.size(); i++) {
 			//make a prediction and compare with training Y
 			trainingY = labels.at(i); //the label that comes with the data
@@ -154,18 +191,73 @@ perceptronReturn basicPerceptron(vector<vector<point> > matrix,
 		} else if (r == 0.01 || r == 0.01 / (1 + 0.02)) {
 			epochMean.r3 += accuracy;
 		}
+
+	}
+
+	//after each epoch compare to the dev set if needed
+	if (compareDev == 1) {
+		//use the weights for the dev set.
+		string filepath = "Dataset/phishing.dev"; //store path since the pipe consumes that string.
+		ifstream pipein(filepath.c_str());
+
+		vector<string> tempLinesDev; //used to temp store the file to go through it.
+		vector<vector<point> > matrixDev; //matrix of input data.
+		vector<int> labelsDev; // -1, +1 label vector.
+
+		//read in the file. push file lines to another vector and handle the labels. O(2n) to make it look a little cleaner
+		for (string line; getline(pipein, line);) {
+			tempLinesDev.push_back(line);
+			if (line.at(0) == '+') {
+				labelsDev.push_back(1);
+			} else {
+				labelsDev.push_back(-1);
+			}
+		}
+
+		//for each line of the file. create a row of the matrix based on the data. add that row to the matrix. each row is 67 long. 0-66. first x in the 0th element has a value of 1.
+		for (unsigned int i = 0; i < tempLinesDev.size(); i++) {
+			vector<point> row = fill(tempLinesDev.at(i));
+			matrixDev.push_back(row);
+		}
+		//epoch = 20 for this.
+		perceptronHelper(matrixDev, labelsDev, r, weights, 20, 0);
+	} else if (compareDev == 2) {
+		//running against the training set
+		string filepath = "Dataset/phishing.test"; //store path since the pipe consumes that string.
+		ifstream pipein(filepath.c_str());
+
+		vector<string> tempLinesDev; //used to temp store the file to go through it.
+		vector<vector<point> > matrixDev; //matrix of input data.
+		vector<int> labelsDev; // -1, +1 label vector.
+
+		//read in the file. push file lines to another vector and handle the labels. O(2n) to make it look a little cleaner
+		for (string line; getline(pipein, line);) {
+			tempLinesDev.push_back(line);
+			if (line.at(0) == '+') {
+				labelsDev.push_back(1);
+			} else {
+				labelsDev.push_back(-1);
+			}
+		}
+
+		//for each line of the file. create a row of the matrix based on the data. add that row to the matrix. each row is 67 long. 0-66. first x in the 0th element has a value of 1.
+		for (unsigned int i = 0; i < tempLinesDev.size(); i++) {
+			vector<point> row = fill(tempLinesDev.at(i));
+			matrixDev.push_back(row);
+		}
+		perceptronHelper(matrixDev, labelsDev, r, weights, 1, 0);
 	}
 
 	meanR mean;
-	mean.r1 = epochMean.r1 / 10;
-	mean.r2 = epochMean.r2 / 10;
-	mean.r3 = epochMean.r3 / 10;
+	mean.r1 = epochMean.r1 / epoch;
+	mean.r2 = epochMean.r2 / epoch;
+	mean.r3 = epochMean.r3 / epoch;
 	perceptronReturn pr(accuracy, weights, mean);
 	return pr;
 }
 
 perceptronReturn perceptronDriver(string path, vector<double> weights, double r,
-		int epoch) {
+		int epoch, int compareDev) {
 	string filepath = path; //store path since the pipe consumes that string.
 	ifstream pipein(path.c_str());
 
@@ -190,7 +282,8 @@ perceptronReturn perceptronDriver(string path, vector<double> weights, double r,
 	}
 
 	//call perceptron
-	perceptronReturn pr = basicPerceptron(matrix, labels, r, weights, epoch);
+	perceptronReturn pr = basicPerceptron(matrix, labels, r, weights, epoch,
+			compareDev);
 
 	return pr;
 }
@@ -219,14 +312,14 @@ crossValidateReturn crossValidate(vector<string> files, int against, double r,
 	for (unsigned int i = 0; i < files.size(); i++) {
 		if ((signed) i != against) {
 			perceptronReturn pr(
-					perceptronDriver(files.at(i), weights, r, epoch));
+					perceptronDriver(files.at(i), weights, r, epoch, false));
 			weights = pr.weights;
 			mean = pr.rates;
 		}
 	}
-
 	//data is all trained. now test against against.
-	perceptronReturn pr(perceptronDriver(files.at(against), weights, r, epoch));
+	perceptronReturn pr(
+			perceptronDriver(files.at(against), weights, r, epoch, false));
 	string training;
 	if (against == 0) {
 		training = against0;
@@ -266,8 +359,8 @@ void printTrainingAverages(double trainedAgainst0, double trainedAgainst1,
 }
 
 //prints the averages. returns the max.
-point printAverageRateAccuracy(double r1, double r2, double r3,
-		string testName, int num) {
+point printAverageRateAccuracy(double r1, double r2, double r3, string testName,
+		int num) {
 	double r1Percentage = r1 / num;
 	double r2Percentage = r2 / num;
 	double r3Percentage = r3 / num;
@@ -284,11 +377,11 @@ point printAverageRateAccuracy(double r1, double r2, double r3,
 
 	point toReturn; //learning rate, accuracy
 	toReturn.y = highestAccuracy;
-	if(highestAccuracy == r1Percentage){
+	if (highestAccuracy == r1Percentage) {
 		toReturn.x = r1;
-	}else if(highestAccuracy == r2Percentage){
+	} else if (highestAccuracy == r2Percentage) {
 		toReturn.x = r2;
-	}else if(highestAccuracy == r3Percentage){
+	} else if (highestAccuracy == r3Percentage) {
 		toReturn.x = r3;
 	}
 	return toReturn;
@@ -319,7 +412,7 @@ void simplePerceptronDriver() {
 	 */
 	//doing basic perceptron 5 fold validation with each learning rate starting with an epoch of 10.
 	cout
-			<< "Beginning 5 fold validation for the basic perceptron. Each file is tested against the trained model from the other 4 files.\n"
+			<< "PART ONE. \n\nBeginning 5 fold validation for the basic perceptron. Each file is tested against the trained model from the other 4 files.\n"
 			<< "Throughout each validation, the accuracy for each learning rate is averaged and printed at the end. The current epoch is ten.\n"
 			<< "Here we are finding the optimal value of r to use for the rest of the experiment."
 			<< endl;
@@ -351,18 +444,19 @@ void simplePerceptronDriver() {
 		}
 	}
 
-	point accuracyStruct(printAverageRateAccuracy(r1Sum, r2Sum, r3Sum,
+	point accuracyStruct(
+			printAverageRateAccuracy(r1Sum, r2Sum, r3Sum,
 					"\nAverage r accuracy from every iteration of 5 fold validation in dynamic perceptron: \n",
 					5));
 
 	optimalLearningRate = accuracyStruct.x;
 	double highestAccuracy = accuracyStruct.y;
 
-	if(optimalLearningRate == r1Sum){
+	if (optimalLearningRate == r1Sum) {
 		optimalLearningRate = learningRate.at(0);
-	}else if(optimalLearningRate == r2Sum){
+	} else if (optimalLearningRate == r2Sum) {
 		optimalLearningRate = learningRate.at(1);
-	}else if(optimalLearningRate == r3Sum){
+	} else if (optimalLearningRate == r3Sum) {
 		optimalLearningRate = learningRate.at(2);
 	}
 	//print averages
@@ -372,10 +466,40 @@ void simplePerceptronDriver() {
 			trainedAgainst3, trainedAgainst4);
 	cout
 			<< "\n\nFive fold validation for basic perceptron complete. The optimal learning rate is: "
-			<< optimalLearningRate << " with a mean accuracy of: " << highestAccuracy <<"\n**********" << endl;
+			<< optimalLearningRate << " with a mean accuracy of: "
+			<< highestAccuracy << "\n**********" << endl;
 
-	cout << "Now that we have the optimal learning rate, we are going to use that to make a classifier from the"
+	cout
+			<< "Now that we have the optimal learning rate, we are going to use that to make a classifier from the"
 			<< "training file." << endl;
+
+	//JSING OPTIMAL R ON TRAINING FILE.
+	epoch = 20;
+	string trainingString = "Dataset/phishing.train";
+	vector<double> weights;
+	srand(time(NULL));
+	for (int i = 0; i < 69; i++) {
+		double randomInitValue = rand() % (20000) - (10000);
+		randomInitValue /= 100000;
+		weights.push_back(randomInitValue);
+	}
+
+	meanR mean;
+
+	cout << "Testing classifier against dev set with an accuracy of: (per epoch) \n";
+	perceptronReturn pr(
+			perceptronDriver(trainingString, weights, optimalLearningRate,
+					epoch, true));
+
+	cout << endl;
+	weights = pr.weights;
+	mean = pr.rates;
+
+	cout << "\nWe have a classifier built and are now testing against the testing set!" << endl;
+	//now use weights as the classifier for test.
+	perceptronReturn prTest(
+			perceptronDriver(trainingString, weights, optimalLearningRate,
+					epoch, 2));
 
 }
 /*
