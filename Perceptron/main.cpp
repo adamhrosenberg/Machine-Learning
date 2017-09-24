@@ -12,7 +12,7 @@ struct point {
 	double x, y;
 };
 
-struct meanR{
+struct meanR {
 	double r1 = 0, r2 = 0, r3 = 0;
 };
 
@@ -27,7 +27,7 @@ struct perceptronReturn {
 	}
 };
 
-struct crossValidateReturn{
+struct crossValidateReturn {
 	meanR rates;
 	double accuracy;
 };
@@ -107,69 +107,65 @@ void update(vector<double> * weights, double trainingY, vector<point> row,
 			double weight = weights->at(i) + (r * trainingY);
 			weights->at(i) = weight;
 		} else {
-			//not at the bias.
+			//not at the bias. this doesn't make a difference since the corresponding feature to the bias is 1 but since its part of the algorithm i included it
 			double weight = weights->at(i) + (r * trainingY * row.at(i).y);
 			weights->at(i) = weight;
 		}
 	}
 }
 
-
 perceptronReturn basicPerceptron(vector<vector<point> > matrix,
-		vector<int> labels, double r, vector<double> weights) {
+		vector<int> labels, double r, vector<double> weights, int epoch) {
 
 	double numRight = 0;
 	double numWrong = 0;
 	double trainingY = 0;
+	double accuracy = 0;
 
+	meanR epochMean;
 	//for each example in the training set
-	for (unsigned int i = 0; i < matrix.size(); i++) {
-		//make a prediction and compare with training Y
-		trainingY = labels.at(i); //the label that comes with the data
-		//take the dot product of the weights matrix and the row of the matrix we're currently in
-		double prediction = dotP(weights, matrix.at(i));
-		//add this prediction to the prediction vector to check accuracy.
-		if (prediction > 0) {
-			prediction = 1;
-		} else if (prediction <= 0) {
-			prediction = -1;
+	for (int epoch = 0; epoch < 10; epoch++) {
+		for (unsigned int i = 0; i < matrix.size(); i++) {
+			//make a prediction and compare with training Y
+			trainingY = labels.at(i); //the label that comes with the data
+			//take the dot product of the weights matrix and the row of the matrix we're currently in
+			double prediction = dotP(weights, matrix.at(i));
+			//add this prediction to the prediction vector to check accuracy.
+			if (prediction > 0) {
+				prediction = 1;
+			} else if (prediction <= 0) {
+				prediction = -1;
+			}
+
+			if (prediction != trainingY) {
+				numWrong++;
+				update(&weights, trainingY, matrix.at(i), r);
+			} else {
+				numRight++;
+			}
 		}
 
-		if (prediction != trainingY) {
-			numWrong++;
-			update(&weights, trainingY, matrix.at(i), r);
-		} else {
-			numRight++;
+		accuracy = numRight / (numRight + numWrong);
+
+		if (r == 1) {
+			epochMean.r1 += accuracy;
+		} else if (r == 0.1 || r == 0.1 / (1 + 0.01)) {
+			epochMean.r2 += accuracy;
+		} else if (r == 0.01 || r == 0.01 / (1 + 0.02)) {
+			epochMean.r3 += accuracy;
 		}
 	}
-
-	double accuracy = numRight / (numRight + numWrong);
 
 	meanR mean;
-	if(r == 1){
-		mean.r1 = accuracy;
-	}else if(r == 0.1){
-		mean.r2 = accuracy;
-	}else if(r == 0.01){
-		mean.r3 = accuracy;
-	}
-
-
+	mean.r1 = epochMean.r1 / 10;
+	mean.r2 = epochMean.r2 / 10;
+	mean.r3 = epochMean.r3 / 10;
 	perceptronReturn pr(accuracy, weights, mean);
 	return pr;
 }
 
-void printAverageRateAccuracy(double r1, double r2, double r3, string testName){
-	double r1Percentage = r1 / 5;
-	double r2Percentage = r2 / 5;
-	double r3Percentage = r3 / 5;
-
-	cout << testName << "Mean accuracy with a learning rate of 1 = " << r1Percentage
-			<< "\t Mean accuracy with a learning rate of 0.1 =  " << r2Percentage
-			<< "\t Mean accuracy with a learning rate of 0.01 =  " << r3Percentage << endl;
-}
-
-perceptronReturn perceptronDriver(string path, vector<double> weights, double r) {
+perceptronReturn perceptronDriver(string path, vector<double> weights, double r,
+		int epoch) {
 	string filepath = path; //store path since the pipe consumes that string.
 	ifstream pipein(path.c_str());
 
@@ -194,13 +190,13 @@ perceptronReturn perceptronDriver(string path, vector<double> weights, double r)
 	}
 
 	//call perceptron
-	perceptronReturn pr = basicPerceptron(matrix, labels,
-			r, weights);
+	perceptronReturn pr = basicPerceptron(matrix, labels, r, weights, epoch);
 
 	return pr;
 }
 
-crossValidateReturn crossValidate(vector<string> files, int against, double r) {
+crossValidateReturn crossValidate(vector<string> files, int against, double r,
+		int epoch) {
 	//against is the file we are testing against
 
 	//creating strings for nice output.
@@ -221,28 +217,32 @@ crossValidateReturn crossValidate(vector<string> files, int against, double r) {
 	//for each file we have, training on the files except for the one we're testing against.
 	meanR mean;
 	for (unsigned int i = 0; i < files.size(); i++) {
-		if((signed)i != against){
-			perceptronReturn pr(perceptronDriver(files.at(i), weights, r));
+		if ((signed) i != against) {
+			perceptronReturn pr(
+					perceptronDriver(files.at(i), weights, r, epoch));
 			weights = pr.weights;
 			mean = pr.rates;
 		}
 	}
 
 	//data is all trained. now test against against.
-	perceptronReturn pr(perceptronDriver(files.at(against), weights, r));
+	perceptronReturn pr(perceptronDriver(files.at(against), weights, r, epoch));
 	string training;
-	if(against == 0){
+	if (against == 0) {
 		training = against0;
-	}else if(against == 1){
+	} else if (against == 1) {
 		training = against1;
-	}else if(against == 2){
+	} else if (against == 2) {
 		training = against2;
-	}else if(against == 3){
+	} else if (against == 3) {
 		training = against3;
-	}else if(against == 4){
+	} else if (against == 4) {
 		training = against4;
 	}
-	cout << "Training complete. Testings the model (weights) generated from files " <<  training << " against: " << files.at(against) << " = " <<  pr.accuracy << "% accuracy" << endl;
+//	cout
+//			<< "Training complete. Testings the model (weights) generated from files "
+//			<< training << " against: " << files.at(against) << " = "
+//			<< pr.accuracy << "% accuracy" << endl;
 	weights = pr.weights;
 	crossValidateReturn re;
 	re.rates = mean;
@@ -250,15 +250,51 @@ crossValidateReturn crossValidate(vector<string> files, int against, double r) {
 	return re;
 }
 
-void printTrainingAverages(double trainedAgainst0,double trainedAgainst1,double trainedAgainst2, double trainedAgainst3, double trainedAgainst4){
-	cout << "\nThe average accuracy while training against training file 0: " << trainedAgainst0 / 3 <<
-			"\nThe average accuracy while training against training file 1: " << trainedAgainst1 / 3 <<
-			"\nThe average accuracy while training against training file 2: " << trainedAgainst2 / 3 <<
-			"\nThe average accuracy while training against training file 3: " << trainedAgainst3 / 3 <<
-			"\nThe average accuracy while training against training file 4: " << trainedAgainst4 / 3 << "\n" << endl;
+void printTrainingAverages(double trainedAgainst0, double trainedAgainst1,
+		double trainedAgainst2, double trainedAgainst3,
+		double trainedAgainst4) {
+	cout << "\nThe average accuracy while training against training file 0: "
+			<< trainedAgainst0 / 3
+			<< "\nThe average accuracy while training against training file 1: "
+			<< trainedAgainst1 / 3
+			<< "\nThe average accuracy while training against training file 2: "
+			<< trainedAgainst2 / 3
+			<< "\nThe average accuracy while training against training file 3: "
+			<< trainedAgainst3 / 3
+			<< "\nThe average accuracy while training against training file 4: "
+			<< trainedAgainst4 / 3 << "\n" << endl;
 }
 
-int main() {
+//prints the averages. returns the max.
+point printAverageRateAccuracy(double r1, double r2, double r3,
+		string testName, int num) {
+	double r1Percentage = r1 / num;
+	double r2Percentage = r2 / num;
+	double r3Percentage = r3 / num;
+
+	cout << testName << "Mean accuracy with a learning rate of 1 = "
+			<< r1Percentage
+			<< "\t Mean accuracy with a learning rate of 0.1 =  "
+			<< r2Percentage
+			<< "\t Mean accuracy with a learning rate of 0.01 =  "
+			<< r3Percentage << endl;
+
+	double max = (r1Percentage < r2Percentage) ? r2Percentage : r1Percentage;
+	double highestAccuracy = ((max < r3Percentage) ? r3Percentage : max);
+
+	point toReturn; //learning rate, accuracy
+	toReturn.y = highestAccuracy;
+	if(highestAccuracy == r1Percentage){
+		toReturn.x = r1;
+	}else if(highestAccuracy == r2Percentage){
+		toReturn.x = r2;
+	}else if(highestAccuracy == r3Percentage){
+		toReturn.x = r3;
+	}
+	return toReturn;
+}
+
+void simplePerceptronDriver() {
 	vector<string> files;
 	files.push_back("Dataset/CVSplits/training00.data");
 	files.push_back("Dataset/CVSplits/training01.data");
@@ -271,31 +307,41 @@ int main() {
 	learningRate.push_back(0.1);
 	learningRate.push_back(0.01);
 
-	double r1Sum, r2Sum, r3Sum; //1, .1, .01
-	double trainedAgainst0, trainedAgainst1, trainedAgainst2, trainedAgainst3, trainedAgainst4;
+	int epoch;
+	double r1Sum = 0, r2Sum = 0, r3Sum = 0; //1, .1, .01
+	double trainedAgainst0 = 0, trainedAgainst1 = 0, trainedAgainst2 = 0,
+			trainedAgainst3 = 0, trainedAgainst4 = 0;
+	double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+	double optimalLearningRate = 0.0;
 
 	/*
 	 * STARTING BASIC PERCEPTRON VALIDATION.
 	 */
-	//doing basic perceptron 5 fold validation with each learning rate.
-	cout << "Beginning 5 fold validation for the basic perceptron. Each file is tested against the trained model from the other 4 files.\n" <<
-			 "Throughout each validation, the accuracy for each learning rate is averaged and printed at the end.\n" << endl;
-
-	for(unsigned int j = 0; j < learningRate.size(); j++){
-		cout << "Validating with learning rate of : " << learningRate.at(j) << endl;
-		for(unsigned int i = 0; i < files.size(); i++){
+	//doing basic perceptron 5 fold validation with each learning rate starting with an epoch of 10.
+	cout
+			<< "Beginning 5 fold validation for the basic perceptron. Each file is tested against the trained model from the other 4 files.\n"
+			<< "Throughout each validation, the accuracy for each learning rate is averaged and printed at the end. The current epoch is ten.\n"
+			<< "Here we are finding the optimal value of r to use for the rest of the experiment."
+			<< endl;
+	cout << "Testing with 10 epochs" << endl;
+	epoch = 10;
+	for (unsigned int j = 0; j < learningRate.size(); j++) {
+		cout << "Validating with learning rate of : " << learningRate.at(j)
+				<< endl;
+		for (unsigned int i = 0; i < files.size(); i++) {
 			//i is the file we're going to test against. j is the learning rate.
-			crossValidateReturn ret = crossValidate(files, i, learningRate.at(j));
+			crossValidateReturn ret = crossValidate(files, i,
+					learningRate.at(j), epoch);
 			//sum up the averages for all the training exapmles to give a mean later.
-			if(i == 0){
+			if (i == 0) {
 				trainedAgainst0 += ret.accuracy;
-			}else if(i==1){
+			} else if (i == 1) {
 				trainedAgainst1 += ret.accuracy;
-			}else if(i == 2){
+			} else if (i == 2) {
 				trainedAgainst2 += ret.accuracy;
-			}else if (i == 3){
+			} else if (i == 3) {
 				trainedAgainst3 += ret.accuracy;
-			}else if(i == 4){
+			} else if (i == 4) {
 				trainedAgainst4 += ret.accuracy;
 			}
 			//sup up the accuracies of every example of the r to get mean later.
@@ -304,15 +350,110 @@ int main() {
 			r3Sum += ret.rates.r3;
 		}
 	}
+
+	point accuracyStruct(printAverageRateAccuracy(r1Sum, r2Sum, r3Sum,
+					"\nAverage r accuracy from every iteration of 5 fold validation in dynamic perceptron: \n",
+					5));
+
+	optimalLearningRate = accuracyStruct.x;
+	double highestAccuracy = accuracyStruct.y;
+
+	if(optimalLearningRate == r1Sum){
+		optimalLearningRate = learningRate.at(0);
+	}else if(optimalLearningRate == r2Sum){
+		optimalLearningRate = learningRate.at(1);
+	}else if(optimalLearningRate == r3Sum){
+		optimalLearningRate = learningRate.at(2);
+	}
 	//print averages
-	printAverageRateAccuracy(r1Sum, r2Sum, r3Sum, "\nAverage r accuracy from every iteration of 5 fold validation in basic perceptron: \n");
-	printTrainingAverages(trainedAgainst0,trainedAgainst1,trainedAgainst2,trainedAgainst3,trainedAgainst4);
-	cout << "\n\nFive fold validation for basic perceptron complete. Now moving onto five fold validation for the perceptron variant with a dynamic learning rate.\n**********" << endl;
+	//maybe include which one is a max
+
+	printTrainingAverages(trainedAgainst0, trainedAgainst1, trainedAgainst2,
+			trainedAgainst3, trainedAgainst4);
+	cout
+			<< "\n\nFive fold validation for basic perceptron complete. The optimal learning rate is: "
+			<< optimalLearningRate << " with a mean accuracy of: " << highestAccuracy <<"\n**********" << endl;
+
+	cout << "Now that we have the optimal learning rate, we are going to use that to make a classifier from the"
+			<< "training file." << endl;
+
+}
+/*
+ * 	Implement a Perceptron whose learning
+ * 	rate decreases as η0 / (1+t)
+ *	, where η0 is the starting learning rate, and t is the time step.
+ *	Note that t should keep increasing across epochs. (That is, you should initialize t to 0
+ *	at the start and keep incrementing for each update.)
+ *	Hyper-parameter: Initial learning rate η0 ∈ {1, 0.1, 0.01}
+ */
+void dynamicLearningRateDrver() {
+	vector<string> files;
+	files.push_back("Dataset/CVSplits/training00.data");
+	files.push_back("Dataset/CVSplits/training01.data");
+	files.push_back("Dataset/CVSplits/training02.data");
+	files.push_back("Dataset/CVSplits/training03.data");
+	files.push_back("Dataset/CVSplits/training04.data");
+	double t = 0; //time step to create dynamic learning rate
+	vector<double> learningRate;
+	learningRate.push_back(1);
+	learningRate.push_back(0.1);
+	learningRate.push_back(0.01);
+
+	double r1Sum = 0, r2Sum = 0, r3Sum = 0; //1, .1, .01
+	double trainedAgainst0 = 0, trainedAgainst1 = 0, trainedAgainst2 = 0,
+			trainedAgainst3 = 0, trainedAgainst4 = 0;
 
 	/*
 	 * STARTING DYNAMIC PERCEPTRON VALIDATION.
 	 */
+	//doing basic perceptron 5 fold validation with each learning rate.
+	cout
+			<< "\nBeginning 5 fold validation for the Dynamic Perceptron Each file is tested against the trained model from the other 4 files.\n"
+			<< "Throughout each validation, the accuracy for each learning rate is averaged and printed at the end.\n"
+			<< endl;
 
+	for (unsigned int j = 0; j < learningRate.size(); j++) {
+		cout << "Validating with learning rate of : " << learningRate.at(j)
+				<< "/(" << 1 << "+" << t << ")" << endl;
+		for (unsigned int i = 0; i < files.size(); i++) {
+			//i is the file we're going to test against. j is the learning rate.
+			crossValidateReturn ret = crossValidate(files, i,
+					learningRate.at(j) / (1 + t), 10);
+			//sum up the averages for all the training exapmles to give a mean later.
+			if (i == 0) {
+				trainedAgainst0 += ret.accuracy;
+			} else if (i == 1) {
+				trainedAgainst1 += ret.accuracy;
+			} else if (i == 2) {
+				trainedAgainst2 += ret.accuracy;
+			} else if (i == 3) {
+				trainedAgainst3 += ret.accuracy;
+			} else if (i == 4) {
+				trainedAgainst4 += ret.accuracy;
+			}
+			//sup up the accuracies of every example of the r to get mean later.
+			r1Sum += ret.rates.r1;
+			r2Sum += ret.rates.r2;
+			r3Sum += ret.rates.r3;
+		}
+		t += 0.01;
+	}
+	//print averages
+	//maybe include which one is a max
+	printAverageRateAccuracy(r1Sum, r2Sum, r3Sum,
+			"\nAverage r accuracy from every iteration of 5 fold validation in dynamic perceptron: \n",
+			5);
+	printTrainingAverages(trainedAgainst0, trainedAgainst1, trainedAgainst2,
+			trainedAgainst3, trainedAgainst4);
+	cout
+			<< "\n\nFive fold validation for dynamic perceptron complete. Now moving onto five fold validation for the perceptron variant with a margin.\n**********"
+			<< endl;
+}
+
+int main() {
+
+	simplePerceptronDriver();
+	//dynamicLearningRateDrver();
 
 	return 0;
 }
