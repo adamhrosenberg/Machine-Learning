@@ -245,7 +245,7 @@ perceptronReturn basicPerceptron(vector<vector<point> > matrix,
 			vector<point> row = fill(tempLinesDev.at(i));
 			matrixDev.push_back(row);
 		}
-		perceptronHelper(matrixDev, labelsDev, r, weights, 1, 0);
+		perceptronHelper(matrixDev, labelsDev, r, weights, 10, 0);
 	}
 
 	meanR mean;

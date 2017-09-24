@@ -245,7 +245,7 @@ perceptronReturn basicPerceptron(vector<vector<point> > matrix,
 			vector<point> row = fill(tempLinesDev.at(i));
 			matrixDev.push_back(row);
 		}
-		perceptronHelper(matrixDev, labelsDev, r, weights, 1, 0);
+		perceptronHelper(matrixDev, labelsDev, r, weights, 10, 0);
 	}
 
 	meanR mean;
@@ -427,7 +427,8 @@ void simplePerceptronDriver(int sectionNum) {
 					<< endl;
 		}else if(sectionNum == 2){
 			//dynamic
-			cout << "t = " << t << " , Validating with learning rate of : " << learningRate.at(j) / ( 1 + t) << endl;
+			cout << "Validating with learning rate of : " << learningRate.at(j) / ( 1 + t)
+					<< endl;
 		}
 
 		for (unsigned int i = 0; i < files.size(); i++) {
@@ -437,7 +438,7 @@ void simplePerceptronDriver(int sectionNum) {
 				ret = crossValidate(files, i,
 						learningRate.at(j), epoch);
 			}else if(sectionNum == 2){
-				ret = crossValidate(files, i,
+				crossValidateReturn ret = crossValidate(files, i,
 						learningRate.at(j) / (1 + t), epoch);
 			}
 

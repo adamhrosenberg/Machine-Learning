@@ -427,7 +427,8 @@ void simplePerceptronDriver(int sectionNum) {
 					<< endl;
 		}else if(sectionNum == 2){
 			//dynamic
-			cout << "t = " << t << " , Validating with learning rate of : " << learningRate.at(j) / ( 1 + t) << endl;
+			cout << "Validating with learning rate of : " << learningRate.at(j) / ( 1 + t)
+					<< endl;
 		}
 
 		for (unsigned int i = 0; i < files.size(); i++) {
@@ -437,7 +438,7 @@ void simplePerceptronDriver(int sectionNum) {
 				ret = crossValidate(files, i,
 						learningRate.at(j), epoch);
 			}else if(sectionNum == 2){
-				ret = crossValidate(files, i,
+				crossValidateReturn ret = crossValidate(files, i,
 						learningRate.at(j) / (1 + t), epoch);
 			}
 
@@ -458,7 +459,7 @@ void simplePerceptronDriver(int sectionNum) {
 			r2Sum += ret.rates.r2;
 			r3Sum += ret.rates.r3;
 		}
-		t++;
+		t+= 1;
 	}
 
 	point accuracyStruct(

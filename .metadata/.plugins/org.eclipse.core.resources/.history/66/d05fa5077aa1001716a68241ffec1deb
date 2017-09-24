@@ -387,7 +387,7 @@ point printAverageRateAccuracy(double r1, double r2, double r3, string testName,
 	return toReturn;
 }
 
-void simplePerceptronDriver(int sectionNum) {
+void simplePerceptronDriver() {
 	vector<string> files;
 	files.push_back("Dataset/CVSplits/training00.data");
 	files.push_back("Dataset/CVSplits/training01.data");
@@ -400,13 +400,10 @@ void simplePerceptronDriver(int sectionNum) {
 	learningRate.push_back(0.1);
 	learningRate.push_back(0.01);
 
-	double t = 0;
-
 	int epoch;
 	double r1Sum = 0, r2Sum = 0, r3Sum = 0; //1, .1, .01
 	double trainedAgainst0 = 0, trainedAgainst1 = 0, trainedAgainst2 = 0,
 			trainedAgainst3 = 0, trainedAgainst4 = 0;
-
 	double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
 	double optimalLearningRate = 0.0;
 
@@ -415,32 +412,19 @@ void simplePerceptronDriver(int sectionNum) {
 	 */
 	//doing basic perceptron 5 fold validation with each learning rate starting with an epoch of 10.
 	cout
-			<< "Beginning 5 fold validation for the basic perceptron. Each file is tested against the trained model from the other 4 files.\n"
+			<< "PART ONE. \n\nBeginning 5 fold validation for the basic perceptron. Each file is tested against the trained model from the other 4 files.\n"
 			<< "Throughout each validation, the accuracy for each learning rate is averaged and printed at the end. The current epoch is ten.\n"
 			<< "Here we are finding the optimal value of r to use for the rest of the experiment."
 			<< endl;
 	cout << "Testing with 10 epochs" << endl;
 	epoch = 10;
 	for (unsigned int j = 0; j < learningRate.size(); j++) {
-		if(sectionNum == 1){
-			cout << "Validating with learning rate of : " << learningRate.at(j)
-					<< endl;
-		}else if(sectionNum == 2){
-			//dynamic
-			cout << "t = " << t << " , Validating with learning rate of : " << learningRate.at(j) / ( 1 + t) << endl;
-		}
-
+		cout << "Validating with learning rate of : " << learningRate.at(j)
+				<< endl;
 		for (unsigned int i = 0; i < files.size(); i++) {
-			crossValidateReturn ret;
 			//i is the file we're going to test against. j is the learning rate.
-			if(sectionNum == 1){
-				ret = crossValidate(files, i,
-						learningRate.at(j), epoch);
-			}else if(sectionNum == 2){
-				ret = crossValidate(files, i,
-						learningRate.at(j) / (1 + t), epoch);
-			}
-
+			crossValidateReturn ret = crossValidate(files, i,
+					learningRate.at(j), epoch);
 			//sum up the averages for all the training exapmles to give a mean later.
 			if (i == 0) {
 				trainedAgainst0 += ret.accuracy;
@@ -458,7 +442,6 @@ void simplePerceptronDriver(int sectionNum) {
 			r2Sum += ret.rates.r2;
 			r3Sum += ret.rates.r3;
 		}
-		t++;
 	}
 
 	point accuracyStruct(
@@ -484,7 +467,7 @@ void simplePerceptronDriver(int sectionNum) {
 	cout
 			<< "\n\nFive fold validation for basic perceptron complete. The optimal learning rate is: "
 			<< optimalLearningRate << " with a mean accuracy of: "
-			<< highestAccuracy << "\n---" << endl;
+			<< highestAccuracy << "\n**********" << endl;
 
 	cout
 			<< "Now that we have the optimal learning rate, we are going to use that to make a classifier from the"
@@ -512,7 +495,7 @@ void simplePerceptronDriver(int sectionNum) {
 	weights = pr.weights;
 	mean = pr.rates;
 
-	cout << "\nWe have a classifier built and are now testing against the testing set!\nAccuracay of the trained classifier against the test set: " << endl;
+	cout << "\nWe have a classifier built and are now testing against the testing set!" << endl;
 	//now use weights as the classifier for test.
 	perceptronReturn prTest(
 			perceptronDriver(trainingString, weights, optimalLearningRate,
@@ -593,10 +576,8 @@ void dynamicLearningRateDrver() {
 
 int main() {
 
-	cout << "****\nPART ONE. \n" << endl;
-	simplePerceptronDriver(1);
-	cout << "\n\n\n****\nPART TWO. \n" << endl;
-	simplePerceptronDriver(2);
+	simplePerceptronDriver();
+	//dynamicLearningRateDrver();
 
 	return 0;
 }
