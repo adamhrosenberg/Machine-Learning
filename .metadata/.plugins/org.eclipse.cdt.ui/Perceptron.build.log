@@ -1,6 +1,6 @@
-07:48:24 **** Incremental Build of configuration Debug for project Perceptron ****
+09:34:40 **** Incremental Build of configuration Debug for project Perceptron ****
 make all 
 make: Nothing to be done for 'all'.
 
-07:48:24 Build Finished (took 84ms)
+09:34:40 Build Finished (took 135ms)
 

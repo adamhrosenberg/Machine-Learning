@@ -18919,3 +18919,246 @@ Finished building target: Perceptron
 07:48:24 **** Incremental Build of configuration Debug for project Perceptron ****
 make all 
 make: Nothing to be done for 'all'.
+09:31:26 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:18:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:18:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:18:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp:22:20: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double accuracy = 0;
+                    ^
+../main.cpp:34:20: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double accuracy = 0;
+                    ^
+../main.cpp: In function ‘std::vector<point> fill(std::__cxx11::string)’:
+../main.cpp:41:22: error: variable ‘std::stringstream ss’ has initializer but incomplete type
+  stringstream ss(line);
+                      ^
+../main.cpp:55:20: error: variable ‘std::stringstream ss2’ has initializer but incomplete type
+   stringstream ss2(tokens.at(i));
+                    ^
+../main.cpp: In function ‘perceptronReturn basicPerceptron(std::vector<std::vector<point> >, std::vector<int>, double, std::vector<double>, int, int, int, double, bool, double)’:
+../main.cpp:243:19: error: variable ‘std::ifstream pipein’ has initializer but incomplete type
+   ifstream pipein(filepath.c_str());
+                   ^
+../main.cpp:269:19: error: variable ‘std::ifstream pipein’ has initializer but incomplete type
+   ifstream pipein(filepath.c_str());
+                   ^
+../main.cpp: In function ‘perceptronReturn perceptronDriver(std::__cxx11::string, std::vector<double>, double, int, int, int, double, bool, double)’:
+../main.cpp:305:18: error: variable ‘std::ifstream pipein’ has initializer but incomplete type
+  ifstream pipein(path.c_str());
+                  ^
+../main.cpp: In function ‘void simplePerceptronDriver(int)’:
+../main.cpp:456:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:456:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:456:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+subdir.mk:18: recipe for target 'main.o' failed
+make: *** [main.o] Error 1
+09:31:31 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:18:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:18:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:18:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp:22:20: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double accuracy = 0;
+                    ^
+../main.cpp:34:20: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double accuracy = 0;
+                    ^
+../main.cpp: In function ‘std::vector<point> fill(std::__cxx11::string)’:
+../main.cpp:41:22: error: variable ‘std::stringstream ss’ has initializer but incomplete type
+  stringstream ss(line);
+                      ^
+../main.cpp:55:20: error: variable ‘std::stringstream ss2’ has initializer but incomplete type
+   stringstream ss2(tokens.at(i));
+                    ^
+../main.cpp: In function ‘perceptronReturn basicPerceptron(std::vector<std::vector<point> >, std::vector<int>, double, std::vector<double>, int, int, int, double, bool, double)’:
+../main.cpp:243:19: error: variable ‘std::ifstream pipein’ has initializer but incomplete type
+   ifstream pipein(filepath.c_str());
+                   ^
+../main.cpp:269:19: error: variable ‘std::ifstream pipein’ has initializer but incomplete type
+   ifstream pipein(filepath.c_str());
+                   ^
+../main.cpp: In function ‘perceptronReturn perceptronDriver(std::__cxx11::string, std::vector<double>, double, int, int, int, double, bool, double)’:
+../main.cpp:305:18: error: variable ‘std::ifstream pipein’ has initializer but incomplete type
+  ifstream pipein(path.c_str());
+                  ^
+../main.cpp: In function ‘void simplePerceptronDriver(int)’:
+../main.cpp:456:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:456:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:456:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+make: *** [main.o] Error 1
+subdir.mk:18: recipe for target 'main.o' failed
+09:31:41 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:18:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:18:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:18:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp:22:20: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double accuracy = 0;
+                    ^
+../main.cpp:34:20: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double accuracy = 0;
+                    ^
+../main.cpp: In function ‘std::vector<point> fill(std::__cxx11::string)’:
+../main.cpp:41:22: error: variable ‘std::stringstream ss’ has initializer but incomplete type
+  stringstream ss(line);
+                      ^
+../main.cpp:55:20: error: variable ‘std::stringstream ss2’ has initializer but incomplete type
+   stringstream ss2(tokens.at(i));
+                    ^
+../main.cpp: In function ‘perceptronReturn basicPerceptron(std::vector<std::vector<point> >, std::vector<int>, double, std::vector<double>, int, int, int, double, bool, double)’:
+../main.cpp:243:19: error: variable ‘std::ifstream pipein’ has initializer but incomplete type
+   ifstream pipein(filepath.c_str());
+                   ^
+../main.cpp:269:19: error: variable ‘std::ifstream pipein’ has initializer but incomplete type
+   ifstream pipein(filepath.c_str());
+                   ^
+../main.cpp: In function ‘perceptronReturn perceptronDriver(std::__cxx11::string, std::vector<double>, double, int, int, int, double, bool, double)’:
+../main.cpp:305:18: error: variable ‘std::ifstream pipein’ has initializer but incomplete type
+  ifstream pipein(path.c_str());
+                  ^
+../main.cpp: In function ‘void simplePerceptronDriver(int)’:
+../main.cpp:456:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:456:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:456:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+subdir.mk:18: recipe for target 'main.o' failed
+make: *** [main.o] Error 1
+09:31:45 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:18:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:18:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:18:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp:22:20: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double accuracy = 0;
+                    ^
+../main.cpp:34:20: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double accuracy = 0;
+                    ^
+../main.cpp: In function ‘std::vector<point> fill(std::__cxx11::string)’:
+../main.cpp:41:22: error: variable ‘std::stringstream ss’ has initializer but incomplete type
+  stringstream ss(line);
+                      ^
+../main.cpp:55:20: error: variable ‘std::stringstream ss2’ has initializer but incomplete type
+   stringstream ss2(tokens.at(i));
+                    ^
+../main.cpp: In function ‘perceptronReturn basicPerceptron(std::vector<std::vector<point> >, std::vector<int>, double, std::vector<double>, int, int, int, double, bool, double)’:
+../main.cpp:243:19: error: variable ‘std::ifstream pipein’ has initializer but incomplete type
+   ifstream pipein(filepath.c_str());
+                   ^
+../main.cpp:269:19: error: variable ‘std::ifstream pipein’ has initializer but incomplete type
+   ifstream pipein(filepath.c_str());
+                   ^
+../main.cpp: In function ‘perceptronReturn perceptronDriver(std::__cxx11::string, std::vector<double>, double, int, int, int, double, bool, double)’:
+../main.cpp:305:18: error: variable ‘std::ifstream pipein’ has initializer but incomplete type
+  ifstream pipein(path.c_str());
+                  ^
+../main.cpp: In function ‘void simplePerceptronDriver(int)’:
+../main.cpp:456:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:456:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:456:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+subdir.mk:18: recipe for target 'main.o' failed
+make: *** [main.o] Error 1
+09:32:25 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../main.cpp:18:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+              ^
+../main.cpp:18:22: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                      ^
+../main.cpp:18:30: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double r1 = 0, r2 = 0, r3 = 0;
+                              ^
+../main.cpp:22:20: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double accuracy = 0;
+                    ^
+../main.cpp:34:20: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  double accuracy = 0;
+                    ^
+../main.cpp: In function ‘void simplePerceptronDriver(int)’:
+../main.cpp:456:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+         ^
+../main.cpp:456:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                             ^
+../main.cpp:456:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+  double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
+                                                 ^
+Finished building: ../main.cpp
+ 
+Building target: Perceptron
+Invoking: Cross G++ Linker
+g++  -o "Perceptron"  ./main.o   
+Finished building target: Perceptron
+ 
+09:32:29 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+make: Nothing to be done for 'all'.
+09:34:40 **** Incremental Build of configuration Debug for project Perceptron ****
+make all 
+make: Nothing to be done for 'all'.
