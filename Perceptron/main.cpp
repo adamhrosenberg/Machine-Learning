@@ -115,9 +115,8 @@ void update(vector<double> * weights, double trainingY, vector<point> row,
 		}
 	}
 }
-void perceptronHelper(vector<vector<point> > matrix,
-		vector<int> labels, double r, vector<double> weights, int epoch,
-		bool compareDev) {
+void perceptronHelper(vector<vector<point> > matrix, vector<int> labels,
+		double r, vector<double> weights, int epoch, bool compareDev) {
 
 	double numRight = 0;
 	double numWrong = 0;
@@ -155,13 +154,15 @@ void perceptronHelper(vector<vector<point> > matrix,
 
 perceptronReturn basicPerceptron(vector<vector<point> > matrix,
 		vector<int> labels, double r, vector<double> weights, int epoch,
-		int compareDev, int sectionNum, double u, bool onTrain) {
+		int compareDev, int sectionNum, double u, bool onTrain, double t) {
 
 	double numRight = 0;
 	double numWrong = 0;
 	double trainingY = 0;
 	double accuracy = 0;
 
+	//set dynamic learning rate
+	r = (r) / (1 + t);
 	meanR epochMean;
 	//for each example in the training set
 	for (int _epoch = 0; _epoch < epoch; _epoch++) {
@@ -176,6 +177,7 @@ perceptronReturn basicPerceptron(vector<vector<point> > matrix,
 				if (prediction < u) {
 					numWrong++;
 					update(&weights, trainingY, matrix.at(i), r);
+//					u /= 10;
 				} else {
 					numRight++;
 				}
@@ -188,6 +190,8 @@ perceptronReturn basicPerceptron(vector<vector<point> > matrix,
 
 				if (prediction != trainingY) {
 					numWrong++;
+					t++;
+					//increase t every time we're wrong and make an update.
 					update(&weights, trainingY, matrix.at(i), r);
 				} else {
 					numRight++;
@@ -206,15 +210,12 @@ perceptronReturn basicPerceptron(vector<vector<point> > matrix,
 			epochMean.r3 += accuracy;
 		}
 
-		if(onTrain){
+		if (onTrain) {
 			numUpdates = numWrong;
 		}
 
-
 	}
-//
-//	numUpdates += numWrong;
-//	cout << "updating num updates : " << numUpdates << endl;
+
 	//after each epoch compare to the dev set if needed
 	if (compareDev == 1) {
 		//use the weights for the dev set.
@@ -278,7 +279,7 @@ perceptronReturn basicPerceptron(vector<vector<point> > matrix,
 }
 
 perceptronReturn perceptronDriver(string path, vector<double> weights, double r,
-		int epoch, int compareDev, int sectionNum, double u, bool onTrain) {
+		int epoch, int compareDev, int sectionNum, double u, bool onTrain, double t) {
 	string filepath = path; //store path since the pipe consumes that string.
 	ifstream pipein(path.c_str());
 
@@ -304,13 +305,13 @@ perceptronReturn perceptronDriver(string path, vector<double> weights, double r,
 
 	//call perceptron
 	perceptronReturn pr = basicPerceptron(matrix, labels, r, weights, epoch,
-			compareDev, sectionNum, u, onTrain);
+			compareDev, sectionNum, u, onTrain, t);
 
 	return pr;
 }
 
 crossValidateReturn crossValidate(vector<string> files, int against, double r,
-		int epoch, int sectionNum, double u) {
+		int epoch, int sectionNum, double u, double t) {
 	//against is the file we are testing against
 
 	//creating strings for nice output.
@@ -333,14 +334,16 @@ crossValidateReturn crossValidate(vector<string> files, int against, double r,
 	for (unsigned int i = 0; i < files.size(); i++) {
 		if ((signed) i != against) {
 			perceptronReturn pr(
-					perceptronDriver(files.at(i), weights, r, epoch, false, sectionNum, u, false));
+					perceptronDriver(files.at(i), weights, r, epoch, false,
+							sectionNum, u, false, t));
 			weights = pr.weights;
 			mean = pr.rates;
 		}
 	}
 	//data is all trained. now test against against.
 	perceptronReturn pr(
-			perceptronDriver(files.at(against), weights, r, epoch, false, sectionNum, u, false));
+			perceptronDriver(files.at(against), weights, r, epoch, false,
+					sectionNum, u, false, t));
 	string training;
 	if (against == 0) {
 		training = against0;
@@ -353,10 +356,10 @@ crossValidateReturn crossValidate(vector<string> files, int against, double r,
 	} else if (against == 4) {
 		training = against4;
 	}
-//	cout
-//			<< "Training complete. Testings the model (weights) generated from files "
-//			<< training << " against: " << files.at(against) << " = "
-//			<< pr.accuracy << "% accuracy" << endl;
+	cout
+			<< "Training complete. Testings the model (weights) generated from files "
+			<< training << " against: " << files.at(against) << " = "
+			<< pr.accuracy << "% accuracy" << endl;
 	weights = pr.weights;
 	crossValidateReturn re;
 	re.rates = mean;
@@ -422,7 +425,7 @@ void simplePerceptronDriver(int sectionNum) {
 	learningRate.push_back(0.01);
 
 	double t = 0;
-	double u = 1;
+	double u = .1;
 
 	int epoch;
 	double r1Sum = 0, r2Sum = 0, r3Sum = 0; //1, .1, .01
@@ -437,44 +440,45 @@ void simplePerceptronDriver(int sectionNum) {
 	 */
 	//doing basic perceptron 5 fold validation with each learning rate starting with an epoch of 10.
 	string perType = "";
-	if(sectionNum == 1){
+	if (sectionNum == 1) {
 		perType = "basic";
-	}else if(sectionNum == 2){
+	} else if (sectionNum == 2) {
 		perType = "dynamic";
-	}else if(sectionNum == 3){
+	} else if (sectionNum == 3) {
 		perType = "margin";
 	}
-	cout
-				<< "Beginning 5 fold validation for the " << perType <<" perceptron. Each file is tested against the trained model from the other 4 files.\n"
-				<< "Throughout each validation, the accuracy for each learning rate is averaged and printed at the end. The current epoch is ten.\n"
-				<< "Here we are finding the optimal value of r to use for the rest of the experiment."
-				<< endl;
-
+	cout << "Beginning 5 fold validation for the " << perType
+			<< " perceptron. Each file is tested against the trained model from the other 4 files.\n"
+			<< "Throughout each validation, the accuracy for each learning rate is averaged and printed at the end. The current epoch is ten.\n"
+			<< "Here we are finding the optimal value of r to use for the rest of the experiment."
+			<< endl;
 
 	cout << "Testing with 10 epochs" << endl;
 	epoch = 10;
 	for (unsigned int j = 0; j < learningRate.size(); j++) {
-		if(sectionNum == 1){
+		if (sectionNum == 1) {
 			cout << "Validating with learning rate of : " << learningRate.at(j)
 					<< endl;
-		}else if(sectionNum == 2){
+		} else if (sectionNum == 2) {
 			//dynamic
-			cout << "t = " << t << " , Validating with learning rate of : " << learningRate.at(j) / ( 1 + t) << endl;
-		}else if(sectionNum == 3){
-			cout << "t = " << t << " , Validating with learning rate of : " << learningRate.at(j) / ( 1 + t) << endl;
+			cout << "t = " << t << " , Validating with dynamic learning rate. \nT is increased when we make a mistake / update. Starting learning rate = : "
+					<< learningRate.at(j) / (1 + t) << endl;
+		} else if (sectionNum == 3) {
+			cout << "t = " << t << " , Validating with dynamic learning rate. \nT is increased when we make a mistake / update. Starting learning rate = : "
+					<< learningRate.at(j) / (1 + t) << endl;
 			//and a u value of
-			cout << "margin value of u = " << u << endl;
+			cout << "Margin value of u = " << u << endl;
 		}
 
 		for (unsigned int i = 0; i < files.size(); i++) {
 			crossValidateReturn ret;
 			//i is the file we're going to test against. j is the learning rate.
-			if(sectionNum == 1){
-				ret = crossValidate(files, i,
-						learningRate.at(j), epoch, sectionNum, 0);
-			}else if(sectionNum == 2 || sectionNum == 3){
-				ret = crossValidate(files, i,
-						learningRate.at(j) / (1 + t), epoch, sectionNum, u);
+			if (sectionNum == 1) {
+				ret = crossValidate(files, i, learningRate.at(j), epoch,
+						sectionNum, 0, t);
+			} else if (sectionNum == 2 || sectionNum == 3) {
+				ret = crossValidate(files, i, learningRate.at(j) / (1 + t),
+						epoch, sectionNum, u, t);
 			}
 
 			//sum up the averages for all the training exapmles to give a mean later.
@@ -494,8 +498,7 @@ void simplePerceptronDriver(int sectionNum) {
 			r2Sum += ret.rates.r2;
 			r3Sum += ret.rates.r3;
 		}
-		t++;
-		u /= 10;
+		t = 0;
 	}
 
 	point accuracyStruct(
@@ -540,28 +543,26 @@ void simplePerceptronDriver(int sectionNum) {
 
 	meanR mean;
 
-	cout << "Testing classifier against dev set with an accuracy of: (per epoch) \n";
+	cout
+			<< "Testing classifier against dev set with an accuracy of: (per epoch) \n";
 //	cout << "Training" << endl;
 
 	perceptronReturn pr(
 			perceptronDriver(trainingString, weights, optimalLearningRate,
-					epoch, true, sectionNum, u, true));
-
-
+					epoch, true, sectionNum, u, true, t));
 
 	cout << endl;
 	cout << "\nNumber of updates was " << numUpdates << endl;
 	weights = pr.weights;
 	mean = pr.rates;
 
-	cout << "\nWe have a classifier built and are now testing against the testing set!\nAccuracay of the trained classifier against the test set: " << endl;
+	cout
+			<< "\nWe have a classifier built and are now testing against the testing set!\nAccuracay of the trained classifier against the test set: "
+			<< endl;
 	//now use weights as the classifier for test.
 	perceptronReturn prTest(
 			perceptronDriver(trainingString, weights, optimalLearningRate,
-					epoch, 2, sectionNum, u, false));
-
-
-
+					epoch, 2, sectionNum, u, false, t));
 
 }
 
