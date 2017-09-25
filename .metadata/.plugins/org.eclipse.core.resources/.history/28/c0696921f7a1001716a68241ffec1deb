@@ -639,11 +639,11 @@ void simplePerceptronDriver(int sectionNum) {
 
 int main() {
 
-	cout << "****\nPART ONE. \n" << endl;
-	simplePerceptronDriver(1);
-	numUpdates = 0;
-	cout << "\n\n\n****\nPART TWO. \n" << endl;
-	simplePerceptronDriver(2);
+//	cout << "****\nPART ONE. \n" << endl;
+//	simplePerceptronDriver(1);
+//	numUpdates = 0;
+//	cout << "\n\n\n****\nPART TWO. \n" << endl;
+//	simplePerceptronDriver(2);
 	numUpdates = 0;
 	cout << "\n\n\n****\nPART THREE. \n" << endl;
 	simplePerceptronDriver(3);
