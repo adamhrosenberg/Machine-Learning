@@ -208,6 +208,7 @@ perceptronReturn basicPerceptron(vector<vector<point> > matrix,
 
 		if(onTrain){
 			numUpdates = numWrong;
+			cout << "Number of updates was " << numUpdates << endl;
 		}
 
 
@@ -547,10 +548,7 @@ void simplePerceptronDriver(int sectionNum) {
 			perceptronDriver(trainingString, weights, optimalLearningRate,
 					epoch, true, sectionNum, u, true));
 
-
-
 	cout << endl;
-	cout << "\nNumber of updates was " << numUpdates << endl;
 	weights = pr.weights;
 	mean = pr.rates;
 
