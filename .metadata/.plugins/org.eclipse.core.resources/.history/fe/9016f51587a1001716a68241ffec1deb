@@ -418,7 +418,7 @@ void simplePerceptronDriver(int sectionNum) {
 	 * STARTING BASIC PERCEPTRON VALIDATION.
 	 */
 	//doing basic perceptron 5 fold validation with each learning rate starting with an epoch of 10.
-	string perType = "";
+	string perType = ""
 	if(sectionNum == 1){
 		perType = "basic";
 	}else if(sectionNum == 2){

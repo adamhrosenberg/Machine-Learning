@@ -418,21 +418,11 @@ void simplePerceptronDriver(int sectionNum) {
 	 * STARTING BASIC PERCEPTRON VALIDATION.
 	 */
 	//doing basic perceptron 5 fold validation with each learning rate starting with an epoch of 10.
-	string perType = "";
-	if(sectionNum == 1){
-		perType = "basic";
-	}else if(sectionNum == 2){
-		perType = "dynamic";
-	}else if(sectionNum == 3){
-		perType = "margin";
-	}
 	cout
-				<< "Beginning 5 fold validation for the " << perType <<" perceptron. Each file is tested against the trained model from the other 4 files.\n"
-				<< "Throughout each validation, the accuracy for each learning rate is averaged and printed at the end. The current epoch is ten.\n"
-				<< "Here we are finding the optimal value of r to use for the rest of the experiment."
-				<< endl;
-
-
+			<< "Beginning 5 fold validation for the basic perceptron. Each file is tested against the trained model from the other 4 files.\n"
+			<< "Throughout each validation, the accuracy for each learning rate is averaged and printed at the end. The current epoch is ten.\n"
+			<< "Here we are finding the optimal value of r to use for the rest of the experiment."
+			<< endl;
 	cout << "Testing with 10 epochs" << endl;
 	epoch = 10;
 	for (unsigned int j = 0; j < learningRate.size(); j++) {

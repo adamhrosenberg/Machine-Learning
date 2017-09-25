@@ -8,8 +8,6 @@
 using namespace std;
 double NORMALIZED_VALUE = 0.18257;
 
-double numUpdates = 0;
-
 struct point {
 	double x, y;
 };
@@ -150,6 +148,8 @@ void perceptronHelper(vector<vector<point> > matrix,
 		accuracy = numRight / (numRight + numWrong);
 		cout << accuracy << "%, ";
 	}
+
+	cout << "Number of updates = " << numWrong << endl;
 }
 
 perceptronReturn basicPerceptron(vector<vector<point> > matrix,
@@ -195,8 +195,6 @@ perceptronReturn basicPerceptron(vector<vector<point> > matrix,
 		}
 
 	}
-
-	numUpdates += numWrong;
 
 	//after each epoch compare to the dev set if needed
 	if (compareDev == 1) {
@@ -418,21 +416,11 @@ void simplePerceptronDriver(int sectionNum) {
 	 * STARTING BASIC PERCEPTRON VALIDATION.
 	 */
 	//doing basic perceptron 5 fold validation with each learning rate starting with an epoch of 10.
-	string perType = "";
-	if(sectionNum == 1){
-		perType = "basic";
-	}else if(sectionNum == 2){
-		perType = "dynamic";
-	}else if(sectionNum == 3){
-		perType = "margin";
-	}
 	cout
-				<< "Beginning 5 fold validation for the " << perType <<" perceptron. Each file is tested against the trained model from the other 4 files.\n"
-				<< "Throughout each validation, the accuracy for each learning rate is averaged and printed at the end. The current epoch is ten.\n"
-				<< "Here we are finding the optimal value of r to use for the rest of the experiment."
-				<< endl;
-
-
+			<< "Beginning 5 fold validation for the basic perceptron. Each file is tested against the trained model from the other 4 files.\n"
+			<< "Throughout each validation, the accuracy for each learning rate is averaged and printed at the end. The current epoch is ten.\n"
+			<< "Here we are finding the optimal value of r to use for the rest of the experiment."
+			<< endl;
 	cout << "Testing with 10 epochs" << endl;
 	epoch = 10;
 	for (unsigned int j = 0; j < learningRate.size(); j++) {
@@ -477,7 +465,7 @@ void simplePerceptronDriver(int sectionNum) {
 
 	point accuracyStruct(
 			printAverageRateAccuracy(r1Sum, r2Sum, r3Sum,
-					"\nAverage r accuracy from every iteration of 5 fold validation in basic perceptron: \n",
+					"\nAverage r accuracy from every iteration of 5 fold validation in dynamic perceptron: \n",
 					5));
 
 	optimalLearningRate = accuracyStruct.x;
@@ -496,7 +484,7 @@ void simplePerceptronDriver(int sectionNum) {
 	printTrainingAverages(trainedAgainst0, trainedAgainst1, trainedAgainst2,
 			trainedAgainst3, trainedAgainst4);
 	cout
-			<< "\n\nFive fold validation for basic perceptron complete. \nThe optimal learning rate is: "
+			<< "\n\nFive fold validation for basic perceptron complete. The optimal learning rate is: "
 			<< optimalLearningRate << " with a mean accuracy of: "
 			<< highestAccuracy << "\n---" << endl;
 
@@ -504,8 +492,7 @@ void simplePerceptronDriver(int sectionNum) {
 			<< "Now that we have the optimal learning rate, we are going to use that to make a classifier from the"
 			<< "training file." << endl;
 
-	cout << "\nThere was a total of " << numUpdates << " performed during the 10 epochs of the 5-fold cross validation training of the training set\n" << endl;
-	// USING OPTIMAL R ON TRAINING FILE.
+	//JSING OPTIMAL R ON TRAINING FILE.
 	epoch = 20;
 	string trainingString = "Dataset/phishing.train";
 	vector<double> weights;
@@ -533,21 +520,85 @@ void simplePerceptronDriver(int sectionNum) {
 			perceptronDriver(trainingString, weights, optimalLearningRate,
 					epoch, 2));
 
+}
+/*
+ * 	Implement a Perceptron whose learning
+ * 	rate decreases as η0 / (1+t)
+ *	, where η0 is the starting learning rate, and t is the time step.
+ *	Note that t should keep increasing across epochs. (That is, you should initialize t to 0
+ *	at the start and keep incrementing for each update.)
+ *	Hyper-parameter: Initial learning rate η0 ∈ {1, 0.1, 0.01}
+ */
+void dynamicLearningRateDrver() {
+	vector<string> files;
+	files.push_back("Dataset/CVSplits/training00.data");
+	files.push_back("Dataset/CVSplits/training01.data");
+	files.push_back("Dataset/CVSplits/training02.data");
+	files.push_back("Dataset/CVSplits/training03.data");
+	files.push_back("Dataset/CVSplits/training04.data");
+	double t = 0; //time step to create dynamic learning rate
+	vector<double> learningRate;
+	learningRate.push_back(1);
+	learningRate.push_back(0.1);
+	learningRate.push_back(0.01);
 
+	double r1Sum = 0, r2Sum = 0, r3Sum = 0; //1, .1, .01
+	double trainedAgainst0 = 0, trainedAgainst1 = 0, trainedAgainst2 = 0,
+			trainedAgainst3 = 0, trainedAgainst4 = 0;
 
+	/*
+	 * STARTING DYNAMIC PERCEPTRON VALIDATION.
+	 */
+	//doing basic perceptron 5 fold validation with each learning rate.
+	cout
+			<< "\nBeginning 5 fold validation for the Dynamic Perceptron Each file is tested against the trained model from the other 4 files.\n"
+			<< "Throughout each validation, the accuracy for each learning rate is averaged and printed at the end.\n"
+			<< endl;
 
+	for (unsigned int j = 0; j < learningRate.size(); j++) {
+		cout << "Validating with learning rate of : " << learningRate.at(j)
+				<< "/(" << 1 << "+" << t << ")" << endl;
+		for (unsigned int i = 0; i < files.size(); i++) {
+			//i is the file we're going to test against. j is the learning rate.
+			crossValidateReturn ret = crossValidate(files, i,
+					learningRate.at(j) / (1 + t), 10);
+			//sum up the averages for all the training exapmles to give a mean later.
+			if (i == 0) {
+				trainedAgainst0 += ret.accuracy;
+			} else if (i == 1) {
+				trainedAgainst1 += ret.accuracy;
+			} else if (i == 2) {
+				trainedAgainst2 += ret.accuracy;
+			} else if (i == 3) {
+				trainedAgainst3 += ret.accuracy;
+			} else if (i == 4) {
+				trainedAgainst4 += ret.accuracy;
+			}
+			//sup up the accuracies of every example of the r to get mean later.
+			r1Sum += ret.rates.r1;
+			r2Sum += ret.rates.r2;
+			r3Sum += ret.rates.r3;
+		}
+		t += 0.01;
+	}
+	//print averages
+	//maybe include which one is a max
+	printAverageRateAccuracy(r1Sum, r2Sum, r3Sum,
+			"\nAverage r accuracy from every iteration of 5 fold validation in dynamic perceptron: \n",
+			5);
+	printTrainingAverages(trainedAgainst0, trainedAgainst1, trainedAgainst2,
+			trainedAgainst3, trainedAgainst4);
+	cout
+			<< "\n\nFive fold validation for dynamic perceptron complete. Now moving onto five fold validation for the perceptron variant with a margin.\n**********"
+			<< endl;
 }
 
 int main() {
 
 	cout << "****\nPART ONE. \n" << endl;
 	simplePerceptronDriver(1);
-	numUpdates = 0;
 	cout << "\n\n\n****\nPART TWO. \n" << endl;
 	simplePerceptronDriver(2);
-	numUpdates = 0;
-	cout << "\n\n\n****\nPART Three. \n" << endl;
-//	simplePerceptronDriver(3);
 
 	return 0;
 }

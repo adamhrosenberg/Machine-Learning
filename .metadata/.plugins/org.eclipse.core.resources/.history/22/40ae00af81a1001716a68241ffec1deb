@@ -418,21 +418,11 @@ void simplePerceptronDriver(int sectionNum) {
 	 * STARTING BASIC PERCEPTRON VALIDATION.
 	 */
 	//doing basic perceptron 5 fold validation with each learning rate starting with an epoch of 10.
-	string perType = "";
-	if(sectionNum == 1){
-		perType = "basic";
-	}else if(sectionNum == 2){
-		perType = "dynamic";
-	}else if(sectionNum == 3){
-		perType = "margin";
-	}
 	cout
-				<< "Beginning 5 fold validation for the " << perType <<" perceptron. Each file is tested against the trained model from the other 4 files.\n"
-				<< "Throughout each validation, the accuracy for each learning rate is averaged and printed at the end. The current epoch is ten.\n"
-				<< "Here we are finding the optimal value of r to use for the rest of the experiment."
-				<< endl;
-
-
+			<< "Beginning 5 fold validation for the basic perceptron. Each file is tested against the trained model from the other 4 files.\n"
+			<< "Throughout each validation, the accuracy for each learning rate is averaged and printed at the end. The current epoch is ten.\n"
+			<< "Here we are finding the optimal value of r to use for the rest of the experiment."
+			<< endl;
 	cout << "Testing with 10 epochs" << endl;
 	epoch = 10;
 	for (unsigned int j = 0; j < learningRate.size(); j++) {
@@ -477,7 +467,7 @@ void simplePerceptronDriver(int sectionNum) {
 
 	point accuracyStruct(
 			printAverageRateAccuracy(r1Sum, r2Sum, r3Sum,
-					"\nAverage r accuracy from every iteration of 5 fold validation in basic perceptron: \n",
+					"\nAverage r accuracy from every iteration of 5 fold validation in dynamic perceptron: \n",
 					5));
 
 	optimalLearningRate = accuracyStruct.x;
@@ -504,7 +494,7 @@ void simplePerceptronDriver(int sectionNum) {
 			<< "Now that we have the optimal learning rate, we are going to use that to make a classifier from the"
 			<< "training file." << endl;
 
-	cout << "\nThere was a total of " << numUpdates << " performed during the 10 epochs of the 5-fold cross validation training of the training set\n" << endl;
+	cout << "\nThere was a total of " << numUpdates << " performed during the training of the training set" << endl;
 	// USING OPTIMAL R ON TRAINING FILE.
 	epoch = 20;
 	string trainingString = "Dataset/phishing.train";
@@ -533,9 +523,6 @@ void simplePerceptronDriver(int sectionNum) {
 			perceptronDriver(trainingString, weights, optimalLearningRate,
 					epoch, 2));
 
-
-
-
 }
 
 int main() {
@@ -545,9 +532,6 @@ int main() {
 	numUpdates = 0;
 	cout << "\n\n\n****\nPART TWO. \n" << endl;
 	simplePerceptronDriver(2);
-	numUpdates = 0;
-	cout << "\n\n\n****\nPART Three. \n" << endl;
-//	simplePerceptronDriver(3);
 
 	return 0;
 }
