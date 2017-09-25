@@ -171,12 +171,12 @@ perceptronReturn basicPerceptron(vector<vector<point> > matrix,
 	for (int _epoch = 0; _epoch < epoch; _epoch++) {
 		for (unsigned int i = 0; i < matrix.size(); i++) {
 			if (sectionNum == 3) {
-//				srand(time(NULL));
-//				for (int i = 0; i < 69; i++) {
-//					double randomInitValue = rand() % (20000) - (10000);
-//					randomInitValue /= 100000;
-//					weights.at(i) = (randomInitValue);
-//				}
+				srand(time(NULL));
+				for (int i = 0; i < 69; i++) {
+					double randomInitValue = rand() % (20000) - (10000);
+					randomInitValue /= 100000;
+					weights.at(i) = (randomInitValue);
+				}
 			}
 
 			//make a prediction and compare with training Y
@@ -344,7 +344,7 @@ crossValidateReturn crossValidate(vector<string> files, int against, double r,
 	string against3 = "0, 1, 2, 4";
 	string against4 = "0, 1, 2, 3";
 	//fill in weights w/ random values to start the cross validation.
-	vector<double> weights; //TODO read in weight vector here.
+	vector<double> weights;
 	srand(time(NULL));
 	for (int i = 0; i < 69; i++) {
 		double randomInitValue = rand() % (20000) - (10000);

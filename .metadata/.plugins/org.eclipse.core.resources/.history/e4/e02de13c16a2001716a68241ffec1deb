@@ -171,12 +171,12 @@ perceptronReturn basicPerceptron(vector<vector<point> > matrix,
 	for (int _epoch = 0; _epoch < epoch; _epoch++) {
 		for (unsigned int i = 0; i < matrix.size(); i++) {
 			if (sectionNum == 3) {
-//				srand(time(NULL));
-//				for (int i = 0; i < 69; i++) {
-//					double randomInitValue = rand() % (20000) - (10000);
-//					randomInitValue /= 100000;
-//					weights.at(i) = (randomInitValue);
-//				}
+				srand(time(NULL));
+				for (int i = 0; i < 69; i++) {
+					double randomInitValue = rand() % (20000) - (10000);
+					randomInitValue /= 100000;
+					weights.at(i) = (randomInitValue);
+				}
 			}
 
 			//make a prediction and compare with training Y

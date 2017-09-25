@@ -171,12 +171,12 @@ perceptronReturn basicPerceptron(vector<vector<point> > matrix,
 	for (int _epoch = 0; _epoch < epoch; _epoch++) {
 		for (unsigned int i = 0; i < matrix.size(); i++) {
 			if (sectionNum == 3) {
-//				srand(time(NULL));
-//				for (int i = 0; i < 69; i++) {
-//					double randomInitValue = rand() % (20000) - (10000);
-//					randomInitValue /= 100000;
-//					weights.at(i) = (randomInitValue);
-//				}
+				srand(time(NULL));
+				for (int i = 0; i < 69; i++) {
+					double randomInitValue = rand() % (20000) - (10000);
+					randomInitValue /= 100000;
+					weights.at(i) = (randomInitValue);
+				}
 			}
 
 			//make a prediction and compare with training Y
@@ -344,7 +344,7 @@ crossValidateReturn crossValidate(vector<string> files, int against, double r,
 	string against3 = "0, 1, 2, 4";
 	string against4 = "0, 1, 2, 3";
 	//fill in weights w/ random values to start the cross validation.
-	vector<double> weights; //TODO read in weight vector here.
+	vector<double> weights;
 	srand(time(NULL));
 	for (int i = 0; i < 69; i++) {
 		double randomInitValue = rand() % (20000) - (10000);
@@ -432,20 +432,6 @@ point printAverageRateAccuracy(double r1, double r2, double r3, string testName,
 		toReturn.x = r3;
 	}
 	return toReturn;
-}
-
-void printMaxU(double u1, double u2, double u3){
-	double max = (u1 < u2) ? u2 : u1;
-	double highestAccuracy = ((max < u3) ? u3 : max);
-
-	if(highestAccuracy == u1)
-		cout << "\n---\nMax u hyperparamter is u = 1" << endl;
-	else if(highestAccuracy == u2)
-		cout << "\n---\nMax u hyperparamter is u = 0.1" << endl;
-	else if(highestAccuracy == u3)
-		cout << "\n---\nMax u hyperparamter is u = 0.01" << endl;
-
-
 }
 
 void simplePerceptronDriver(int sectionNum) {
@@ -540,25 +526,23 @@ void simplePerceptronDriver(int sectionNum) {
 					r3Sum += ret.rates.r3;
 
 					if(z == 0){
-						u1Sum += (r1Sum + r2Sum + r3Sum);
+						u1Sum += (r1Sum + r2Sum + r3Sum) / 3;
 					}else if(z == 1){
-						u2Sum += (r1Sum + r2Sum + r3Sum);
+						u2Sum += (r1Sum + r2Sum + r3Sum) / 3;
 					}else if(z == 2){
-						u3Sum += (r1Sum + r2Sum + r3Sum);
+						u3Sum += (r1Sum + r2Sum + r3Sum) / 3;
 					}
 				}
 				t = 0;
 			}
 			if(z == 0){
-//				cout << "u1 : " << u1Sum/5 << endl;
+				cout << "u1 : " << u1Sum << endl;
 			}else if(z == 1){
-//				cout << "u2 : " << u2Sum/5 << endl;
+				cout << "u2 : " << u2Sum << endl;
 			}else if(z == 2){
-//				cout << "u3 : " << u3Sum/5 << endl;
+				cout << "u3 : " << u3Sum << endl;
 			}
 		}
-
-		printMaxU(u1Sum, u2Sum, u3Sum);
 
 	} else {
 		for (unsigned int j = 0; j < learningRate.size(); j++) {
@@ -626,7 +610,7 @@ void simplePerceptronDriver(int sectionNum) {
 	printTrainingAverages(trainedAgainst0, trainedAgainst1, trainedAgainst2,
 			trainedAgainst3, trainedAgainst4);
 	cout
-			<< "\n\nFive fold validation for basic perceptron complete. \n---\nThe optimal hyperparamter for the learning rate is: "
+			<< "\n\nFive fold validation for basic perceptron complete. \nThe optimal learning rate is: "
 			<< optimalLearningRate << " with a mean accuracy of: "
 			<< highestAccuracy << "\n---" << endl;
 
@@ -671,11 +655,12 @@ void simplePerceptronDriver(int sectionNum) {
 }
 
 int main() {
-	cout << "****\nPART ONE. \n" << endl;
-	simplePerceptronDriver(1);
-	numUpdates = 0;
-	cout << "\n\n\n****\nPART TWO. \n" << endl;
-	simplePerceptronDriver(2);
+
+//	cout << "****\nPART ONE. \n" << endl;
+//	simplePerceptronDriver(1);
+//	numUpdates = 0;
+//	cout << "\n\n\n****\nPART TWO. \n" << endl;
+//	simplePerceptronDriver(2);
 	numUpdates = 0;
 	cout << "\n\n\n****\nPART THREE. \n" << endl;
 	simplePerceptronDriver(3);
