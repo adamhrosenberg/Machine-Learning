@@ -1,4 +1,4 @@
-11:23:28 **** Incremental Build of configuration Debug for project Perceptron ****
+15:29:40 **** Incremental Build of configuration Debug for project Perceptron ****
 make all 
 Building file: ../main.cpp
 Invoking: Cross G++ Compiler
@@ -36,5 +36,5 @@ g++  -o "Perceptron"  ./main.o
 Finished building target: Perceptron
  
 
-11:23:28 Build Finished (took 691ms)
+15:29:41 Build Finished (took 623ms)
 

@@ -158,8 +158,8 @@ perceptronReturn basicPerceptron(vector<vector<point> > matrix,
 		vector<int> labels, double r, vector<double> weights, int epoch,
 		int compareDev, int sectionNum, double u, bool onTrain, double t) {
 
-	double numRight = 1;
-	double numWrong = 1;
+	double numRight = 0;
+	double numWrong = 0;
 	double trainingY = 0;
 	double accuracy = 0;
 
@@ -636,7 +636,6 @@ void simplePerceptronDriver(int sectionNum) {
 
 	// USING OPTIMAL R ON TRAINING FILE.
 	epoch = 20;
-	cout << "Using the optimal value of r on the training file for 20 epochs " <<endl;
 	string trainingString = "Dataset/phishing.train";
 	vector<double> weights;
 	srand(time(NULL));
@@ -672,11 +671,12 @@ void simplePerceptronDriver(int sectionNum) {
 }
 
 int main() {
-	cout << "****\nPART ONE. \n" << endl;
-	simplePerceptronDriver(1);
-	numUpdates = 0;
-	cout << "\n\n\n****\nPART TWO. \n" << endl;
-	simplePerceptronDriver(2);
+	//read in weights here.
+//	cout << "****\nPART ONE. \n" << endl;
+//	simplePerceptronDriver(1);
+//	numUpdates = 0;
+//	cout << "\n\n\n****\nPART TWO. \n" << endl;
+//	simplePerceptronDriver(2);
 	numUpdates = 0;
 	cout << "\n\n\n****\nPART THREE. \n" << endl;
 	simplePerceptronDriver(3);

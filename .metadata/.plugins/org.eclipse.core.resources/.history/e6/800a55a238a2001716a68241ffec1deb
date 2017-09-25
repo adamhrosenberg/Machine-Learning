@@ -672,6 +672,7 @@ void simplePerceptronDriver(int sectionNum) {
 }
 
 int main() {
+	//read in weights here.
 	cout << "****\nPART ONE. \n" << endl;
 	simplePerceptronDriver(1);
 	numUpdates = 0;
