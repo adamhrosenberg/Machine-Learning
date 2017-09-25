@@ -1,4 +1,4 @@
-15:29:40 **** Incremental Build of configuration Debug for project Perceptron ****
+16:51:44 **** Incremental Build of configuration Debug for project Perceptron ****
 make all 
 Building file: ../main.cpp
 Invoking: Cross G++ Compiler
@@ -19,13 +19,13 @@ g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "mai
   double accuracy = 0;
                     ^
 ../main.cpp: In function ‘void simplePerceptronDriver(int)’:
-../main.cpp:472:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
+../main.cpp:474:9: warning: unused variable ‘epochAverager1’ [-Wunused-variable]
   double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
          ^
-../main.cpp:472:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
+../main.cpp:474:29: warning: unused variable ‘epochAverager2’ [-Wunused-variable]
   double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
                              ^
-../main.cpp:472:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
+../main.cpp:474:49: warning: unused variable ‘epochAverager3’ [-Wunused-variable]
   double epochAverager1 = 0, epochAverager2 = 0, epochAverager3 = 0;
                                                  ^
 Finished building: ../main.cpp
@@ -36,5 +36,5 @@ g++  -o "Perceptron"  ./main.o
 Finished building target: Perceptron
  
 
-15:29:41 Build Finished (took 623ms)
+16:51:45 Build Finished (took 627ms)
 

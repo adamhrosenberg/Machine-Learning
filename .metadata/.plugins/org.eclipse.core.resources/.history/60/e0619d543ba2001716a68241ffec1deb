@@ -150,7 +150,7 @@ void perceptronHelper(vector<vector<point> > matrix, vector<int> labels,
 		}
 		accuracy = numRight / (numRight + numWrong);
 
-		cout << accuracy * 100 << "%, ";
+		cout << accuracy << "%, ";
 	}
 }
 
@@ -187,7 +187,6 @@ perceptronReturn basicPerceptron(vector<vector<point> > matrix,
 			if (sectionNum == 3) {
 				//update. BASED ON MARGIN PERCEPTRON.
 				if (prediction < u) {
-					t++;
 					if (prediction > 0) {
 						prediction = 1;
 					} else if (prediction <= 0) {
@@ -195,7 +194,7 @@ perceptronReturn basicPerceptron(vector<vector<point> > matrix,
 					}
 					if (prediction != trainingY) {
 						numWrong++;
-//						t++;
+						t++;
 						//increase t every time we're wrong and make an update.
 					} else {
 						numRight++;
@@ -205,7 +204,6 @@ perceptronReturn basicPerceptron(vector<vector<point> > matrix,
 //					u /= 10;
 				}
 			} else {
-				t++;
 				if (prediction > 0) {
 					prediction = 1;
 				} else if (prediction <= 0) {
@@ -214,7 +212,7 @@ perceptronReturn basicPerceptron(vector<vector<point> > matrix,
 
 				if (prediction != trainingY) {
 					numWrong++;
-//					t++; //we now update t for every example.
+					t++;
 					//increase t every time we're wrong and make an update.
 					update(&weights, trainingY, matrix.at(i), r);
 				} else {
@@ -396,15 +394,15 @@ void printTrainingAverages(double trainedAgainst0, double trainedAgainst1,
 		double trainedAgainst2, double trainedAgainst3,
 		double trainedAgainst4) {
 	cout << "\nThe average accuracy while training against training file 0: "
-			<< (trainedAgainst0 / 3)*100
-			<< "%\nThe average accuracy while training against training file 1: "
-			<< (trainedAgainst1 / 3) *100
-			<< "%\nThe average accuracy while training against training file 2: "
-			<< (trainedAgainst2 / 3)*100
-			<< "%\nThe average accuracy while training against training file 3: "
-			<< (trainedAgainst3 / 3) *100
-			<< "%\nThe average accuracy while training against training file 4: "
-			<< (trainedAgainst4 / 3) *100 << "%\n" << endl;
+			<< trainedAgainst0 / 3
+			<< "\nThe average accuracy while training against training file 1: "
+			<< trainedAgainst1 / 3
+			<< "\nThe average accuracy while training against training file 2: "
+			<< trainedAgainst2 / 3
+			<< "\nThe average accuracy while training against training file 3: "
+			<< trainedAgainst3 / 3
+			<< "\nThe average accuracy while training against training file 4: "
+			<< trainedAgainst4 / 3 << "\n" << endl;
 }
 
 //prints the averages. returns the max.
@@ -414,12 +412,12 @@ point printAverageRateAccuracy(double r1, double r2, double r3, string testName,
 	double r2Percentage = r2 / num;
 	double r3Percentage = r3 / num;
 
-	cout << testName << "Mean accuracy with a learning rate of 1.0: = "
+	cout << testName << "Mean accuracy with a learning rate of 1 = "
 			<< r1Percentage
-			<< "\t Mean accuracy with a learning rate of 0.1: =  "
+			<< "\t Mean accuracy with a learning rate of 0.1 =  "
 			<< r2Percentage
-			<< "\t Mean accuracy with a learning rate of 0.01: =  "
-			<< r3Percentage << "%" << endl;
+			<< "\t Mean accuracy with a learning rate of 0.01 =  "
+			<< r3Percentage << endl;
 
 	double max = (r1Percentage < r2Percentage) ? r2Percentage : r1Percentage;
 	double highestAccuracy = ((max < r3Percentage) ? r3Percentage : max);
@@ -441,11 +439,11 @@ void printMaxU(double u1, double u2, double u3){
 	double highestAccuracy = ((max < u3) ? u3 : max);
 
 	if(highestAccuracy == u1)
-		cout << "\n---\nMax u hyperparamter is u = 1\n---" << endl;
+		cout << "\n---\nMax u hyperparamter is u = 1" << endl;
 	else if(highestAccuracy == u2)
-		cout << "\n---\nMax u hyperparamter is u = 0.1\n---" << endl;
+		cout << "\n---\nMax u hyperparamter is u = 0.1" << endl;
 	else if(highestAccuracy == u3)
-		cout << "\n---\nMax u hyperparamter is u = 0.01\n---" << endl;
+		cout << "\n---\nMax u hyperparamter is u = 0.01" << endl;
 
 
 }
@@ -506,7 +504,7 @@ void simplePerceptronDriver(int sectionNum) {
 					u = .01;
 				}
 				cout
-						<< "Validating with dynamic learning rate. \nT is increased for every example per canvas discussion. Starting learning rate = : "
+						<< "Validating with dynamic learning rate. \nT is increased when we make a mistake / update. Starting learning rate = : "
 						<< learningRate.at(j) / (1 + t) << endl;
 				//and a u value of
 				cout << "Margin value of u = " << u << endl;
@@ -551,6 +549,13 @@ void simplePerceptronDriver(int sectionNum) {
 				}
 				t = 0;
 			}
+			if(z == 0){
+//				cout << "u1 : " << u1Sum/5 << endl;
+			}else if(z == 1){
+//				cout << "u2 : " << u2Sum/5 << endl;
+			}else if(z == 2){
+//				cout << "u3 : " << u3Sum/5 << endl;
+			}
 		}
 
 		printMaxU(u1Sum, u2Sum, u3Sum);
@@ -564,7 +569,7 @@ void simplePerceptronDriver(int sectionNum) {
 			} else if (sectionNum == 2) {
 				//dynamic
 				cout
-						<< "Validating with dynamic learning rate. \nT is increased per every example per canvas discussion. Starting learning rate = : "
+						<< "Validating with dynamic learning rate. \nT is increased when we make a mistake / update. Starting learning rate = : "
 						<< learningRate.at(j) / (1 + t) << endl;
 			}
 
@@ -621,7 +626,7 @@ void simplePerceptronDriver(int sectionNum) {
 	printTrainingAverages(trainedAgainst0, trainedAgainst1, trainedAgainst2,
 			trainedAgainst3, trainedAgainst4);
 	cout
-			<< "\n\nFive fold validation for " << perType <<" perceptron complete. \n---\nThe optimal hyperparamter for the learning rate is: "
+			<< "\n\nFive fold validation for basic perceptron complete. \n---\nThe optimal hyperparamter for the learning rate is: "
 			<< optimalLearningRate << " with a mean accuracy of: "
 			<< highestAccuracy << "\n---" << endl;
 
@@ -667,15 +672,16 @@ void simplePerceptronDriver(int sectionNum) {
 }
 
 int main() {
-	cout << "****\nPART ONE. \n" << endl;
-	simplePerceptronDriver(1);
-	numUpdates = 0;
-	cout << "\n\n\n****\nPART TWO. \n" << endl;
-	simplePerceptronDriver(2);
+//	cout << "****\nPART ONE. \n" << endl;
+//	simplePerceptronDriver(1);
+//	numUpdates = 0;
+//	cout << "\n\n\n****\nPART TWO. \n" << endl;
+//	simplePerceptronDriver(2);
 	cout << "\n\n\n****\nPART THREE. \n" << endl;
+	for(int i = 0; i < 10; i++){
 	numUpdates = 0;
 	simplePerceptronDriver(3);
-
+	}
 
 	return 0;
 }

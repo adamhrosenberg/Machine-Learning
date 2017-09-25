@@ -4686,3 +4686,686 @@ java.io.FileNotFoundException: /home/adam/Documents/CS5350/.gitignore (Is a dire
 	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1039)
 	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1256)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 15:38:53.231
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 15:38:53.254
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.egit.core 4 0 2017-09-25 15:38:55.524
+!MESSAGE Ignoring /Perceptron/Debug failed
+!STACK 0
+java.io.FileNotFoundException: /home/adam/Documents/CS5350/.gitignore (Is a directory)
+	at java.io.FileInputStream.open0(Native Method)
+	at java.io.FileInputStream.open(FileInputStream.java:195)
+	at java.io.FileInputStream.<init>(FileInputStream.java:138)
+	at org.eclipse.jgit.treewalk.FileTreeIterator$FileEntry.openInputStream(FileTreeIterator.java:396)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator$PerDirectoryIgnoreNode.load(WorkingTreeIterator.java:1241)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator$RootIgnoreNode.load(WorkingTreeIterator.java:1264)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.getIgnoreNode(WorkingTreeIterator.java:698)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:666)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:691)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:646)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:633)
+	at org.eclipse.egit.core.RepositoryUtil.canBeAutoIgnored(RepositoryUtil.java:719)
+	at org.eclipse.egit.core.Activator$IgnoreDerivedResources$1.visit(Activator.java:718)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:64)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:75)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:75)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:48)
+	at org.eclipse.egit.core.Activator$IgnoreDerivedResources.resourceChanged(Activator.java:694)
+	at org.eclipse.core.internal.events.NotificationManager$1.run(NotificationManager.java:299)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.NotificationManager.notify(NotificationManager.java:289)
+	at org.eclipse.core.internal.events.NotificationManager.broadcastChanges(NotificationManager.java:152)
+	at org.eclipse.core.internal.resources.Workspace.broadcastPostChange(Workspace.java:374)
+	at org.eclipse.core.internal.resources.Workspace.aboutToBuild(Workspace.java:302)
+	at org.eclipse.core.internal.resources.Project$1.run(Project.java:556)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2240)
+	at org.eclipse.core.internal.resources.Project.internalBuild(Project.java:544)
+	at org.eclipse.core.internal.resources.Project.build(Project.java:120)
+	at org.eclipse.cdt.launch.AbstractCLaunchDelegate2$1.run(AbstractCLaunchDelegate2.java:367)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2240)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2262)
+	at org.eclipse.cdt.launch.AbstractCLaunchDelegate2.buildProject(AbstractCLaunchDelegate2.java:382)
+	at org.eclipse.cdt.launch.AbstractCLaunchDelegate2.buildForLaunch(AbstractCLaunchDelegate2.java:297)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:855)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:739)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1039)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1256)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+
+!ENTRY org.eclipse.egit.core 4 0 2017-09-25 15:48:58.449
+!MESSAGE Ignoring /Perceptron/Debug failed
+!STACK 0
+java.io.FileNotFoundException: /home/adam/Documents/CS5350/.gitignore (Is a directory)
+	at java.io.FileInputStream.open0(Native Method)
+	at java.io.FileInputStream.open(FileInputStream.java:195)
+	at java.io.FileInputStream.<init>(FileInputStream.java:138)
+	at org.eclipse.jgit.treewalk.FileTreeIterator$FileEntry.openInputStream(FileTreeIterator.java:396)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator$PerDirectoryIgnoreNode.load(WorkingTreeIterator.java:1241)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator$RootIgnoreNode.load(WorkingTreeIterator.java:1264)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.getIgnoreNode(WorkingTreeIterator.java:698)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:666)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:691)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:646)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:633)
+	at org.eclipse.egit.core.RepositoryUtil.canBeAutoIgnored(RepositoryUtil.java:719)
+	at org.eclipse.egit.core.Activator$IgnoreDerivedResources$1.visit(Activator.java:718)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:64)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:75)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:75)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:48)
+	at org.eclipse.egit.core.Activator$IgnoreDerivedResources.resourceChanged(Activator.java:694)
+	at org.eclipse.core.internal.events.NotificationManager$1.run(NotificationManager.java:299)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.NotificationManager.notify(NotificationManager.java:289)
+	at org.eclipse.core.internal.events.NotificationManager.broadcastChanges(NotificationManager.java:152)
+	at org.eclipse.core.internal.resources.Workspace.broadcastPostChange(Workspace.java:374)
+	at org.eclipse.core.internal.resources.Workspace.aboutToBuild(Workspace.java:302)
+	at org.eclipse.core.internal.resources.Project$1.run(Project.java:556)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2240)
+	at org.eclipse.core.internal.resources.Project.internalBuild(Project.java:544)
+	at org.eclipse.core.internal.resources.Project.build(Project.java:120)
+	at org.eclipse.cdt.launch.AbstractCLaunchDelegate2$1.run(AbstractCLaunchDelegate2.java:367)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2240)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2262)
+	at org.eclipse.cdt.launch.AbstractCLaunchDelegate2.buildProject(AbstractCLaunchDelegate2.java:382)
+	at org.eclipse.cdt.launch.AbstractCLaunchDelegate2.buildForLaunch(AbstractCLaunchDelegate2.java:297)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:855)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:739)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1039)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1256)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:31:19.685
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:31:19.694
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:31:19.712
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:31:19.730
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:31:19.751
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:31:19.770
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:31:19.776
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:31:19.887
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:31:19.906
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.egit.core 4 0 2017-09-25 16:31:23.435
+!MESSAGE Ignoring /Perceptron/Debug failed
+!STACK 0
+java.io.FileNotFoundException: /home/adam/Documents/CS5350/.gitignore (Is a directory)
+	at java.io.FileInputStream.open0(Native Method)
+	at java.io.FileInputStream.open(FileInputStream.java:195)
+	at java.io.FileInputStream.<init>(FileInputStream.java:138)
+	at org.eclipse.jgit.treewalk.FileTreeIterator$FileEntry.openInputStream(FileTreeIterator.java:396)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator$PerDirectoryIgnoreNode.load(WorkingTreeIterator.java:1241)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator$RootIgnoreNode.load(WorkingTreeIterator.java:1264)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.getIgnoreNode(WorkingTreeIterator.java:698)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:666)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:691)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:646)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:633)
+	at org.eclipse.egit.core.RepositoryUtil.canBeAutoIgnored(RepositoryUtil.java:719)
+	at org.eclipse.egit.core.Activator$IgnoreDerivedResources$1.visit(Activator.java:718)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:64)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:75)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:75)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:48)
+	at org.eclipse.egit.core.Activator$IgnoreDerivedResources.resourceChanged(Activator.java:694)
+	at org.eclipse.core.internal.events.NotificationManager$1.run(NotificationManager.java:299)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.NotificationManager.notify(NotificationManager.java:289)
+	at org.eclipse.core.internal.events.NotificationManager.broadcastChanges(NotificationManager.java:152)
+	at org.eclipse.core.internal.resources.Workspace.broadcastPostChange(Workspace.java:374)
+	at org.eclipse.core.internal.resources.Workspace.endOperation(Workspace.java:1469)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:505)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:399)
+	at org.eclipse.ui.actions.GlobalBuildAction$1.run(GlobalBuildAction.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+
+!ENTRY org.eclipse.egit.core 4 0 2017-09-25 16:31:25.990
+!MESSAGE Ignoring /Perceptron/Debug failed
+!STACK 0
+java.io.FileNotFoundException: /home/adam/Documents/CS5350/.gitignore (Is a directory)
+	at java.io.FileInputStream.open0(Native Method)
+	at java.io.FileInputStream.open(FileInputStream.java:195)
+	at java.io.FileInputStream.<init>(FileInputStream.java:138)
+	at org.eclipse.jgit.treewalk.FileTreeIterator$FileEntry.openInputStream(FileTreeIterator.java:396)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator$PerDirectoryIgnoreNode.load(WorkingTreeIterator.java:1241)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator$RootIgnoreNode.load(WorkingTreeIterator.java:1264)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.getIgnoreNode(WorkingTreeIterator.java:698)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:666)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:691)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:646)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:633)
+	at org.eclipse.egit.core.RepositoryUtil.canBeAutoIgnored(RepositoryUtil.java:719)
+	at org.eclipse.egit.core.Activator$IgnoreDerivedResources$1.visit(Activator.java:718)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:64)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:75)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:75)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:48)
+	at org.eclipse.egit.core.Activator$IgnoreDerivedResources.resourceChanged(Activator.java:694)
+	at org.eclipse.core.internal.events.NotificationManager$1.run(NotificationManager.java:299)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.NotificationManager.notify(NotificationManager.java:289)
+	at org.eclipse.core.internal.events.NotificationManager.broadcastChanges(NotificationManager.java:152)
+	at org.eclipse.core.internal.resources.Workspace.broadcastPostChange(Workspace.java:374)
+	at org.eclipse.core.internal.resources.Workspace.aboutToBuild(Workspace.java:302)
+	at org.eclipse.core.internal.resources.Project$1.run(Project.java:556)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2240)
+	at org.eclipse.core.internal.resources.Project.internalBuild(Project.java:544)
+	at org.eclipse.core.internal.resources.Project.build(Project.java:120)
+	at org.eclipse.cdt.launch.AbstractCLaunchDelegate2$1.run(AbstractCLaunchDelegate2.java:367)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2240)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2262)
+	at org.eclipse.cdt.launch.AbstractCLaunchDelegate2.buildProject(AbstractCLaunchDelegate2.java:382)
+	at org.eclipse.cdt.launch.AbstractCLaunchDelegate2.buildForLaunch(AbstractCLaunchDelegate2.java:297)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:855)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:739)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1039)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1256)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:39:14.149
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:39:14.169
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:39:14.187
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:39:14.206
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:40:20.686
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:40:21.232
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:40:21.420
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:40:21.470
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:40:21.488
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:40:21.506
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:40:21.524
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:40:21.542
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:40:21.561
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:40:30.454
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:40:31.431
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:40:31.441
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:40:31.465
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:40:31.484
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:40:31.503
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:40:31.523
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:40:31.530
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:40:31.542
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:40:38.748
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:40:38.750
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:40:38.792
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:40:38.811
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:40:38.848
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:40:39.005
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:40:39.024
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:40:39.089
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:40:47.472
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:40:47.516
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.egit.core 4 0 2017-09-25 16:41:07.660
+!MESSAGE Ignoring /Perceptron/Debug failed
+!STACK 0
+java.io.FileNotFoundException: /home/adam/Documents/CS5350/.gitignore (Is a directory)
+	at java.io.FileInputStream.open0(Native Method)
+	at java.io.FileInputStream.open(FileInputStream.java:195)
+	at java.io.FileInputStream.<init>(FileInputStream.java:138)
+	at org.eclipse.jgit.treewalk.FileTreeIterator$FileEntry.openInputStream(FileTreeIterator.java:396)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator$PerDirectoryIgnoreNode.load(WorkingTreeIterator.java:1241)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator$RootIgnoreNode.load(WorkingTreeIterator.java:1264)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.getIgnoreNode(WorkingTreeIterator.java:698)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:666)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:691)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:646)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:633)
+	at org.eclipse.egit.core.RepositoryUtil.canBeAutoIgnored(RepositoryUtil.java:719)
+	at org.eclipse.egit.core.Activator$IgnoreDerivedResources$1.visit(Activator.java:718)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:64)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:75)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:75)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:48)
+	at org.eclipse.egit.core.Activator$IgnoreDerivedResources.resourceChanged(Activator.java:694)
+	at org.eclipse.core.internal.events.NotificationManager$1.run(NotificationManager.java:299)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.NotificationManager.notify(NotificationManager.java:289)
+	at org.eclipse.core.internal.events.NotificationManager.broadcastChanges(NotificationManager.java:152)
+	at org.eclipse.core.internal.resources.Workspace.broadcastPostChange(Workspace.java:374)
+	at org.eclipse.core.internal.resources.Workspace.aboutToBuild(Workspace.java:302)
+	at org.eclipse.core.internal.resources.Project$1.run(Project.java:556)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2240)
+	at org.eclipse.core.internal.resources.Project.internalBuild(Project.java:544)
+	at org.eclipse.core.internal.resources.Project.build(Project.java:120)
+	at org.eclipse.cdt.launch.AbstractCLaunchDelegate2$1.run(AbstractCLaunchDelegate2.java:367)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2240)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2262)
+	at org.eclipse.cdt.launch.AbstractCLaunchDelegate2.buildProject(AbstractCLaunchDelegate2.java:382)
+	at org.eclipse.cdt.launch.AbstractCLaunchDelegate2.buildForLaunch(AbstractCLaunchDelegate2.java:297)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:855)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:739)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1039)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1256)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+
+!ENTRY org.eclipse.egit.core 4 0 2017-09-25 16:42:38.302
+!MESSAGE Ignoring /Perceptron/Debug failed
+!STACK 0
+java.io.FileNotFoundException: /home/adam/Documents/CS5350/.gitignore (Is a directory)
+	at java.io.FileInputStream.open0(Native Method)
+	at java.io.FileInputStream.open(FileInputStream.java:195)
+	at java.io.FileInputStream.<init>(FileInputStream.java:138)
+	at org.eclipse.jgit.treewalk.FileTreeIterator$FileEntry.openInputStream(FileTreeIterator.java:396)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator$PerDirectoryIgnoreNode.load(WorkingTreeIterator.java:1241)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator$RootIgnoreNode.load(WorkingTreeIterator.java:1264)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.getIgnoreNode(WorkingTreeIterator.java:698)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:666)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:691)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:646)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:633)
+	at org.eclipse.egit.core.RepositoryUtil.canBeAutoIgnored(RepositoryUtil.java:719)
+	at org.eclipse.egit.core.Activator$IgnoreDerivedResources$1.visit(Activator.java:718)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:64)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:75)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:75)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:48)
+	at org.eclipse.egit.core.Activator$IgnoreDerivedResources.resourceChanged(Activator.java:694)
+	at org.eclipse.core.internal.events.NotificationManager$1.run(NotificationManager.java:299)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.NotificationManager.notify(NotificationManager.java:289)
+	at org.eclipse.core.internal.events.NotificationManager.broadcastChanges(NotificationManager.java:152)
+	at org.eclipse.core.internal.resources.Workspace.broadcastPostChange(Workspace.java:374)
+	at org.eclipse.core.internal.resources.Workspace.aboutToBuild(Workspace.java:302)
+	at org.eclipse.core.internal.resources.Project$1.run(Project.java:556)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2240)
+	at org.eclipse.core.internal.resources.Project.internalBuild(Project.java:544)
+	at org.eclipse.core.internal.resources.Project.build(Project.java:120)
+	at org.eclipse.cdt.launch.AbstractCLaunchDelegate2$1.run(AbstractCLaunchDelegate2.java:367)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2240)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2262)
+	at org.eclipse.cdt.launch.AbstractCLaunchDelegate2.buildProject(AbstractCLaunchDelegate2.java:382)
+	at org.eclipse.cdt.launch.AbstractCLaunchDelegate2.buildForLaunch(AbstractCLaunchDelegate2.java:297)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:855)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:739)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1039)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1256)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+
+!ENTRY org.eclipse.egit.core 4 0 2017-09-25 16:44:45.276
+!MESSAGE Ignoring /Perceptron/Debug failed
+!STACK 0
+java.io.FileNotFoundException: /home/adam/Documents/CS5350/.gitignore (Is a directory)
+	at java.io.FileInputStream.open0(Native Method)
+	at java.io.FileInputStream.open(FileInputStream.java:195)
+	at java.io.FileInputStream.<init>(FileInputStream.java:138)
+	at org.eclipse.jgit.treewalk.FileTreeIterator$FileEntry.openInputStream(FileTreeIterator.java:396)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator$PerDirectoryIgnoreNode.load(WorkingTreeIterator.java:1241)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator$RootIgnoreNode.load(WorkingTreeIterator.java:1264)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.getIgnoreNode(WorkingTreeIterator.java:698)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:666)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:691)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:646)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:633)
+	at org.eclipse.egit.core.RepositoryUtil.canBeAutoIgnored(RepositoryUtil.java:719)
+	at org.eclipse.egit.core.Activator$IgnoreDerivedResources$1.visit(Activator.java:718)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:64)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:75)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:75)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:48)
+	at org.eclipse.egit.core.Activator$IgnoreDerivedResources.resourceChanged(Activator.java:694)
+	at org.eclipse.core.internal.events.NotificationManager$1.run(NotificationManager.java:299)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.NotificationManager.notify(NotificationManager.java:289)
+	at org.eclipse.core.internal.events.NotificationManager.broadcastChanges(NotificationManager.java:152)
+	at org.eclipse.core.internal.resources.Workspace.broadcastPostChange(Workspace.java:374)
+	at org.eclipse.core.internal.resources.Workspace.aboutToBuild(Workspace.java:302)
+	at org.eclipse.core.internal.resources.Project$1.run(Project.java:556)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2240)
+	at org.eclipse.core.internal.resources.Project.internalBuild(Project.java:544)
+	at org.eclipse.core.internal.resources.Project.build(Project.java:120)
+	at org.eclipse.cdt.launch.AbstractCLaunchDelegate2$1.run(AbstractCLaunchDelegate2.java:367)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2240)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2262)
+	at org.eclipse.cdt.launch.AbstractCLaunchDelegate2.buildProject(AbstractCLaunchDelegate2.java:382)
+	at org.eclipse.cdt.launch.AbstractCLaunchDelegate2.buildForLaunch(AbstractCLaunchDelegate2.java:297)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:855)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:739)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1039)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1256)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+
+!ENTRY org.eclipse.egit.core 4 0 2017-09-25 16:47:13.013
+!MESSAGE Ignoring /Perceptron/Debug failed
+!STACK 0
+java.io.FileNotFoundException: /home/adam/Documents/CS5350/.gitignore (Is a directory)
+	at java.io.FileInputStream.open0(Native Method)
+	at java.io.FileInputStream.open(FileInputStream.java:195)
+	at java.io.FileInputStream.<init>(FileInputStream.java:138)
+	at org.eclipse.jgit.treewalk.FileTreeIterator$FileEntry.openInputStream(FileTreeIterator.java:396)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator$PerDirectoryIgnoreNode.load(WorkingTreeIterator.java:1241)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator$RootIgnoreNode.load(WorkingTreeIterator.java:1264)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.getIgnoreNode(WorkingTreeIterator.java:698)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:666)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:691)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:646)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:633)
+	at org.eclipse.egit.core.RepositoryUtil.canBeAutoIgnored(RepositoryUtil.java:719)
+	at org.eclipse.egit.core.Activator$IgnoreDerivedResources$1.visit(Activator.java:718)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:64)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:75)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:75)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:48)
+	at org.eclipse.egit.core.Activator$IgnoreDerivedResources.resourceChanged(Activator.java:694)
+	at org.eclipse.core.internal.events.NotificationManager$1.run(NotificationManager.java:299)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.NotificationManager.notify(NotificationManager.java:289)
+	at org.eclipse.core.internal.events.NotificationManager.broadcastChanges(NotificationManager.java:152)
+	at org.eclipse.core.internal.resources.Workspace.broadcastPostChange(Workspace.java:374)
+	at org.eclipse.core.internal.resources.Workspace.aboutToBuild(Workspace.java:302)
+	at org.eclipse.core.internal.resources.Project$1.run(Project.java:556)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2240)
+	at org.eclipse.core.internal.resources.Project.internalBuild(Project.java:544)
+	at org.eclipse.core.internal.resources.Project.build(Project.java:120)
+	at org.eclipse.cdt.launch.AbstractCLaunchDelegate2$1.run(AbstractCLaunchDelegate2.java:367)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2240)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2262)
+	at org.eclipse.cdt.launch.AbstractCLaunchDelegate2.buildProject(AbstractCLaunchDelegate2.java:382)
+	at org.eclipse.cdt.launch.AbstractCLaunchDelegate2.buildForLaunch(AbstractCLaunchDelegate2.java:297)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:855)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:739)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1039)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1256)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+
+!ENTRY org.eclipse.egit.core 4 0 2017-09-25 16:49:20.777
+!MESSAGE Ignoring /Perceptron/Debug failed
+!STACK 0
+java.io.FileNotFoundException: /home/adam/Documents/CS5350/.gitignore (Is a directory)
+	at java.io.FileInputStream.open0(Native Method)
+	at java.io.FileInputStream.open(FileInputStream.java:195)
+	at java.io.FileInputStream.<init>(FileInputStream.java:138)
+	at org.eclipse.jgit.treewalk.FileTreeIterator$FileEntry.openInputStream(FileTreeIterator.java:396)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator$PerDirectoryIgnoreNode.load(WorkingTreeIterator.java:1241)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator$RootIgnoreNode.load(WorkingTreeIterator.java:1264)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.getIgnoreNode(WorkingTreeIterator.java:698)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:666)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:691)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:646)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:633)
+	at org.eclipse.egit.core.RepositoryUtil.canBeAutoIgnored(RepositoryUtil.java:719)
+	at org.eclipse.egit.core.Activator$IgnoreDerivedResources$1.visit(Activator.java:718)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:64)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:75)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:75)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:48)
+	at org.eclipse.egit.core.Activator$IgnoreDerivedResources.resourceChanged(Activator.java:694)
+	at org.eclipse.core.internal.events.NotificationManager$1.run(NotificationManager.java:299)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.NotificationManager.notify(NotificationManager.java:289)
+	at org.eclipse.core.internal.events.NotificationManager.broadcastChanges(NotificationManager.java:152)
+	at org.eclipse.core.internal.resources.Workspace.broadcastPostChange(Workspace.java:374)
+	at org.eclipse.core.internal.resources.Workspace.aboutToBuild(Workspace.java:302)
+	at org.eclipse.core.internal.resources.Project$1.run(Project.java:556)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2240)
+	at org.eclipse.core.internal.resources.Project.internalBuild(Project.java:544)
+	at org.eclipse.core.internal.resources.Project.build(Project.java:120)
+	at org.eclipse.cdt.launch.AbstractCLaunchDelegate2$1.run(AbstractCLaunchDelegate2.java:367)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2240)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2262)
+	at org.eclipse.cdt.launch.AbstractCLaunchDelegate2.buildProject(AbstractCLaunchDelegate2.java:382)
+	at org.eclipse.cdt.launch.AbstractCLaunchDelegate2.buildForLaunch(AbstractCLaunchDelegate2.java:297)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:855)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:739)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1039)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1256)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+
+!ENTRY org.eclipse.egit.core 4 0 2017-09-25 16:50:11.508
+!MESSAGE Ignoring /Perceptron/Debug failed
+!STACK 0
+java.io.FileNotFoundException: /home/adam/Documents/CS5350/.gitignore (Is a directory)
+	at java.io.FileInputStream.open0(Native Method)
+	at java.io.FileInputStream.open(FileInputStream.java:195)
+	at java.io.FileInputStream.<init>(FileInputStream.java:138)
+	at org.eclipse.jgit.treewalk.FileTreeIterator$FileEntry.openInputStream(FileTreeIterator.java:396)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator$PerDirectoryIgnoreNode.load(WorkingTreeIterator.java:1241)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator$RootIgnoreNode.load(WorkingTreeIterator.java:1264)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.getIgnoreNode(WorkingTreeIterator.java:698)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:666)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:691)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:646)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:633)
+	at org.eclipse.egit.core.RepositoryUtil.canBeAutoIgnored(RepositoryUtil.java:719)
+	at org.eclipse.egit.core.Activator$IgnoreDerivedResources$1.visit(Activator.java:718)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:64)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:75)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:75)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:48)
+	at org.eclipse.egit.core.Activator$IgnoreDerivedResources.resourceChanged(Activator.java:694)
+	at org.eclipse.core.internal.events.NotificationManager$1.run(NotificationManager.java:299)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.NotificationManager.notify(NotificationManager.java:289)
+	at org.eclipse.core.internal.events.NotificationManager.broadcastChanges(NotificationManager.java:152)
+	at org.eclipse.core.internal.resources.Workspace.broadcastPostChange(Workspace.java:374)
+	at org.eclipse.core.internal.resources.Workspace.aboutToBuild(Workspace.java:302)
+	at org.eclipse.core.internal.resources.Project$1.run(Project.java:556)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2240)
+	at org.eclipse.core.internal.resources.Project.internalBuild(Project.java:544)
+	at org.eclipse.core.internal.resources.Project.build(Project.java:120)
+	at org.eclipse.cdt.launch.AbstractCLaunchDelegate2$1.run(AbstractCLaunchDelegate2.java:367)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2240)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2262)
+	at org.eclipse.cdt.launch.AbstractCLaunchDelegate2.buildProject(AbstractCLaunchDelegate2.java:382)
+	at org.eclipse.cdt.launch.AbstractCLaunchDelegate2.buildForLaunch(AbstractCLaunchDelegate2.java:297)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:855)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:739)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1039)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1256)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+
+!ENTRY org.eclipse.ui 4 0 2017-09-25 16:50:42.508
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException
+
+!ENTRY org.eclipse.egit.core 4 0 2017-09-25 16:51:45.394
+!MESSAGE Ignoring /Perceptron/Debug failed
+!STACK 0
+java.io.FileNotFoundException: /home/adam/Documents/CS5350/.gitignore (Is a directory)
+	at java.io.FileInputStream.open0(Native Method)
+	at java.io.FileInputStream.open(FileInputStream.java:195)
+	at java.io.FileInputStream.<init>(FileInputStream.java:138)
+	at org.eclipse.jgit.treewalk.FileTreeIterator$FileEntry.openInputStream(FileTreeIterator.java:396)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator$PerDirectoryIgnoreNode.load(WorkingTreeIterator.java:1241)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator$RootIgnoreNode.load(WorkingTreeIterator.java:1264)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.getIgnoreNode(WorkingTreeIterator.java:698)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:666)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:691)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:646)
+	at org.eclipse.jgit.treewalk.WorkingTreeIterator.isEntryIgnored(WorkingTreeIterator.java:633)
+	at org.eclipse.egit.core.RepositoryUtil.canBeAutoIgnored(RepositoryUtil.java:719)
+	at org.eclipse.egit.core.Activator$IgnoreDerivedResources$1.visit(Activator.java:718)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:64)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:75)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:75)
+	at org.eclipse.core.internal.events.ResourceDelta.accept(ResourceDelta.java:48)
+	at org.eclipse.egit.core.Activator$IgnoreDerivedResources.resourceChanged(Activator.java:694)
+	at org.eclipse.core.internal.events.NotificationManager$1.run(NotificationManager.java:299)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.NotificationManager.notify(NotificationManager.java:289)
+	at org.eclipse.core.internal.events.NotificationManager.broadcastChanges(NotificationManager.java:152)
+	at org.eclipse.core.internal.resources.Workspace.broadcastPostChange(Workspace.java:374)
+	at org.eclipse.core.internal.resources.Workspace.aboutToBuild(Workspace.java:302)
+	at org.eclipse.core.internal.resources.Project$1.run(Project.java:556)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2240)
+	at org.eclipse.core.internal.resources.Project.internalBuild(Project.java:544)
+	at org.eclipse.core.internal.resources.Project.build(Project.java:120)
+	at org.eclipse.cdt.launch.AbstractCLaunchDelegate2$1.run(AbstractCLaunchDelegate2.java:367)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2240)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2262)
+	at org.eclipse.cdt.launch.AbstractCLaunchDelegate2.buildProject(AbstractCLaunchDelegate2.java:382)
+	at org.eclipse.cdt.launch.AbstractCLaunchDelegate2.buildForLaunch(AbstractCLaunchDelegate2.java:297)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:855)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:739)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1039)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1256)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)

@@ -564,7 +564,7 @@ void simplePerceptronDriver(int sectionNum) {
 			} else if (sectionNum == 2) {
 				//dynamic
 				cout
-						<< "Validating with dynamic learning rate. \nT is increased per every example per canvas discussion. Starting learning rate = : "
+						<< "Validating with dynamic learning rate. \nT is increased when we make a mistake / update. Starting learning rate = : "
 						<< learningRate.at(j) / (1 + t) << endl;
 			}
 

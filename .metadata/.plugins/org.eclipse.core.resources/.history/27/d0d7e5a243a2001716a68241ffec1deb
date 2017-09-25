@@ -414,12 +414,12 @@ point printAverageRateAccuracy(double r1, double r2, double r3, string testName,
 	double r2Percentage = r2 / num;
 	double r3Percentage = r3 / num;
 
-	cout << testName << "Mean accuracy with a learning rate of 1.0: = "
+	cout << testName << "Mean accuracy with a learning rate of 1.0 = "
 			<< r1Percentage
-			<< "\t Mean accuracy with a learning rate of 0.1: =  "
+			<< "\t Mean accuracy with a learning rate of 0.1 =  "
 			<< r2Percentage
-			<< "\t Mean accuracy with a learning rate of 0.01: =  "
-			<< r3Percentage << "%" << endl;
+			<< "\t Mean accuracy with a learning rate of 0.01 =  "
+			<< r3Percentage << endl;
 
 	double max = (r1Percentage < r2Percentage) ? r2Percentage : r1Percentage;
 	double highestAccuracy = ((max < r3Percentage) ? r3Percentage : max);
@@ -564,7 +564,7 @@ void simplePerceptronDriver(int sectionNum) {
 			} else if (sectionNum == 2) {
 				//dynamic
 				cout
-						<< "Validating with dynamic learning rate. \nT is increased per every example per canvas discussion. Starting learning rate = : "
+						<< "Validating with dynamic learning rate. \nT is increased when we make a mistake / update. Starting learning rate = : "
 						<< learningRate.at(j) / (1 + t) << endl;
 			}
 
@@ -601,7 +601,7 @@ void simplePerceptronDriver(int sectionNum) {
 	}
 
 	point accuracyStruct(
-			printAverageRateAccuracy(r1Sum, r2Sum, r3Sum,
+			printAverageRateAccuracy(r1Sum*100, r2Sum*100, r3Sum*100,
 					"\nAverage r accuracy from every iteration of 5 fold validation in basic perceptron: \n",
 					5));
 
