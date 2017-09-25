@@ -19,7 +19,7 @@ struct meanR {
 };
 
 struct perceptronReturn {
-	double accuracy;
+	double accuracy = 0;
 	vector<double> weights;
 	meanR rates;
 	perceptronReturn(double _accuracy, vector<double> _weights, meanR _rates) {
@@ -31,7 +31,7 @@ struct perceptronReturn {
 
 struct crossValidateReturn {
 	meanR rates;
-	double accuracy;
+	double accuracy = 0;
 };
 
 vector<point> fill(string line) {
@@ -162,11 +162,21 @@ perceptronReturn basicPerceptron(vector<vector<point> > matrix,
 	double accuracy = 0;
 
 	//set dynamic learning rate
-	r = (r) / (1 + t);
+	if (sectionNum == 2 || sectionNum == 3)
+		r = (r) / (1 + t);
 	meanR epochMean;
 	//for each example in the training set
 	for (int _epoch = 0; _epoch < epoch; _epoch++) {
 		for (unsigned int i = 0; i < matrix.size(); i++) {
+			if (sectionNum == 3) {
+				srand(time(NULL));
+				for (int i = 0; i < 69; i++) {
+					double randomInitValue = rand() % (20000) - (10000);
+					randomInitValue /= 100000;
+					weights.at(i) = (randomInitValue);
+				}
+			}
+
 			//make a prediction and compare with training Y
 			trainingY = labels.at(i); //the label that comes with the data
 			//take the dot product of the weights matrix and the row of the matrix we're currently in
@@ -175,11 +185,21 @@ perceptronReturn basicPerceptron(vector<vector<point> > matrix,
 			if (sectionNum == 3) {
 				//update. BASED ON MARGIN PERCEPTRON.
 				if (prediction < u) {
+					if (prediction > 0) {
+						prediction = 1;
+					} else if (prediction <= 0) {
+						prediction = -1;
+					}
+					if (prediction != trainingY) {
+//						numWrong++;
+						t++;
+						//increase t every time we're wrong and make an update.
+					} else {
+						numRight++;
+					}
 					numWrong++;
 					update(&weights, trainingY, matrix.at(i), r);
 //					u /= 10;
-				} else {
-					numRight++;
 				}
 			} else {
 				if (prediction > 0) {
@@ -279,7 +299,8 @@ perceptronReturn basicPerceptron(vector<vector<point> > matrix,
 }
 
 perceptronReturn perceptronDriver(string path, vector<double> weights, double r,
-		int epoch, int compareDev, int sectionNum, double u, bool onTrain, double t) {
+		int epoch, int compareDev, int sectionNum, double u, bool onTrain,
+		double t) {
 	string filepath = path; //store path since the pipe consumes that string.
 	ifstream pipein(path.c_str());
 
@@ -336,7 +357,7 @@ crossValidateReturn crossValidate(vector<string> files, int against, double r,
 			perceptronReturn pr(
 					perceptronDriver(files.at(i), weights, r, epoch, false,
 							sectionNum, u, false, t));
-			weights = pr.weights;
+//			weights = pr.weights;
 			mean = pr.rates;
 		}
 	}
@@ -356,10 +377,10 @@ crossValidateReturn crossValidate(vector<string> files, int against, double r,
 	} else if (against == 4) {
 		training = against4;
 	}
-	cout
-			<< "Training complete. Testings the model (weights) generated from files "
-			<< training << " against: " << files.at(against) << " = "
-			<< pr.accuracy << "% accuracy" << endl;
+//	cout
+//			<< "Training complete. Testings the model (weights) generated from files "
+//			<< training << " against: " << files.at(against) << " = "
+//			<< pr.accuracy << "% accuracy" << endl;
 	weights = pr.weights;
 	crossValidateReturn re;
 	re.rates = mean;
@@ -425,7 +446,7 @@ void simplePerceptronDriver(int sectionNum) {
 	learningRate.push_back(0.01);
 
 	double t = 0;
-	double u = .1;
+	//double u = .01;
 
 	int epoch;
 	double r1Sum = 0, r2Sum = 0, r3Sum = 0; //1, .1, .01
@@ -455,50 +476,100 @@ void simplePerceptronDriver(int sectionNum) {
 
 	cout << "Testing with 10 epochs" << endl;
 	epoch = 10;
-	for (unsigned int j = 0; j < learningRate.size(); j++) {
-		if (sectionNum == 1) {
-			cout << "Validating with learning rate of : " << learningRate.at(j)
-					<< endl;
-		} else if (sectionNum == 2) {
-			//dynamic
-			cout << "t = " << t << " , Validating with dynamic learning rate. \nT is increased when we make a mistake / update. Starting learning rate = : "
-					<< learningRate.at(j) / (1 + t) << endl;
-		} else if (sectionNum == 3) {
-			cout << "t = " << t << " , Validating with dynamic learning rate. \nT is increased when we make a mistake / update. Starting learning rate = : "
-					<< learningRate.at(j) / (1 + t) << endl;
-			//and a u value of
-			cout << "Margin value of u = " << u << endl;
+	if (sectionNum == 3) {
+		double u = 0;
+		for (double z = 0; z < 3; z++) {
+			for (unsigned int j = 0; j < learningRate.size(); j++) {
+				if(z == 0){
+					u = 1;
+				}else if(z == 1){
+					u = .1;
+				}else if(z == 2){
+					u = .01;
+				}
+				cout
+						<< "Validating with dynamic learning rate. \nT is increased when we make a mistake / update. Starting learning rate = : "
+						<< learningRate.at(j) / (1 + t) << endl;
+				//and a u value of
+				cout << "Margin value of u = " << u << endl;
+
+				for (unsigned int i = 0; i < files.size(); i++) {
+					crossValidateReturn ret;
+					//i is the file we're going to test against. j is the learning rate.
+					if (sectionNum == 1) {
+						ret = crossValidate(files, i, learningRate.at(j), epoch,
+								sectionNum, 0, t);
+					} else if (sectionNum == 2 || sectionNum == 3) {
+
+						ret = crossValidate(files, i,
+								learningRate.at(j) / (1 + t), epoch, sectionNum,
+								u, t);
+					}
+
+					//sum up the averages for all the training exapmles to give a mean later.
+					if (i == 0) {
+						trainedAgainst0 += ret.accuracy;
+					} else if (i == 1) {
+						trainedAgainst1 += ret.accuracy;
+					} else if (i == 2) {
+						trainedAgainst2 += ret.accuracy;
+					} else if (i == 3) {
+						trainedAgainst3 += ret.accuracy;
+					} else if (i == 4) {
+						trainedAgainst4 += ret.accuracy;
+					}
+					//sup up the accuracies of every example of the r to get mean later.
+					r1Sum += ret.rates.r1;
+					r2Sum += ret.rates.r2;
+					r3Sum += ret.rates.r3;
+				}
+				t = 0;
+			}
 		}
 
-		for (unsigned int i = 0; i < files.size(); i++) {
-			crossValidateReturn ret;
-			//i is the file we're going to test against. j is the learning rate.
+	} else {
+		for (unsigned int j = 0; j < learningRate.size(); j++) {
+
 			if (sectionNum == 1) {
-				ret = crossValidate(files, i, learningRate.at(j), epoch,
-						sectionNum, 0, t);
-			} else if (sectionNum == 2 || sectionNum == 3) {
-				ret = crossValidate(files, i, learningRate.at(j) / (1 + t),
-						epoch, sectionNum, u, t);
+				cout << "Validating with learning rate of : "
+						<< learningRate.at(j) << endl;
+			} else if (sectionNum == 2) {
+				//dynamic
+				cout
+						<< "Validating with dynamic learning rate. \nT is increased when we make a mistake / update. Starting learning rate = : "
+						<< learningRate.at(j) / (1 + t) << endl;
 			}
 
-			//sum up the averages for all the training exapmles to give a mean later.
-			if (i == 0) {
-				trainedAgainst0 += ret.accuracy;
-			} else if (i == 1) {
-				trainedAgainst1 += ret.accuracy;
-			} else if (i == 2) {
-				trainedAgainst2 += ret.accuracy;
-			} else if (i == 3) {
-				trainedAgainst3 += ret.accuracy;
-			} else if (i == 4) {
-				trainedAgainst4 += ret.accuracy;
+			for (unsigned int i = 0; i < files.size(); i++) {
+				crossValidateReturn ret;
+				//i is the file we're going to test against. j is the learning rate.
+				if (sectionNum == 1) {
+					ret = crossValidate(files, i, learningRate.at(j), epoch,
+							sectionNum, 0, t);
+				} else if (sectionNum == 2 || sectionNum == 3) {
+					ret = crossValidate(files, i, learningRate.at(j) / (1 + t),
+							epoch, sectionNum, 0, t);
+				}
+
+				//sum up the averages for all the training exapmles to give a mean later.
+				if (i == 0) {
+					trainedAgainst0 += ret.accuracy;
+				} else if (i == 1) {
+					trainedAgainst1 += ret.accuracy;
+				} else if (i == 2) {
+					trainedAgainst2 += ret.accuracy;
+				} else if (i == 3) {
+					trainedAgainst3 += ret.accuracy;
+				} else if (i == 4) {
+					trainedAgainst4 += ret.accuracy;
+				}
+				//sup up the accuracies of every example of the r to get mean later.
+				r1Sum += ret.rates.r1;
+				r2Sum += ret.rates.r2;
+				r3Sum += ret.rates.r3;
 			}
-			//sup up the accuracies of every example of the r to get mean later.
-			r1Sum += ret.rates.r1;
-			r2Sum += ret.rates.r2;
-			r3Sum += ret.rates.r3;
+			t = 0;
 		}
-		t = 0;
 	}
 
 	point accuracyStruct(
@@ -549,7 +620,7 @@ void simplePerceptronDriver(int sectionNum) {
 
 	perceptronReturn pr(
 			perceptronDriver(trainingString, weights, optimalLearningRate,
-					epoch, true, sectionNum, u, true, t));
+					epoch, true, sectionNum, 0, true, t));
 
 	cout << endl;
 	cout << "\nNumber of updates was " << numUpdates << endl;
@@ -562,17 +633,17 @@ void simplePerceptronDriver(int sectionNum) {
 	//now use weights as the classifier for test.
 	perceptronReturn prTest(
 			perceptronDriver(trainingString, weights, optimalLearningRate,
-					epoch, 2, sectionNum, u, false, t));
+					epoch, 2, sectionNum, 0, false, t));
 
 }
 
 int main() {
 
-	cout << "****\nPART ONE. \n" << endl;
-	simplePerceptronDriver(1);
-	numUpdates = 0;
-	cout << "\n\n\n****\nPART TWO. \n" << endl;
-	simplePerceptronDriver(2);
+//	cout << "****\nPART ONE. \n" << endl;
+//	simplePerceptronDriver(1);
+//	numUpdates = 0;
+//	cout << "\n\n\n****\nPART TWO. \n" << endl;
+//	simplePerceptronDriver(2);
 	numUpdates = 0;
 	cout << "\n\n\n****\nPART THREE. \n" << endl;
 	simplePerceptronDriver(3);
