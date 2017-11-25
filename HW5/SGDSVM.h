@@ -31,6 +31,7 @@ public:
 	vector<double> rates = {10, 1, 0.1, 0.01, 0.001, 0.0001};
 	vector<double> tradeoff = {10, 1, 0.1, 0.01, 0.001, 0.0001};
 	vector<string> trainingFiles = {
+			"data/speeches.train.liblinear",
 			"data/CVSplits/training00.data",
 			"data/CVSplits/training01.data",
 			"data/CVSplits/training02.data",

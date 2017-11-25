@@ -66,6 +66,7 @@ void SGD_SVM::run(double rate, double tradeoff){
 	for(int row = 0; row < labels.size(); row++){
 		double result = dotP(trainingMap.at(row), weights);
 		if(labels.at(row) * result <= 1){
+//			cout << "LESS"<<endl;
 
 			//first term
 			scale(1 - rate, &weights);
@@ -76,8 +77,17 @@ void SGD_SVM::run(double rate, double tradeoff){
 			scale(rate, &trainingMap.at(row));
 
 			//now see if there is a corresponding true feature value
-			map<double, double>::iterator iter = trainingMap.at(row).begin();
+			map<double, double>::iterator witer = weights.begin();
+			while(witer != weights.end()){
+				double index = witer->first;
+				auto search = trainingMap.at(row).find(index);
+				if(search != trainingMap.at(row).end()){
+					witer->second += trainingMap.at(row).find(index)->second;
+				}
+				witer++;
+			}
 		}else{
+			cout << "GREATER"<<endl;
 			scale(1-rate, &weights);
 		}
 	}
@@ -85,28 +95,31 @@ void SGD_SVM::run(double rate, double tradeoff){
 
 void SGD_SVM::stream(string filepath, bool isTest) {
 	ifstream pipein(filepath.c_str());
-	double right, wrong = 0;
+	double right = 0, wrong = 0;
 	for (string line; getline(pipein, line);) {
 		map<double, double> example;
-		double label = ((line.at(0) == '0') ? -1 : 1);
+		double label = ((line.at(0) == '-') ? -1 : 1);
 		labels.push_back(label);
 		line = line.substr(2); //2 was og 1
 		std::string token;
 		std::istringstream tokenStream(line);
+		float key ;
 		while (std::getline(tokenStream, token, ' ')) {
-			float key = atof(token.c_str());
+			key = atof(token.c_str());
 			example.insert(make_pair(key, 1));
 		}
 		if(!isTest){
+			weights[key] = 0;
 			trainingMap.push_back(example);
 		}else{
 			double dot = dotP(example, weights);
 			double temp = 0;
-			if(dot <= 1){
+			if(dot < 0){
 				temp = -1;
 			}else{
 				temp = 1;
 			}
+			cout << "guess: " << temp << " label: " << label << " dot: " << dot << endl;
 
 			if(temp == label){
 				right ++;
@@ -117,6 +130,7 @@ void SGD_SVM::stream(string filepath, bool isTest) {
 	}
 	if(isTest){
 		cout << "Accuracy " << right / (right + wrong) << endl;
+		cout << "Right: " << right << " wrong: " << wrong << endl;
 	}
 }
 
@@ -129,9 +143,10 @@ void SGD_SVM::go() {
 
 	stream(trainingFiles.at(0), false); //training map consists of the entire file now with positives.
 
-	//for epoch 1....T
-	run(rates.at(0), tradeoff.at(0));
-	test("/data/speeches.test.liblinear");
+	//for epoch 1....T, 5, 2 are good.
+	for(int i = 0; i < 5; i++)
+		run(rates.at(5), tradeoff.at(2));
+	test("data/speeches.test.liblinear");
 }
 
 
