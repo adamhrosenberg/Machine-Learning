@@ -38,7 +38,7 @@ void Bayes::stream(string filepath, bool isTest) {
 		}
 		if (!isTest) {
 			//compute the prior probablitiy.
-			prior = numLabelTrue / numTrainExamples; //CHECK THIS BEFORE CHANING FILES
+
 
 //			labels.push_back(label);
 			trainingMap.push_back(example);
@@ -47,30 +47,28 @@ void Bayes::stream(string filepath, bool isTest) {
 			double guess;
 			//make prediction
 			//we have example. which is a map.
-			double sumT = 0;
-			double sumF = 0;
+			double sumT = 1;
+			double sumF = 1;
 			map<double, double>::iterator examIter = example.begin();
-			for(; examIter != example.end(); examIter ++){
+			for (; examIter != example.end(); examIter++) {
 				double guess = 0;
-				sumT += probabilityTable[examIter->first].pTrue * prior;
-				sumF += probabilityTable[examIter->first].pFalse * prior;
+				sumT *= probabilityTable[examIter->first].pTrue * prior;
+				sumF *= probabilityTable[examIter->first].pFalse * prior;
 			}
-			if(sumT > sumF){
+			if (sumT > sumF) {
 				guess = 1;
-			}else{
+			} else {
 				guess = -1;
 			}
 
-			cout << guess << endl;
+			cout << guess << " T: " << sumT << " F " << sumF << endl;
 
-			if(guess == label)
+			if (guess == label)
 				right++;
 			else
 				wrong++;
 		}
 	}
-
-
 
 	if (isTest) {
 		cout << "Accuracy " << right / (right + wrong) << endl;
@@ -91,69 +89,44 @@ void Bayes::computeProbabilityTable() {
 		//we need to keep track of when x is true and the label is true.
 		//we need to keep track of when x is true and the label is false.
 
-		//denom:
-		//we need to keep track of the number of when x isnt in the row and the label is true
-		//we need to keep track of the number of when x isnt in the row and the label is false
-
-
-		double numLabelTrue = 0; //where x1 is and the label is true.
-		double numLabelFalse = 0;
-
 		double trueCount = 0; //number of times x is true and y is true
 		double falseCount = 0; //number of times x is false and y is true
 
-		for (int trainingMapRow = 0; trainingMapRow < 50 /*trainingMap.size()*/; trainingMapRow++) {
+		for (int trainingMapRow = 0; trainingMapRow < trainingMap.size();
+				trainingMapRow++) {
 			//for each row of the trainingmap, iterate through the row until the features line up. then check the label.
-			map<double, double>::iterator iter =
-					trainingMap.at(trainingMapRow).begin();
 
-			while (iter != trainingMap.at(trainingMapRow).end()) {
-
-				if(*featIter == iter->first){
-					//feature is 1.
-//					cout << trainingMap.at(trainingMapRow).at(*featIter) << endl;
-
-					if(labels.at(trainingMapRow) == 1){
-						numLabelTrue++;
-						trueCount++;
-//						cout << "positive label for iter->first / *featIter = " << iter->first << endl;
-//						trueCount++;
-					}else{
-						numLabelFalse++;
-						falseCount++;
-//						cout << "neagtive label for iter->first / *featIter = " << iter->first << endl;
-					}
-				}
-				iter++;
-				if(iter == trainingMap.at(trainingMapRow).end()){
-					//the feature was not in the row
-					//if the labels is 1 then increment true count.
-					if(labels.at(trainingMapRow) == 1)
-						numLabelTrue++;
-					else
-						numLabelFalse++;
+			map<double, double>::iterator trainIter;
+			double featureNumber = *featIter;
+			trainIter = trainingMap.at(trainingMapRow).find(featureNumber);
+			if(trainIter != trainingMap.at(trainingMapRow).end()){
+				//found it.
+				if(labels.at(trainingMapRow) == 1){
+					trueCount ++;
+				}else{
+					falseCount ++;
 				}
 			}
-			//new row.
+
+//			new row.
 //			cout << "new row : #  " << trainingMapRow << endl;
 		}
 
 		//now after every row.
 		ProbPair entry;
-		entry.pFalse = falseCount / numLabelFalse;
-		entry.pTrue = trueCount / numLabelTrue;
+		entry.pFalse = (falseCount + .5) / (numLabelTrue + 1);
+		entry.pTrue = (trueCount + .5) / ((featuresMentioned.size() - numLabelTrue) + 1);
 
 		probabilityTable[*featIter] = entry;
 
 		cout << "Probabilities for feature: " << *featIter << " "  << entry.pFalse << " " << entry.pTrue << endl;
-
-//		cout << " label true # / label false # " << numLabelTrue << " " << numLabelFalse << endl;
+//
 //		cout << " true count, false count " << trueCount << " " << falseCount << endl;
 		featIter++;
 	}
 }
 
-void Bayes:: test(string filepath){
+void Bayes::test(string filepath) {
 	stream(filepath, true);
 }
 void Bayes::go() {
@@ -161,12 +134,15 @@ void Bayes::go() {
 	cout << "size of training map: " << trainingMap.size() << endl;
 	cout << "size of labels " << labels.size() << endl;
 	cout << "featuredmentioend size " << featuresMentioned.size() << endl;
-	cout << "Prior: " << prior << endl;
 
+	prior = numLabelTrue / featuresMentioned.size(); //CHECK THIS BEFORE CHANING FILES
+
+	cout << "Prior: " << prior << endl;
 
 	computeProbabilityTable();
 
 	test("data/speeches.test.liblinear");
+//	cout << "size of training map: " << trainingMap.size() << endl;
 	cout << "done" << endl;
 }
 
