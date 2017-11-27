@@ -55,13 +55,17 @@ void Bayes::stream(string filepath, bool isTest) {
 				sumT *= probabilityTable[examIter->first].pTrue * prior;
 				sumF *= probabilityTable[examIter->first].pFalse * prior;
 			}
-			if (sumT > sumF) {
+			if (sumT >= sumF) {
 				guess = 1;
 			} else {
 				guess = -1;
 			}
 
-			cout << guess << " T: " << sumT << " F " << sumF << endl;
+			cout << guess << " T: " << sumT << " F " << sumF <<  " for the true prob =  "
+					<< probabilityTable[examIter->first].pTrue << " , false = "
+					<< probabilityTable[examIter->first].pFalse
+					<< endl;
+
 
 			if (guess == label)
 				right++;
@@ -114,8 +118,8 @@ void Bayes::computeProbabilityTable() {
 
 		//now after every row.
 		ProbPair entry;
-		entry.pFalse = (falseCount + .5) / (numLabelTrue + 1);
-		entry.pTrue = (trueCount + .5) / ((featuresMentioned.size() - numLabelTrue) + 1);
+		entry.pTrue = (trueCount + 1) / (numLabelTrue + 2);
+		entry.pFalse = (falseCount + 1) / ((featuresMentioned.size() - numLabelTrue) + 2);
 
 		probabilityTable[*featIter] = entry;
 
