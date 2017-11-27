@@ -35,6 +35,7 @@ public:
 	double prior = 0;
 	double numLabelTrue = 0;
 	void go();
+	void test(string filepath);
 	set<int> featuresMentioned;
 	vector<map<double, double>> trainingMap;
 //	map<double, double> featureMap; //index # to weight.

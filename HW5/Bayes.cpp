@@ -37,16 +37,40 @@ void Bayes::stream(string filepath, bool isTest) {
 			featuresMentioned.insert(key);
 		}
 		if (!isTest) {
+			//compute the prior probablitiy.
+			prior = numLabelTrue / numTrainExamples; //CHECK THIS BEFORE CHANING FILES
+
 //			labels.push_back(label);
 			trainingMap.push_back(example);
 
 		} else {
+			double guess;
 			//make prediction
+			//we have example. which is a map.
+			double sumT = 0;
+			double sumF = 0;
+			map<double, double>::iterator examIter = example.begin();
+			for(; examIter != example.end(); examIter ++){
+				double guess = 0;
+				sumT += probabilityTable[examIter->first].pTrue * prior;
+				sumF += probabilityTable[examIter->first].pFalse * prior;
+			}
+			if(sumT > sumF){
+				guess = 1;
+			}else{
+				guess = -1;
+			}
+
+			cout << guess << endl;
+
+			if(guess == label)
+				right++;
+			else
+				wrong++;
 		}
 	}
 
-	//compute the prior probablitiy.
-	prior = numLabelTrue / numTrainExamples; //CHECK THIS BEFORE CHANING FILES
+
 
 	if (isTest) {
 		cout << "Accuracy " << right / (right + wrong) << endl;
@@ -78,7 +102,7 @@ void Bayes::computeProbabilityTable() {
 		double trueCount = 0; //number of times x is true and y is true
 		double falseCount = 0; //number of times x is false and y is true
 
-		for (int trainingMapRow = 0; trainingMapRow < 1000 /*trainingMap.size()*/; trainingMapRow++) {
+		for (int trainingMapRow = 0; trainingMapRow < 50 /*trainingMap.size()*/; trainingMapRow++) {
 			//for each row of the trainingmap, iterate through the row until the features line up. then check the label.
 			map<double, double>::iterator iter =
 					trainingMap.at(trainingMapRow).begin();
@@ -121,7 +145,7 @@ void Bayes::computeProbabilityTable() {
 
 		probabilityTable[*featIter] = entry;
 
-		cout << "Probabilities: " << entry.pFalse << " " << entry.pTrue << endl;
+		cout << "Probabilities for feature: " << *featIter << " "  << entry.pFalse << " " << entry.pTrue << endl;
 
 //		cout << " label true # / label false # " << numLabelTrue << " " << numLabelFalse << endl;
 //		cout << " true count, false count " << trueCount << " " << falseCount << endl;
@@ -129,21 +153,20 @@ void Bayes::computeProbabilityTable() {
 	}
 }
 
+void Bayes:: test(string filepath){
+	stream(filepath, true);
+}
 void Bayes::go() {
 	stream(trainingFiles.at(0), false);
 	cout << "size of training map: " << trainingMap.size() << endl;
 	cout << "size of labels " << labels.size() << endl;
-	cout << "Prior: " << prior << "\n labels marked true: " << numLabelTrue
-			<< endl;
-
-//		set<int>::iterator iter = featuresMentioned.begin();
-//		while (iter != featuresMentioned.end()) {
-//			cout << *iter << endl;
-//			iter++;
-//		}
+	cout << "featuredmentioend size " << featuresMentioned.size() << endl;
+	cout << "Prior: " << prior << endl;
 
 
 	computeProbabilityTable();
+
+	test("data/speeches.test.liblinear");
 	cout << "done" << endl;
 }
 
