@@ -16,13 +16,14 @@
 #include <algorithm>
 #include <sstream>
 #include <map>
+#include <set>
 //#include <point>
 using namespace std;
 
 typedef struct ProbPair{
 	double pTrue;
 	double pFalse;
-};
+}ProbPair;
 
 class Bayes {
 public:
@@ -34,8 +35,9 @@ public:
 	double prior = 0;
 	double numLabelTrue = 0;
 	void go();
-	vector<int> featuresMentioned;
+	set<int> featuresMentioned;
 	vector<map<double, double>> trainingMap;
+//	map<double, double> featureMap; //index # to weight.
 	vector<double> labels;
 	map<int, ProbPair> probabilityTable; //each feature index has a corresponding pair, which consists of the Probability of it being true / false given the dataset..
 	vector<double> rates = {10, 1, 0.1, 0.01, 0.001, 0.0001};
