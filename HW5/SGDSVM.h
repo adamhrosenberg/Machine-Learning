@@ -48,6 +48,7 @@ public:
 	void updateLess(map<double, double> * vector, double rate, double tradeoff);
 	double dotP(map<double, double> row, map<double, double> weights);
 	void test(string filepath);
+	int count = 0;
 
 };
 
