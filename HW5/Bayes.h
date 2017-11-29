@@ -30,8 +30,8 @@ public:
 	Bayes();
 	virtual ~Bayes();
 //	int numFeatures = 67692;
-	int numTrainExamples = 2818;
-	int numTestExamples = 940;
+//	int numTrainExamples = 2818;
+//	int numTestExamples = 940;
 	double prior = 0;
 	double numLabelTrue = 0;
 	void go();

@@ -17,7 +17,6 @@ SGD_SVM::~SGD_SVM() {
 	// TODO Auto-generated destructor stub
 }
 
-
 double SGD_SVM::dotP(map<double, double> row, map<double, double> weights) {
 	double result = 0;
 	map<double, double>::iterator iter = row.begin();
@@ -34,7 +33,8 @@ double SGD_SVM::dotP(map<double, double> row, map<double, double> weights) {
 
 void SGD_SVM::shuffle() {
 	for (int line = labels.size() - 1; line > 0; line--) {
-		srand(time(NULL));
+//		srand(time(NULL));
+		srand(31);
 
 		int rnd = rand() % (line + 1);
 
@@ -63,10 +63,10 @@ void SGD_SVM::run(double rate, double tradeoff) {
 	shuffle();
 	for (int row = 0; row < labels.size(); row++) {
 		double result = dotP(trainingMap.at(row), weights);
-		gamma_t = rate / (1 + (rate * row / tradeoff));
+
 		if (labels.at(row) * result <= 1) {
 //			cout << "LESS"<<endl;
-
+			gamma_t = rate / (1 + (rate * row / tradeoff));
 			//first term
 
 			scale(1 - gamma_t, &weights);
@@ -84,13 +84,14 @@ void SGD_SVM::run(double rate, double tradeoff) {
 				if (search != trainingMap.at(row).end()) {
 //					witer->second += trainingMap.at(row).find(index)->second;
 					witer->second += search->second;
-				}else{
+				} else {
 					count++;
 				}
 				witer++;
 			}
 		} else {
 			cout << "GREATER" << endl;
+			gamma_t = rate / (1 + (rate * row / tradeoff));
 			scale(1 - gamma_t, &weights);
 		}
 	}
@@ -148,10 +149,9 @@ void SGD_SVM::go() {
 	stream(trainingFiles.at(0), false); //training map consists of the entire file now with positives.
 
 	//for epoch 1....T, 5, 2 are good.
-//	for(int i = 0; i < 10; i++)
-	run(rates.at(5), tradeoff.at(4));
-	test("data/speeches.test.liblinear");
-	cout << count << endl;
-	cout << trainingMap.at(100).size() << endl;
-}
+//	for( int i = 0; i < 10; i++){
+		run(.1,.1);
+		test("data/speeches.test.liblinear");
+//	}
 
+}

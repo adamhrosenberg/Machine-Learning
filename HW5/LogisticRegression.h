@@ -42,6 +42,7 @@ private:
 	double gamma_t;
 	map<double, double> weights; //index # to weight.
 	void run(double rate, double tradeoff);
+	double t = 0;
 	vector<double> rates = {1, 0.1, 0.01, 0.001, 0.0001, 0.00001 };
 	vector<double> tradeoff = { 0.1, 1, 10, 100, 1000, 10000 };
 	vector<string> trainingFiles = { "data/speeches.train.liblinear",

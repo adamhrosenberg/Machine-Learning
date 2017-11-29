@@ -41,6 +41,7 @@ public:
 	SGD_SVM();
 	virtual ~SGD_SVM();
 	void go();
+	double t = 0;
 	void shuffle();
 	void stream(string filepath, bool isTest);
 	void run(double rate, double tradeoff);

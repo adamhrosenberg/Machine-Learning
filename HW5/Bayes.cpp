@@ -118,14 +118,14 @@ void Bayes::computeProbabilityTable(double smoothing) {
 
 		//now after every row.
 		ProbPair entry;
-		entry.pTrue = (trueCount + smoothing) / (numLabelTrue + 2 * smoothing);
+		entry.pTrue = (trueCount + smoothing) / (numLabelTrue + smoothing);
 		entry.pFalse = (falseCount + smoothing) / ((featuresMentioned.size() - numLabelTrue) + 2 * smoothing);
 
 		probabilityTable[*featIter] = entry;
 
-		cout << "Probabilities for feature: " << *featIter << " "  << entry.pFalse << " " << entry.pTrue << endl;
+//		cout << "Probabilities for feature: " << *featIter << " "  << entry.pFalse << " " << entry.pTrue << endl;
 
-		cout << " true count, false count " << trueCount << " " << falseCount << endl;
+//		cout << " true count, false count " << trueCount << " " << falseCount << endl;
 		featIter++;
 	}
 }
@@ -144,7 +144,7 @@ void Bayes::go() {
 	cout << "Prior: " << prior << endl;
 	cout << "label tru: " << numLabelTrue << endl;
 
-	computeProbabilityTable(1.5);
+	computeProbabilityTable(.1);
 //	for(int i = 0 ; i < smoothness.size(); i++){
 //		cout << "***For smoothness of : " << smoothness.at(i) << endl;
 //		computeProbabilityTable(smoothness.at(i));

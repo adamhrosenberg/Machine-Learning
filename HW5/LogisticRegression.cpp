@@ -78,7 +78,8 @@ void LogisticRegression::stream(string filepath, bool isTest) {
 void LogisticRegression::shuffle() {
 //	cout << "Shuffling" << endl;
 	for (int line = labels.size() - 1; line > 0; line--) {
-		srand(time(NULL));
+//		srand(time(NULL));
+		srand(30);
 
 		int rnd = rand() % (line + 1);
 
@@ -141,11 +142,13 @@ void LogisticRegression::run(double rate, double tradeoff) {
 	cout << "Training with rate: " << rate << " tradeoff = " << tradeoff
 			<< endl;
 	shuffle();
+	t = 0;
 	for (int row = 0; row < labels.size(); row++) {
 //		cout << "training on row: " << row << endl;
+//		gamma_t = rate / (1 + (rate * row / tradeoff));
 
-//		double result = dotP(trainingMap.at(row), weights);
-		gamma_t = rate / (1 + (rate * row / tradeoff));
+		gamma_t = rate / (1 + t);
+
 
 		map<double, double> mid; //large paran value
 		map<double, double> origW = weights;
@@ -156,7 +159,7 @@ void LogisticRegression::run(double rate, double tradeoff) {
 		map<double, double> exampleTop = trainingMap.at(row);
 		map<double, double> exampleBottom = trainingMap.at(row);
 
-		scale(2 / (tradeoff * tradeoff) , &rightW);
+		scale(2 / (tradeoff) , &rightW);
 
 
 		double dot = labels.at(row) * dotP(exampleBottom, leftW);
@@ -167,21 +170,8 @@ void LogisticRegression::run(double rate, double tradeoff) {
 
 		scale(-1 * gamma_t, &mid);
 		weights = mapAdd(&origW, &mid);
-//		scale(-1 * labels.at(row), &example);
-//
-//		double dotResult = dotP(example, weights);
-//		double expo = labels.at(row) * dotResult;
-//		double exponentiation = exp(expo);
-//
-//		scale(1 / (1 + exponentiation), &example);
-//
-//		scale(1 / (tradeoff * tradeoff), &weights);
-//
-//		weights = mapAdd(&weights, &example); //exmaple is now equals to the sum.
-//
-//		scale(-1 * gamma_t, &mid);
-//
-//		weights = mapAdd(&origW, &weights);
+
+		t+= 1;
 	}
 }
 
@@ -192,8 +182,10 @@ void LogisticRegression::test(string filepath) {
 void LogisticRegression::go() {
 	stream(trainingFiles.at(0), false);
 
-	run(.1, 1);
-	test("data/speeches.test.liblinear");
+//	for(int epoch = 0; epoch < 5; epoch++){
+		run(.01, 100);
+		test("data/speeches.test.liblinear");
+//	}
 
 //	for(int rate = 0; rate < rates.size(); rate++){
 //		for(int sigma = 0; sigma < tradeoff.size(); sigma++){
