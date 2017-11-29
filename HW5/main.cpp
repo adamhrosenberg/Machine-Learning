@@ -3,6 +3,7 @@
 
 #include "SGDSVM.h"
 #include "Bayes.h"
+#include "LogisticRegression.h"
 
 using namespace std;
 
@@ -11,9 +12,11 @@ int main(){
 //	svm.go();
 
 
-	Bayes bayes;
-	bayes.go();
+//	Bayes bayes;
+//	bayes.go();
 
 
+	LogisticRegression logic;
+	logic.go();
 
 }

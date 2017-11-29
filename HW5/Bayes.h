@@ -43,6 +43,7 @@ public:
 	map<int, ProbPair> probabilityTable; //each feature index has a corresponding pair, which consists of the Probability of it being true / false given the dataset..
 	vector<double> rates = {10, 1, 0.1, 0.01, 0.001, 0.0001};
 	vector<double> tradeoff = {10, 1, 0.1, 0.01, 0.001, 0.0001};
+	vector<double> smoothness = { 2, 1.5, 1, .5 };
 	vector<string> trainingFiles = {
 			"data/speeches.train.liblinear",
 			"data/CVSplits/training00.data",
@@ -51,7 +52,7 @@ public:
 			"data/CVSplits/training03.data",
 			"data/CVSplits/training04.data"
 	};
-	void computeProbabilityTable();
+	void computeProbabilityTable(double smoothing);
 	void stream(string filepath, bool isTest);
 };
 

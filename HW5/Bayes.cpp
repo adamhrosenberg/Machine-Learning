@@ -61,10 +61,10 @@ void Bayes::stream(string filepath, bool isTest) {
 				guess = -1;
 			}
 
-			cout << guess << " T: " << sumT << " F " << sumF <<  " for the true prob =  "
-					<< probabilityTable[examIter->first].pTrue << " , false = "
-					<< probabilityTable[examIter->first].pFalse
-					<< endl;
+//			cout << guess << " T: " << sumT << " F " << sumF <<  " for the true prob =  "
+//					<< probabilityTable[examIter->first].pTrue << " , false = "
+//					<< probabilityTable[examIter->first].pFalse
+//					<< endl;
 
 
 			if (guess == label)
@@ -79,8 +79,8 @@ void Bayes::stream(string filepath, bool isTest) {
 		cout << "Right: " << right << " wrong: " << wrong << endl;
 	}
 }
-void Bayes::computeProbabilityTable() {
-	double smoothing = 1;
+void Bayes::computeProbabilityTable(double smoothing) {
+//	double smoothing = 1;
 	double count = 0;
 	cout << "Starting prob table" << endl;
 	set<int>::iterator featIter = featuresMentioned.begin();
@@ -118,14 +118,14 @@ void Bayes::computeProbabilityTable() {
 
 		//now after every row.
 		ProbPair entry;
-		entry.pTrue = (trueCount + 1) / (numLabelTrue + 2);
-		entry.pFalse = (falseCount + 1) / ((featuresMentioned.size() - numLabelTrue) + 2);
+		entry.pTrue = (trueCount + smoothing) / (numLabelTrue + 2 * smoothing);
+		entry.pFalse = (falseCount + smoothing) / ((featuresMentioned.size() - numLabelTrue) + 2 * smoothing);
 
 		probabilityTable[*featIter] = entry;
 
 		cout << "Probabilities for feature: " << *featIter << " "  << entry.pFalse << " " << entry.pTrue << endl;
-//
-//		cout << " true count, false count " << trueCount << " " << falseCount << endl;
+
+		cout << " true count, false count " << trueCount << " " << falseCount << endl;
 		featIter++;
 	}
 }
@@ -135,17 +135,23 @@ void Bayes::test(string filepath) {
 }
 void Bayes::go() {
 	stream(trainingFiles.at(0), false);
-	cout << "size of training map: " << trainingMap.size() << endl;
-	cout << "size of labels " << labels.size() << endl;
-	cout << "featuredmentioend size " << featuresMentioned.size() << endl;
+//	cout << "size of training map: " << trainingMap.size() << endl;
+//	cout << "size of labels " << labels.size() << endl;
+//	cout << "featuredmentioend size " << featuresMentioned.size() << endl;
 
-	prior = numLabelTrue / featuresMentioned.size(); //CHECK THIS BEFORE CHANING FILES
+	prior = numLabelTrue / labels.size(); //CHECK THIS BEFORE CHANING FILES
 
 	cout << "Prior: " << prior << endl;
+	cout << "label tru: " << numLabelTrue << endl;
 
-	computeProbabilityTable();
+	computeProbabilityTable(1.5);
+//	for(int i = 0 ; i < smoothness.size(); i++){
+//		cout << "***For smoothness of : " << smoothness.at(i) << endl;
+//		computeProbabilityTable(smoothness.at(i));
+		test("data/speeches.test.liblinear");
+//	}
 
-	test("data/speeches.test.liblinear");
+
 //	cout << "size of training map: " << trainingMap.size() << endl;
 	cout << "done" << endl;
 }
