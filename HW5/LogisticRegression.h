@@ -32,7 +32,7 @@ public:
 	void shuffle();
 	void stream(string filepath, bool isTest);
 	void updateWeights(double rate, double tradeoff);
-	void mapAdd(map<double, double> * first, map<double, double> * second);
+	map<double, double> mapAdd(map<double, double> * weights, map<double, double> * example);
 	void test(string filepath);
 private:
 	//	map<double, double> trainingMap;
