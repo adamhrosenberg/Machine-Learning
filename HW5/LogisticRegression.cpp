@@ -16,8 +16,18 @@ double LogisticRegression::dotP(map<double, double> row,
 	while (iter != row.end()) {
 		double key = iter->first;
 		double value = iter->second;
-		double weight = weights[key];
-		result += value * weight;
+
+
+
+		map<double, double>::iterator findIter = weights.begin();
+		findIter = weights.find(iter->first);
+		if (findIter != weights.end()) {
+//			cout << "Find iter first: " << findIter->first << endl;
+			double weight = weights[key];
+			result += value * weight;
+		}
+
+
 		iter++;
 	}
 //	cout << result << endl;
@@ -114,11 +124,11 @@ map<double, double> LogisticRegression::mapAdd(map<double, double> * weights,
 	map<double, double>::iterator witer = weights->begin();
 	map<double, double>::iterator xiter = example->begin();
 
-	for(; xiter != example->end(); xiter++){
+	for (; xiter != example->end(); xiter++) {
 
 		map<double, double>::iterator findIter = weights->begin();
 		findIter = weights->find(xiter->first);
-		if(findIter != weights->end()){
+		if (findIter != weights->end()) {
 //			cout << "Find iter first: " << findIter->first << endl;
 			result[findIter->first] = xiter->second + findIter->second;
 		}
@@ -128,6 +138,8 @@ map<double, double> LogisticRegression::mapAdd(map<double, double> * weights,
 
 }
 void LogisticRegression::run(double rate, double tradeoff) {
+	cout << "Training with rate: " << rate << " tradeoff = " << tradeoff
+			<< endl;
 	shuffle();
 	for (int row = 0; row < labels.size(); row++) {
 //		cout << "training on row: " << row << endl;
@@ -137,24 +149,39 @@ void LogisticRegression::run(double rate, double tradeoff) {
 
 		map<double, double> mid; //large paran value
 		map<double, double> origW = weights;
-//				cout << "size " << origW.size() << endl;
 		map<double, double> example = trainingMap.at(row);
 
-		scale(-1 * labels.at(row), &example);
+		map<double, double> rightW = weights;
+		map<double, double> leftW = weights;
+		map<double, double> exampleTop = trainingMap.at(row);
+		map<double, double> exampleBottom = trainingMap.at(row);
 
-		double dotResult = dotP(example, weights);
-		double expo = labels.at(row) * dotResult;
-		double exponentiation = exp(expo);
+		scale(2 / (tradeoff * tradeoff) , &rightW);
 
-		scale(1 / (1 + exponentiation), &example);
 
-		scale(1/(tradeoff * tradeoff), &weights);
+		double dot = labels.at(row) * dotP(exampleBottom, leftW);
+		double exponentiation = exp(dot);
+		scale((-1 * labels.at(row)) / (1 + exponentiation), &exampleTop);
 
-		weights = mapAdd(&weights, &example); //exmaple is now equals to the sum.
+		mid = mapAdd(&rightW, &exampleTop);
 
 		scale(-1 * gamma_t, &mid);
-
-		weights = mapAdd(&origW, &weights);
+		weights = mapAdd(&origW, &mid);
+//		scale(-1 * labels.at(row), &example);
+//
+//		double dotResult = dotP(example, weights);
+//		double expo = labels.at(row) * dotResult;
+//		double exponentiation = exp(expo);
+//
+//		scale(1 / (1 + exponentiation), &example);
+//
+//		scale(1 / (tradeoff * tradeoff), &weights);
+//
+//		weights = mapAdd(&weights, &example); //exmaple is now equals to the sum.
+//
+//		scale(-1 * gamma_t, &mid);
+//
+//		weights = mapAdd(&origW, &weights);
 	}
 }
 
@@ -165,10 +192,15 @@ void LogisticRegression::test(string filepath) {
 void LogisticRegression::go() {
 	stream(trainingFiles.at(0), false);
 
-	run(.1, 100);
-	cout << "done" << endl;
+	run(.1, 1);
 	test("data/speeches.test.liblinear");
 
+//	for(int rate = 0; rate < rates.size(); rate++){
+//		for(int sigma = 0; sigma < tradeoff.size(); sigma++){
+//			run(rates.at(rate), tradeoff.at(sigma));
+//			test("data/speeches.test.liblinear");
+//		}
+//	}
 //	cout << weights.size() << endl;
 //
 //	for(map<double, double>::iterator iter = weights.begin(); iter != weights.end(); iter++){
