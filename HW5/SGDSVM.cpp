@@ -63,16 +63,18 @@ void SGD_SVM::run(double rate, double tradeoff) {
 	shuffle();
 	for (int row = 0; row < labels.size(); row++) {
 		double result = dotP(trainingMap.at(row), weights);
+		gamma_t = rate / (1 + (rate * row / tradeoff));
 		if (labels.at(row) * result <= 1) {
 //			cout << "LESS"<<endl;
 
 			//first term
-			scale(1 - rate, &weights);
+
+			scale(1 - gamma_t, &weights);
 
 			//second term
 			scale(tradeoff, &trainingMap.at(row));
 			scale(labels.at(row), &trainingMap.at(row));
-			scale(rate, &trainingMap.at(row));
+			scale(gamma_t, &trainingMap.at(row));
 
 			//now see if there is a corresponding true feature value
 			map<double, double>::iterator witer = weights.begin();
@@ -89,7 +91,7 @@ void SGD_SVM::run(double rate, double tradeoff) {
 			}
 		} else {
 			cout << "GREATER" << endl;
-			scale(1 - rate, &weights);
+			scale(1 - gamma_t, &weights);
 		}
 	}
 }

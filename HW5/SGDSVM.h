@@ -49,6 +49,7 @@ public:
 	double dotP(map<double, double> row, map<double, double> weights);
 	void test(string filepath);
 	int count = 0;
+	double gamma_t = 0;
 
 };
 
