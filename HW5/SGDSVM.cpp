@@ -62,6 +62,7 @@ void SGD_SVM::scale(double scalar, map<double, double> * vector) {
 void SGD_SVM::run(double rate, double tradeoff) {
 	shuffle();
 	for (int row = 0; row < labels.size(); row++) {
+
 		double result = dotP(trainingMap.at(row), weights);
 
 		if (labels.at(row) * result <= 1) {
@@ -90,7 +91,7 @@ void SGD_SVM::run(double rate, double tradeoff) {
 				witer++;
 			}
 		} else {
-			cout << "GREATER" << endl;
+//			cout << "GREATER" << endl;
 			gamma_t = rate / (1 + (rate * row / tradeoff));
 			scale(1 - gamma_t, &weights);
 		}
@@ -124,8 +125,8 @@ void SGD_SVM::stream(string filepath, bool isTest) {
 			} else {
 				temp = 1;
 			}
-			cout << "guess: " << temp << " label: " << label << " dot: " << dot
-					<< endl;
+//			cout << "guess: " << temp << " label: " << label << " dot: " << dot
+//					<< endl;
 
 			if (temp == label) {
 				right++;
@@ -135,8 +136,10 @@ void SGD_SVM::stream(string filepath, bool isTest) {
 		}
 	}
 	if (isTest) {
-		cout << "Accuracy " << right / (right + wrong) << endl;
-		cout << "Right: " << right << " wrong: " << wrong << endl;
+
+		percentageCross = right / (right + wrong);
+		cout << "\tAccuracy " << percentageCross << endl;
+//		cout << "Right: " << right << " wrong: " << wrong << endl;
 	}
 }
 
@@ -144,14 +147,110 @@ void SGD_SVM::test(string filepath) {
 	stream(filepath, true);
 }
 
+string SGD_SVM::pickTraining(int against) {
+	string against0 = "1, 2, 3, 4";
+	string against1 = "0, 2, 3, 4";
+	string against2 = "0, 1, 3, 4";
+	string against3 = "0, 1, 2, 4";
+	string against4 = "0, 1, 2, 3";
+
+	if (against == 0) {
+		return against0;
+	} else if (against == 1) {
+		return against1;
+	} else if (against == 2) {
+		return against2;
+	} else if (against == 3) {
+		return against3;
+	} else if (against == 4) {
+		return against4;
+	}
+	return "";
+}
+void SGD_SVM::crossValidate(double rate, double tradeoff) {
+	//train on 0, 1, 2, 3, test against 4 etc.
+
+	cout << "Cross validating with rate = " << rate << " and tradeoff ^2 = "
+			<< tradeoff << endl;
+	string training;
+
+	for (int against = 0; against < trainingFiles.size(); against++) {
+
+		weights.clear();
+
+		training = pickTraining(against);
+		cout << "Training on files: " << training
+				<< " and testing against file: " << trainingFiles.at(against)
+				<< endl;
+
+		for (int train = 0; train < trainingFiles.size(); train++) {
+
+			if (train != against) {
+
+				stream(trainingFiles.at(train), false); //training map consists of the entire file now with positives.
+				run(rate, tradeoff);
+				for (int row = 0; row < trainingMap.size(); row++) {
+					trainingMap.at(row).clear();
+				}
+			}
+
+		}
+		test(trainingFiles.at(against));
+		averagePercentage += percentageCross;
+		cout << "Adding percentage" << endl;
+	}
+
+	cout << averagePercentage << " = sum. " << endl;
+	averagePercentage = averagePercentage / (trainingFiles.size());
+	cout << "Average percentage " << averagePercentage << endl;
+}
 void SGD_SVM::go() {
 
-	stream(trainingFiles.at(0), false); //training map consists of the entire file now with positives.
+	for (int rate = 0; rate < rates.size(); rate++) {
+		for (int sigma = 0; sigma < tradeoff.size(); sigma++) {
+			crossValidate(rates.at(rate), tradeoff.at(sigma));
+			cout << "Average percentage for 5 fold validation with a rate of "
+					<< rates.at(rate) << " and a sigma of "
+					<< tradeoff.at(sigma) << " = " << averagePercentage << endl;
 
-	//for epoch 1....T, 5, 2 are good.
-	for( int i = 0; i < 10; i++){
-		run(.1,.1);
-		test("data/speeches.test.liblinear");
+			pair<double, double> p;
+			p.first = rate;
+			p.second = sigma;
+
+			accuracyPoints.insert(make_pair(p, averagePercentage));
+			averagePercentage = 0;
+			percentageCross = 0;
+		}
 	}
+
+	double maxAccuracy = 0;
+	pair<double, double> optimizedHyperParams;
+	for (map<pair<double, double>, double>::iterator iter = accuracyPoints.begin();
+			iter != accuracyPoints.end(); iter++) {
+		if (iter->second > maxAccuracy) {
+			maxAccuracy = iter->second;
+			optimizedHyperParams.first = iter->first.first;
+			optimizedHyperParams.second = iter->first.second;
+		}
+	}
+
+	cout << "Optimized hyper params: delta = " << optimizedHyperParams.first
+			<< " and sigma = " << optimizedHyperParams.second << endl;
+
+	cout << "Running optimized hyper params on speeches train and test file"
+			<< endl;
+
+	stream("data/speeches.train.liblinear", false); //training map consists of the entire file now with positives.
+	run(optimizedHyperParams.first, optimizedHyperParams.second);
+	test("data/speeches.test.liblinear");
+
+	cout << "\n\ndone";
+
+//	//for epoch 1....T, 5, 2 are good.
+//	for( int i = 0; i < 10; i++){
+//		run(.1,10);
+////		test("data/speeches.test.liblinear");
+//		test(trainingFiles.at(1));
+//	}
 
 }

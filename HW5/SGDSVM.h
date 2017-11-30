@@ -13,25 +13,27 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <utility>      // std::pair, std::make_pair
 #include <algorithm>
 #include <sstream>
 #include <map>
-
-struct point{
-	double key = 0, value = 0;
-};
 using namespace std;
+
+
 class SGD_SVM {
 public:
 //	map<double, double> trainingMap;
 //	vector<point> trainingMap;
 	vector<map<double, double>> trainingMap;
 	vector<double> labels;
+	vector<double> accuracies;
+	double averagePercentage = 0;
+	map<pair<double, double>, double> accuracyPoints;
+	double percentageCross = 0;
 	map<double, double> weights; //index # to weight.
 	vector<double> rates = {10, 1, 0.1, 0.01, 0.001, 0.0001};
 	vector<double> tradeoff = {10, 1, 0.1, 0.01, 0.001, 0.0001};
 	vector<string> trainingFiles = {
-			"data/speeches.train.liblinear",
 			"data/CVSplits/training00.data",
 			"data/CVSplits/training01.data",
 			"data/CVSplits/training02.data",
@@ -41,6 +43,7 @@ public:
 	SGD_SVM();
 	virtual ~SGD_SVM();
 	void go();
+	string pickTraining(int against);
 	double t = 0;
 	void shuffle();
 	void stream(string filepath, bool isTest);
@@ -49,6 +52,7 @@ public:
 	void updateLess(map<double, double> * vector, double rate, double tradeoff);
 	double dotP(map<double, double> row, map<double, double> weights);
 	void test(string filepath);
+	void crossValidate(double rate, double tradeoff);
 	int count = 0;
 	double gamma_t = 0;
 
