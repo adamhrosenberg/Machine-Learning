@@ -138,7 +138,7 @@ void SGD_SVM::stream(string filepath, bool isTest) {
 	if (isTest) {
 
 		percentageCross = right / (right + wrong);
-		cout << "\tAccuracy " << percentageCross << endl;
+//		cout << "\tAccuracy " << percentageCross << endl;
 //		cout << "Right: " << right << " wrong: " << wrong << endl;
 	}
 }
@@ -169,14 +169,13 @@ string SGD_SVM::pickTraining(int against) {
 }
 void SGD_SVM::crossValidate(double rate, double tradeoff) {
 	//train on 0, 1, 2, 3, test against 4 etc.
-
-	cout << "Cross validating with rate = " << rate << " and tradeoff ^2 = "
+	cout << "\n\nCross validating with rate = " << rate << " and tradeoff ^2 = "
 			<< tradeoff << endl;
 	string training;
 
 	for (int against = 0; against < trainingFiles.size(); against++) {
 
-		weights.clear();
+
 
 		training = pickTraining(against);
 		cout << "Training on files: " << training
@@ -188,21 +187,27 @@ void SGD_SVM::crossValidate(double rate, double tradeoff) {
 			if (train != against) {
 
 				stream(trainingFiles.at(train), false); //training map consists of the entire file now with positives.
-				run(rate, tradeoff);
-				for (int row = 0; row < trainingMap.size(); row++) {
-					trainingMap.at(row).clear();
-				}
+
 			}
 
 		}
+		run(rate, tradeoff);
 		test(trainingFiles.at(against));
 		averagePercentage += percentageCross;
-		cout << "Adding percentage" << endl;
+		averageOfCross += percentageCross;
+		numberOfCross ++ ;
+
+		//reset
+		trainingMap.clear();
+		labels.clear();
+		weights.clear();
+		gamma_t = 0;
+
 	}
 
-	cout << averagePercentage << " = sum. " << endl;
+//	cout << averagePercentage << " = sum. " << endl;
 	averagePercentage = averagePercentage / (trainingFiles.size());
-	cout << "Average percentage " << averagePercentage << endl;
+//	cout << "Average percentage " << averagePercentage << endl;
 }
 void SGD_SVM::go() {
 
@@ -214,8 +219,8 @@ void SGD_SVM::go() {
 					<< tradeoff.at(sigma) << " = " << averagePercentage << endl;
 
 			pair<double, double> p;
-			p.first = rate;
-			p.second = sigma;
+			p.first = rates.at(rate);
+			p.second = tradeoff.at(sigma);
 
 			accuracyPoints.insert(make_pair(p, averagePercentage));
 			averagePercentage = 0;
@@ -237,20 +242,19 @@ void SGD_SVM::go() {
 	cout << "Optimized hyper params: delta = " << optimizedHyperParams.first
 			<< " and sigma = " << optimizedHyperParams.second << endl;
 
+
+	averageOfCross /= numberOfCross;
+
+	cout << "Average accuracy during cross validation:  " << averageOfCross << endl;
 	cout << "Running optimized hyper params on speeches train and test file"
 			<< endl;
 
+
 	stream("data/speeches.train.liblinear", false); //training map consists of the entire file now with positives.
 	run(optimizedHyperParams.first, optimizedHyperParams.second);
+
 	test("data/speeches.test.liblinear");
+	cout << "\n***\nAccuracy with optimal hyper params: " << percentageCross << endl;
 
-	cout << "\n\ndone";
-
-//	//for epoch 1....T, 5, 2 are good.
-//	for( int i = 0; i < 10; i++){
-//		run(.1,10);
-////		test("data/speeches.test.liblinear");
-//		test(trainingFiles.at(1));
-//	}
 
 }

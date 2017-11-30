@@ -22,17 +22,17 @@ using namespace std;
 
 class SGD_SVM {
 public:
-//	map<double, double> trainingMap;
-//	vector<point> trainingMap;
 	vector<map<double, double>> trainingMap;
 	vector<double> labels;
 	vector<double> accuracies;
 	double averagePercentage = 0;
 	map<pair<double, double>, double> accuracyPoints;
 	double percentageCross = 0;
+	double averageOfCross = 0;
+	int numberOfCross = 0;
 	map<double, double> weights; //index # to weight.
-	vector<double> rates = {10, 1, 0.1, 0.01, 0.001, 0.0001};
-	vector<double> tradeoff = {10, 1, 0.1, 0.01, 0.001, 0.0001};
+	vector<double> rates = {10, 1, 0.1, 0.01, 0.001, 0.0001}; //4
+	vector<double> tradeoff = {10, 1, 0.1, 0.01, 0.001, 0.0001}; //2
 	vector<string> trainingFiles = {
 			"data/CVSplits/training00.data",
 			"data/CVSplits/training01.data",
