@@ -145,10 +145,9 @@ void LogisticRegression::run(double rate, double tradeoff) {
 	t = 0;
 	for (int row = 0; row < labels.size(); row++) {
 //		cout << "training on row: " << row << endl;
-//		gamma_t = rate / (1 + (rate * row / tradeoff));
+//		gamma_t = rate / (1 + (rate * t / sqrt(tradeoff)));
 
 		gamma_t = rate / (1 + t);
-
 
 		map<double, double> mid; //large paran value
 		map<double, double> origW = weights;
@@ -159,7 +158,7 @@ void LogisticRegression::run(double rate, double tradeoff) {
 		map<double, double> exampleTop = trainingMap.at(row);
 		map<double, double> exampleBottom = trainingMap.at(row);
 
-		scale(2 / (tradeoff) , &rightW);
+		scale(2 / (sqrt(tradeoff)) , &rightW);
 
 
 		double dot = labels.at(row) * dotP(exampleBottom, leftW);

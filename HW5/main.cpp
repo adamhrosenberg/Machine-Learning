@@ -8,15 +8,15 @@
 using namespace std;
 
 int main(){
-//	SGD_SVM svm;
-//	svm.go();
+	SGD_SVM svm;
+	svm.go();
 
 
 //	Bayes bayes;
 //	bayes.go();
 
 
-	LogisticRegression logic;
-	logic.go();
+//	LogisticRegression logic;
+//	logic.go();
 
 }

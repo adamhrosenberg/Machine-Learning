@@ -149,9 +149,9 @@ void SGD_SVM::go() {
 	stream(trainingFiles.at(0), false); //training map consists of the entire file now with positives.
 
 	//for epoch 1....T, 5, 2 are good.
-//	for( int i = 0; i < 10; i++){
+	for( int i = 0; i < 10; i++){
 		run(.1,.1);
 		test("data/speeches.test.liblinear");
-//	}
+	}
 
 }
