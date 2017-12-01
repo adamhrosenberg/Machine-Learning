@@ -77,18 +77,18 @@ void ID3::test(string filepath) {
 
 }
 
-double ID3::calculateTotalEntropy(vector<double> l){
+double ID3::calculateTotalEntropy(vector<double> * l){
 	cout << "calculating total entropy " << endl;
 	double totalEntropy = 0;
 	double posCount = 0;
 
-	for(int label = 0 ; label < l.size(); label++){
-		if(l.at(label) == 1){
+	for(int label = 0 ; label < l->size(); label++){
+		if(l->at(label) == 1){
 			posCount ++;
 		}
 	}
 
-	double proportion = posCount / l.size();
+	double proportion = posCount / l->size();
 
 	double posPro = proportion;
 	double negPro = 1 - (proportion);
@@ -98,8 +98,8 @@ double ID3::calculateTotalEntropy(vector<double> l){
 
 	return totalEntropy;
 }
-double ID3::calculateEntropy(vector<map<double, double>> S, vector<double> l, int featureNumber){
-	cout << "Calculating entropy for feat # " << featureNumber << endl;
+double ID3::calculateEntropy(vector<map<double, double>> * S, vector<double> * l, int featureNumber){
+//	cout << "Calculating entropy for feat # " << featureNumber << endl;
 	double expectedEntropy = 0;
 
 	double yesEntropy = 0;
@@ -111,22 +111,22 @@ double ID3::calculateEntropy(vector<map<double, double>> S, vector<double> l, in
 	double noPosCount = 0;
 	double noNegCount = 0;
 
-	for(int row = 0; row < S.size(); row++){
+	for(int row = 0; row < S->size(); row++){
 		map<double, double>::iterator sIter;
-		sIter = S.at(row).find(featureNumber);
+		sIter = S->at(row).find(featureNumber);
 
 
 
-		if(sIter != S.at(row).end()){
+		if(sIter != S->at(row).end()){
 			//the feature is there and TRUE
-			if(l.at(row) == 1){
+			if(l->at(row) == 1){
 				yesPosCount ++ ;
 			}else{
 				yesNegCount ++;
 			}
 		}else{
 			//not there. value if negative.
-			if(l.at(row) == 1){
+			if(l->at(row) == 1){
 				noPosCount ++ ;
 			}else{
 				noNegCount ++;
@@ -135,24 +135,39 @@ double ID3::calculateEntropy(vector<map<double, double>> S, vector<double> l, in
 	}
 
 	double yesTotal = yesPosCount + noNegCount;
+	cout << "yesPos count " << yesPosCount << " yes neg count " << yesNegCount << endl;
 
+	if(yesPosCount != 0 && yesNegCount != 0){
 	yesEntropy = (-1 * (yesPosCount / yesTotal) * log2(yesPosCount / yesTotal) -
 					   (yesNegCount / yesTotal) * log2(yesNegCount / yesTotal));
 
+	}else{
+		yesEntropy = 0;
+	}
+
 	double noTotal = noPosCount + noNegCount;
-	noEntropy = (-1 * (noPosCount / noTotal) * log2(noPosCount / noTotal) -
+
+	if(noPosCount != 0 && noNegCount != 0){
+		noEntropy = (-1 * (noPosCount / noTotal) * log2(noPosCount / noTotal) -
 				  	  (noNegCount / noTotal) * log2(noNegCount / noTotal));
+	}else{
+		noEntropy = 0;
+	}
 
+	cout << featureNumber << " Yes entropy : " << yesEntropy << endl;
+	cout << featureNumber<< " No entropy : " << noEntropy << endl;
 
-	double yesCoef = yesTotal / l.size();
-	double noCoef = noTotal / l.size();
+	double yesCoef = yesTotal / l->size();
+	double noCoef = noTotal / l->size();
 
 	expectedEntropy = (yesCoef * yesEntropy) + (noCoef * noEntropy);
+
+	cout << "Expected entropy " << expectedEntropy << endl;
 
 	return expectedEntropy;
 }
 
-double ID3::calculateGain(vector<map<double, double>> S, vector<double> l, double totalEntropy, int featureNumber){
+double ID3::calculateGain(vector<map<double, double>> * S, vector<double> * l, double totalEntropy, int featureNumber){
 
 //	double calculateEntropy(vector<map<double,double>> S, vector<double> l, int featureNumber);
 
@@ -161,16 +176,18 @@ double ID3::calculateGain(vector<map<double, double>> S, vector<double> l, doubl
 
 
 
-int ID3::bestAttributeThatClassifiesS(vector<map<double, double>> S, set<int> attributes, vector<double> l,double totalEntropy){
+int ID3::bestAttributeThatClassifiesS(vector<map<double, double>> * S, set<int> * attributes, vector<double> * l,double totalEntropy){
 
 	double maxGain = 0;
 	double maxFeat = 0;
 
 	//calculate gain for every feature.
-	for(set<int>::iterator attIter = attributes.begin(); attIter != attributes.end(); attIter++){
+	for(set<int>::iterator attIter = attributes->begin(); attIter != attributes->end(); attIter++){
 
 		double gain = calculateGain(S, l, totalEntropy, *attIter);
+		cout << "Gain: " << gain << endl;
 		if(gain > maxGain){
+			cout << "New max gain " << gain << " @ " << *attIter << endl;
 			maxGain = gain;
 			maxFeat = *attIter;
 		}
@@ -193,12 +210,12 @@ TreeNode ID3::recurse(vector<map<double, double>> S, set<int> attributes, vector
 
 	vector<map<double, double>> S_v;
 
-	double totalEntropy = calculateTotalEntropy(l);
+	double totalEntropy = calculateTotalEntropy(&l);
 
 	cout << "Total label entropy " << totalEntropy << endl;
 
 
-	int A = bestAttributeThatClassifiesS(S, attributes, l, totalEntropy);
+	int A = bestAttributeThatClassifiesS(&S, &attributes, &l, totalEntropy);
 
 	cout << A << endl;
 
