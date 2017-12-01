@@ -134,8 +134,8 @@ double ID3::calculateEntropy(vector<map<double, double>> * S, vector<double> * l
 		}
 	}
 
-	double yesTotal = yesPosCount + noNegCount;
-	cout << "yesPos count " << yesPosCount << " yes neg count " << yesNegCount << endl;
+	double yesTotal = yesPosCount + yesNegCount;
+//	cout << "yesPos count " << yesPosCount << " yes neg count " << yesNegCount << endl;
 
 	if(yesPosCount != 0 && yesNegCount != 0){
 	yesEntropy = (-1 * (yesPosCount / yesTotal) * log2(yesPosCount / yesTotal) -
@@ -154,15 +154,19 @@ double ID3::calculateEntropy(vector<map<double, double>> * S, vector<double> * l
 		noEntropy = 0;
 	}
 
-	cout << featureNumber << " Yes entropy : " << yesEntropy << endl;
-	cout << featureNumber<< " No entropy : " << noEntropy << endl;
+//	cout << " Yes entropy : " << yesEntropy << endl;
+//	cout << " No entropy : " << noEntropy << endl;
 
 	double yesCoef = yesTotal / l->size();
 	double noCoef = noTotal / l->size();
 
+
+//	cout << "Yes coef " << yesCoef << " no coef: " << noCoef <<  " l.size() " << l->size() << endl;
+
 	expectedEntropy = (yesCoef * yesEntropy) + (noCoef * noEntropy);
 
-	cout << "Expected entropy " << expectedEntropy << endl;
+//	cout <<
+//	cout << "Expected entropy " << expectedEntropy << endl;
 
 	return expectedEntropy;
 }
@@ -171,7 +175,10 @@ double ID3::calculateGain(vector<map<double, double>> * S, vector<double> * l, d
 
 //	double calculateEntropy(vector<map<double,double>> S, vector<double> l, int featureNumber);
 
-	return totalEntropy - calculateEntropy(S, l, featureNumber);
+	double expectedEntropy = calculateEntropy(S, l, featureNumber);
+	if(featureNumber == 0)
+	cout << "expected entropy " << expectedEntropy << " for feat # " << featureNumber << endl;
+	return totalEntropy - expectedEntropy;
 }
 
 
@@ -184,8 +191,12 @@ int ID3::bestAttributeThatClassifiesS(vector<map<double, double>> * S, set<int> 
 	//calculate gain for every feature.
 	for(set<int>::iterator attIter = attributes->begin(); attIter != attributes->end(); attIter++){
 
+		if(attIter == attributes->begin()){
+			attIter ++ ;
+		}
+
 		double gain = calculateGain(S, l, totalEntropy, *attIter);
-		cout << "Gain: " << gain << endl;
+//		cout << "Gain: " << gain << "\n\n" << endl;
 		if(gain > maxGain){
 			cout << "New max gain " << gain << " @ " << *attIter << endl;
 			maxGain = gain;
