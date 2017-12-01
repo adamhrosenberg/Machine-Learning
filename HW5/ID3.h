@@ -39,11 +39,11 @@ public:
 	void stream(string filepath, bool isTest);
 	void test(string filepath);
 	void run(int depth);
-	double calculateEntropy(vector<map<double,double>> S);
+	double calculateEntropy(vector<map<double,double>> S, vector<double> l, int featureNumber);
 	TreeNode recurse(vector<map<double, double>> S, set<int> attributes, vector<double> labels);
-	int bestAttributeThatClassifiesS();
-	double calculateGain(vector<map<double, double>> S, set<int> attributes, double totalEntropy);
-
+	int bestAttributeThatClassifiesS(vector<map<double, double>> S, set<int> attributes, vector<double> l, double totalEntropy);
+	double calculateGain(vector<map<double, double>> S, vector<double> l, double totalEntropy, int featureNumber);
+	double calculateTotalEntropy(vector<double> l);
 private:
 	vector<string> trainingFiles = {
 			"data/CVSplits/training00.data", "data/CVSplits/training01.data",
