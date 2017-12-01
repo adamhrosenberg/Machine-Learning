@@ -60,8 +60,8 @@ void LogisticRegression::stream(string filepath, bool isTest) {
 			} else {
 				temp = 1;
 			}
-			cout << "guess: " << temp << " label: " << label << " dot: " << dot
-					<< endl;
+//			cout << "guess: " << temp << " label: " << label << " dot: " << dot
+//					<< endl;
 
 			if (temp == label) {
 				right++;
@@ -71,8 +71,9 @@ void LogisticRegression::stream(string filepath, bool isTest) {
 		}
 	}
 	if (isTest) {
-		cout << "Accuracy " << right / (right + wrong) << endl;
-		cout << "Right: " << right << " wrong: " << wrong << endl;
+		percentageCross = right / (right + wrong);
+//		cout << "Accuracy " << right / (right + wrong) << endl;
+//		cout << "Right: " << right << " wrong: " << wrong << endl;
 	}
 }
 void LogisticRegression::shuffle() {
@@ -139,8 +140,8 @@ map<double, double> LogisticRegression::mapAdd(map<double, double> * weights,
 
 }
 void LogisticRegression::run(double rate, double tradeoff) {
-	cout << "Training with rate: " << rate << " tradeoff = " << tradeoff
-			<< endl;
+//	cout << "Training with rate: " << rate << " tradeoff = " << tradeoff
+//			<< endl;
 	shuffle();
 	t = 0;
 	for (int row = 0; row < labels.size(); row++) {
@@ -178,24 +179,115 @@ void LogisticRegression::test(string filepath) {
 	stream(filepath, true);
 }
 
+string LogisticRegression::pickTraining(int against) {
+	string against0 = "1, 2, 3, 4";
+	string against1 = "0, 2, 3, 4";
+	string against2 = "0, 1, 3, 4";
+	string against3 = "0, 1, 2, 4";
+	string against4 = "0, 1, 2, 3";
+
+	if (against == 0) {
+		return against0;
+	} else if (against == 1) {
+		return against1;
+	} else if (against == 2) {
+		return against2;
+	} else if (against == 3) {
+		return against3;
+	} else if (against == 4) {
+		return against4;
+	}
+	return "";
+}
+void LogisticRegression::crossValidate(double rate, double tradeoff) {
+
+	//train on 0, 1, 2, 3, test against 4 etc.
+	cout << "\n\nCross validating with rate = " << rate << " and tradeoff ^2 = "
+			<< tradeoff << endl;
+	string training;
+
+	for (int against = 0; against < trainingFiles.size(); against++) {
+
+
+
+		training = pickTraining(against);
+		cout << "Training on files: " << training
+				<< " and testing against file: " << trainingFiles.at(against)
+				<< endl;
+
+		for (int train = 0; train < trainingFiles.size(); train++) {
+
+			if (train != against) {
+
+				stream(trainingFiles.at(train), false); //training map consists of the entire file now with positives.
+
+			}
+
+		}
+		run(rate, tradeoff);
+		test(trainingFiles.at(against));
+		averagePercentage += percentageCross;
+		averageOfCross += percentageCross;
+		numberOfCross ++ ;
+
+		//reset
+		trainingMap.clear();
+		labels.clear();
+		weights.clear();
+		gamma_t = 0;
+
+	}
+
+//	cout << averagePercentage << " = sum. " << endl;
+	averagePercentage = averagePercentage / (trainingFiles.size());
+//	cout << "Average percentage " << averagePercentage << endl;
+}
 void LogisticRegression::go() {
-	stream(trainingFiles.at(0), false);
 
-//	for(int epoch = 0; epoch < 5; epoch++){
-		run(.01, 100);
-		test("data/speeches.test.liblinear");
-//	}
+		for (int rate = 0; rate < rates.size(); rate++) {
+				for (int sigma = 0; sigma < tradeoff.size(); sigma++) {
+					crossValidate(rates.at(rate), tradeoff.at(sigma));
+					cout << "Average percentage for 5 fold validation with a rate of "
+							<< rates.at(rate) << " and a sigma of "
+							<< tradeoff.at(sigma) << " = " << averagePercentage << endl;
 
-//	for(int rate = 0; rate < rates.size(); rate++){
-//		for(int sigma = 0; sigma < tradeoff.size(); sigma++){
-//			run(rates.at(rate), tradeoff.at(sigma));
-//			test("data/speeches.test.liblinear");
-//		}
-//	}
-//	cout << weights.size() << endl;
-//
-//	for(map<double, double>::iterator iter = weights.begin(); iter != weights.end(); iter++){
-//		cout << "First " << iter ->first << " second " << iter->second << endl;
-//	}
+					pair<double, double> p;
+					p.first = rates.at(rate);
+					p.second = tradeoff.at(sigma);
+
+					accuracyPoints.insert(make_pair(p, averagePercentage));
+					averagePercentage = 0;
+					percentageCross = 0;
+				}
+			}
+
+			double maxAccuracy = 0;
+			pair<double, double> optimizedHyperParams;
+			for (map<pair<double, double>, double>::iterator iter = accuracyPoints.begin();
+					iter != accuracyPoints.end(); iter++) {
+				if (iter->second > maxAccuracy) {
+					maxAccuracy = iter->second;
+					optimizedHyperParams.first = iter->first.first;
+					optimizedHyperParams.second = iter->first.second;
+				}
+			}
+
+			cout << "Optimized hyper params: delta = " << optimizedHyperParams.first
+					<< " and sigma = " << optimizedHyperParams.second << endl;
+
+
+			averageOfCross /= numberOfCross;
+
+			cout << "Average accuracy during cross validation:  " << averageOfCross << endl;
+			cout << "Running optimized hyper params on speeches train and test file"
+					<< endl;
+
+
+			stream("data/speeches.train.liblinear", false); //training map consists of the entire file now with positives.
+			run(optimizedHyperParams.first, optimizedHyperParams.second);
+
+			test("data/speeches.test.liblinear");
+			cout << "\n***\nAccuracy with optimal hyper params: " << percentageCross << endl;
+
 }
 
