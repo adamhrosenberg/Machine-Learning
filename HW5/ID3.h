@@ -54,6 +54,9 @@ public:
 
 	TreeNode _root;
 
+	vector<TreeNode> forest;
+//	vector<Type> *vect = new vector<Type>;
+
 	double calculateEntropy(vector<map<double,double>> * S, vector<double> * l, int featureNumber);
 private:
 	vector<string> trainingFiles = {
@@ -66,7 +69,7 @@ private:
 	bool allLabelsTrue = true;
 	set<int> featuresMentioned;
 	int possibleValuesForA = 2;
-	int maxDepth = 3;
+	int maxDepth = 4;
 	bool seeIfAllTrue(vector<double> * l);
 
 
