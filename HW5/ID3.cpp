@@ -71,20 +71,12 @@ void ID3::stream(string filepath, bool isTest) {
 				right++;
 			else
 				wrong++;
-			if (guess == 1)
-				pos++;
-			else
-				neg++;
 		}
 	}
 	if (isTest) {
 //			percentageCross = right / (right + wrong);
 //		cout << "Accuracy " << right / (right + wrong) << endl;
 		cout << "Accuracy - " << ((right)/(right+wrong)) << endl;
-		cout << "Right - " << right << endl;
-		cout << "Wrong - " << wrong << endl;
-		cout << "Pos - " << pos << endl;
-		cout << "Neg - " << neg << endl;
 		//		cout << "Right: " << right << " wrong: " << wrong << endl;
 	}
 }
@@ -108,21 +100,6 @@ double ID3::calculateTotalEntropy(vector<double> * l) {
 	totalEntropy = (-1 * posPro * log2(posPro)) - (negPro * log2(negPro));
 
 	return totalEntropy;
-}
-
-bool ID3::ML(vector<double> * l) {
-	double pos = 0, neg = 0;
-	for (unsigned i = 0; i < l->size(); i++) {
-		if (l->at(i) == 1)
-			pos++;
-		else
-			neg++;
-	}
-
-	if (pos > neg)
-		return 1;
-	else
-		return -1;
 }
 
 double ID3::calculateEntropy(vector<map<double, double>> * S,
@@ -290,8 +267,7 @@ TreeNode ID3::recurse(vector<map<double, double>> * S, set<int> * attributes,
 				}
 			}
 		}
-//		cout << "sv size: " << sv.size() << endl;
-		//if sv is empty create l or past current depth
+
 		if (sv.size() == 0 || currentDepth >= maxDepth) {
 			child.leaf = true;
 
@@ -313,11 +289,11 @@ TreeNode ID3::recurse(vector<map<double, double>> * S, set<int> * attributes,
 			}
 			child.label_value = temp;
 //			cout << "yes " << pC << " no " << nC << endl;
-			cout << "setting child with label " << child.label_value << endl;
+//			cout << "setting child with label " << child.label_value << endl;
 			root.branches.push_back(child);
 			//return new_node;
 		} else {
-			cout << "Pushing back new node " << endl;
+//			cout << "Pushing back new node " << endl;
 			root.branches.push_back(
 					recurse(&sv, attributes, &labels_sv, ++currentDepth));
 
