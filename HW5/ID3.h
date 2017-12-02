@@ -69,7 +69,6 @@ private:
 	bool allLabelsTrue = true;
 	set<int> featuresMentioned;
 	int possibleValuesForA = 2;
-	int numGroupChoices = 0;
 	int maxDepth = 3;
 	bool seeIfAllTrue(vector<double> * l);
 

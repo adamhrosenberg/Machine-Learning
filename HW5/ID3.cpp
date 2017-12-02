@@ -81,9 +81,7 @@ void ID3::stream(string filepath, bool isTest) {
 				guess = -1;
 			}
 
-			numGroupChoices++;
 
-			cout << numGroupChoices << endl;
 //
 //			cout << "My guess was " << guess << " real label is " << label
 //					<< endl;
@@ -326,7 +324,7 @@ TreeNode ID3::recurse(vector<map<double, double>> * S, set<int> * attributes,
 			}
 			child.label_value = temp;
 //			cout << "yes " << pC << " no " << nC << endl;
-			cout << "setting child with label " << child.label_value << endl;
+//			cout << "setting child with label " << child.label_value << endl;
 			root.branches.push_back(child);
 			//return new_node;
 		} else {
@@ -361,11 +359,12 @@ void ID3::bagged() {
 	/* initialize random seed: */
 	srand(time(NULL));
 
-	for (int treeNumber = 0; treeNumber < 50; treeNumber++) {
+	for (int treeNumber = 0; treeNumber < 1000; treeNumber++) {
 		vector<map<double, double>> S;
 		vector<double> l;
 		set<int> attributes = featuresMentioned;
 
+		cout << "True num " << treeNumber << endl;
 		for (int example = 0; example < 100; example++) {
 			int randomRow = rand() % trainingMap.size();
 			S.push_back(trainingMap.at(randomRow));
