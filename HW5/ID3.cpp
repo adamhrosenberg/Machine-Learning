@@ -51,12 +51,14 @@ void ID3::stream(string filepath, bool isTest) {
 			}
 			trainingMap.push_back(example);
 		} else {
-
-			for(int tree = 0; tree < forest.size(); tree++){
+			groupYesVote = 0, groupNoVote = 0;
+			for (int tree = 0; tree < forest.size(); tree++) {
 				TreeNode current = forest.at(tree);
+//				cout << forest.size() << endl;
 
 				while (current.leaf == false) {
 					int attr = current.attributeNum;
+//					cout << "Attr num" << attr << endl;
 					if (example.find(attr) == example.end()) {
 						current = current.branches[0];
 					} else {
@@ -64,23 +66,32 @@ void ID3::stream(string filepath, bool isTest) {
 					}
 				}
 
-				if (current.label_value){
+				if (current.label_value == 1) {
 					groupYesVote++;
-				}else{
+				} else if (current.label_value == 0) {
 					groupNoVote++;
 				}
 
-				double guess = 0;
-				if(groupYesVote > groupNoVote){
-					guess = 1;
-				}else{
-					guess = -1;
-				}
-				if(guess == label){
-					right++;
-				}else{
-					wrong++;
-				}
+			}
+			double guess = 0;
+			cout << "group yes / no " << groupYesVote << " " <<groupNoVote <<endl;
+			if (groupYesVote > groupNoVote) {
+				guess = 1;
+			} else {
+				guess = -1;
+			}
+
+			numGroupChoices++;
+
+			cout << numGroupChoices << endl;
+//
+//			cout << "My guess was " << guess << " real label is " << label
+//					<< endl;
+
+			if (guess == label) {
+				right++;
+			} else {
+				wrong++;
 			}
 
 		}
@@ -315,7 +326,7 @@ TreeNode ID3::recurse(vector<map<double, double>> * S, set<int> * attributes,
 			}
 			child.label_value = temp;
 //			cout << "yes " << pC << " no " << nC << endl;
-//			cout << "setting child with label " << child.label_value << endl;
+			cout << "setting child with label " << child.label_value << endl;
 			root.branches.push_back(child);
 			//return new_node;
 		} else {
@@ -342,46 +353,38 @@ void ID3::run(vector<map<double, double>> * S, vector<double> * l,
 void ID3::bagged() {
 
 	stream(trainingFiles.at(0), false); //training map consists of the entire file now with positives.
+//	stream(trainingFiles.at(1), false); //training map consists of the entire file now with positives.
+//	stream(trainingFiles.at(2), false); //training map consists of the entire file now with positives.
 
 	//now split up the data 100 ways
 
 	/* initialize random seed: */
 	srand(time(NULL));
 
-	for(int treeNumber = 0; treeNumber < 15; treeNumber++){
-		cout << "tree num " << treeNumber << endl;
-
-		vector<map<double, double>> S ;
+	for (int treeNumber = 0; treeNumber < 50; treeNumber++) {
+		vector<map<double, double>> S;
 		vector<double> l;
 		set<int> attributes = featuresMentioned;
 
-		for(int example = 0; example < 100; example++){
+		for (int example = 0; example < 100; example++) {
 			int randomRow = rand() % trainingMap.size();
 			S.push_back(trainingMap.at(randomRow));
 			l.push_back(labels.at(randomRow));
 		}
 
-
-
 		run(&S, &l, &attributes);
-
 
 		S.clear();
 		l.clear();
 
 	}
 
-	cout << "testing";
-	test(trainingFiles.at(1));
-
+	test(trainingFiles.at(3));
 
 	trainingMap.clear();
 	labels.clear();
 	featuresMentioned.clear();
 	zeroData.clear();
-
-
-
 
 	cout << "done";
 
