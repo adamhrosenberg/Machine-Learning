@@ -42,7 +42,7 @@ public:
 	void run(int depth);
 
 
-	TreeNode recurse(vector<map<double, double>> S, set<int> attributes, vector<double> labels, int currentDepth);
+	TreeNode recurse(vector<map<double, double>> * S, set<int> * attributes, vector<double> * labels, int currentDepth);
 
 	int bestAttributeThatClassifiesS(vector<map<double, double>> * S, set<int> * attributes, vector<double> * l, double totalEntropy);
 
@@ -62,7 +62,7 @@ private:
 	set<int> featuresMentioned;
 	int possibleValuesForA = 2;
 	int maxDepth = 3;
-	bool seeIfAllTrue(vector<double> l);
+	bool seeIfAllTrue(vector<double> * l);
 
 
 };

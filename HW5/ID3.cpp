@@ -17,9 +17,9 @@ ID3::~ID3() {
 }
 
 
-bool ID3::seeIfAllTrue(vector<double> l){
-	for(int i = 0; i < l.size(); i++){
-		if(l.at(i) == -1){
+bool ID3::seeIfAllTrue(vector<double> * l){
+	for(int i = 0; i < l->size(); i++){
+		if(l->at(i) == -1){
 			return false;
 		}
 	}
@@ -207,10 +207,10 @@ int ID3::bestAttributeThatClassifiesS(vector<map<double, double>> * S, set<int> 
 	return maxFeat;
 }
 
-TreeNode ID3::recurse(vector<map<double, double>> S, set<int> attributes, vector<double> l, int currentDepth){
+TreeNode ID3::recurse(vector<map<double, double>> * S, set<int> * attributes, vector<double> * l, int currentDepth){
 
 	currentDepth++;
-	cout << "S.size " << S.size() << " l.size() " << l.size()<<endl;
+	cout << "S.size " << S->size() << " l.size() " << l->size()<<endl;
 	if(seeIfAllTrue(l)){
 		TreeNode root;
 		root.leaf = true;
@@ -224,80 +224,59 @@ TreeNode ID3::recurse(vector<map<double, double>> S, set<int> attributes, vector
 
 	vector<map<double, double>> S_v;
 
-	double totalEntropy = calculateTotalEntropy(&l);
+	double totalEntropy = calculateTotalEntropy(l);
 
 	cout << "Total label entropy " << totalEntropy << endl;
 
 
-	int A = bestAttributeThatClassifiesS(&S, &attributes, &l, totalEntropy);
+	int A = bestAttributeThatClassifiesS(S, attributes, l, totalEntropy);
 
 	cout << "The best attirubte is  " << A << endl;
 
 
-	//add a true branch
-	//compute subset of attributes
-	TreeNode trueChild;
-	vector<map<double, double>> S_v_true;
-	vector<double> l_v_true;
 
-	for(int row = 0; row < S.size(); row++){
-		map<double, double>::iterator sIter;
 
-		sIter = S.at(row).find(A);
+	/**
+	 *
+	 *
+	 *
+	 *
+	 *
+	 */
 
-		if(sIter != S.at(row).end()){
-//			cout << "true pushing back row # " << row << endl;
-			map<double, double> toAdd;
-			toAdd.insert(make_pair(sIter->first, sIter->second));
-			l_v_true.push_back(labels.at(row));
-			S_v_true.push_back(toAdd);
+//	attributes->erase(max_attribute);
+	for (int i = 0; i < 2; i++) {
+		TreeNode child;
+		vector<map<double, double> > sv;
+		vector<double> labels_sv;
+		for (int j = 0; j < S->size(); j++) {
+			if (i == 0) {
+				if (S->at(j).find(A)
+						== S->at(j).end()) {
+					sv.push_back(S->at(j));
+					labels_sv.push_back(l->at(j));
+				}
+			} else {
+				if (S->at(j).find(A)
+						!= S->at(j).end()) {
+					sv.push_back(S->at(j));
+					labels_sv.push_back(l->at(j));
+				}
+			}
 		}
-	}
+//		cout << "sv size: " << sv.size() << endl;
+		//if sv is empty create l or past current depth
+		if (sv.size() == 0 || currentDepth >= 3) {
+			child.leaf = true;
+//			double maj_lab = majority_label(&labels_sv);
+			child.attributeNum = A;
+			root.branches.push_back(child);
+			//return new_node;
+		} else {
+			root.branches.push_back(recurse(&sv, attributes, &labels_sv,
+					++currentDepth));
 
-	if(currentDepth >= maxDepth){
-		cout << "STOP true" <<endl;
-		trueChild.leaf = true;
-//		currentDepth ++;
-		trueChild.attributeNum = A;
-		root.branches.push_back(trueChild);
-
-	}else{
-//		cout << "pushing back true " <<endl;
-		root.branches.push_back(recurse(S_v_true, attributes, l_v_true, currentDepth));
-	}
-
-
-
-
-
-
-	//add a false branch
-	TreeNode falseChild;
-	vector<map<double,double>> S_v_false;
-	vector<double> l_v_false;
-	for(int row = 0; row < S.size(); row++){
-		map<double, double>::iterator sIter;
-
-		sIter = S.at(row).find(A);
-
-		if(sIter == S.at(row).end()){
-//			cout << "false pushing back row # " << row << endl;
-			map<double, double> toAdd;
-			toAdd.insert(make_pair(sIter->first, sIter->second));
-			l_v_false.push_back(labels.at(row));
-			S_v_false.push_back(toAdd);
 		}
-	}
-
-	if(currentDepth >= maxDepth){
-		cout << "STOP false" <<endl;
-		falseChild.leaf = true;
-		falseChild.attributeNum = A;
-//		currentDepth ++;
-		root.branches.push_back(falseChild);
-	}else{
-//		cout << "pushing back false " <<endl;
-		root.branches.push_back(recurse(S_v_false, attributes, l_v_false, currentDepth));
 	}
 
 
@@ -312,7 +291,7 @@ void ID3::run(int depth) {
 	vector<double> l = labels;
 	set<int> attributes = featuresMentioned;
 
-	TreeNode root =	recurse(S, attributes, l, 0);
+	TreeNode root =	recurse(&S, &attributes, &l, 0);
 
 
 }
