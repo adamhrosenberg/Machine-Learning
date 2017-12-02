@@ -47,7 +47,6 @@ void ID3::stream(string filepath, bool isTest) {
 			if (label != 1 && allLabelsTrue) {
 				allLabelsTrue = false;
 			}
-//				weights[key] = 0;
 			trainingMap.push_back(example);
 		} else {
 			TreeNode current = _root;
@@ -62,9 +61,9 @@ void ID3::stream(string filepath, bool isTest) {
 			}
 
 			double guess;
-			if(current.label_value){
+			if (current.label_value) {
 				guess = 1;
-			}else{
+			} else {
 				guess = -1;
 			}
 			if (guess == label)
@@ -76,7 +75,7 @@ void ID3::stream(string filepath, bool isTest) {
 	if (isTest) {
 //			percentageCross = right / (right + wrong);
 //		cout << "Accuracy " << right / (right + wrong) << endl;
-		cout << "Accuracy - " << ((right)/(right+wrong)) << endl;
+		cout << "Accuracy - " << ((right) / (right + wrong)) << endl;
 		//		cout << "Right: " << right << " wrong: " << wrong << endl;
 	}
 }
@@ -179,6 +178,9 @@ double ID3::calculateGain(vector<map<double, double>> * S, vector<double> * l,
 
 //	double calculateEntropy(vector<map<double,double>> S, vector<double> l, int featureNumber);
 
+//	if (zeroData.find(featureNumber) == zeroData.end()) {
+//		return totalEntropy;
+//	}
 	double expectedEntropy = calculateEntropy(S, l, featureNumber);
 //	if(featureNumber == 0)
 //	cout << "expected entropy " << expectedEntropy << " for feat # " << featureNumber << endl;
@@ -191,21 +193,35 @@ int ID3::bestAttributeThatClassifiesS(vector<map<double, double>> * S,
 	double maxGain = 0;
 	double maxFeat = 0;
 
+	int count = 0;
+
 	//calculate gain for every feature.
 	for (set<int>::iterator attIter = attributes->begin();
 			attIter != attributes->end(); attIter++) {
+
 
 		if (attIter == attributes->begin()) {
 			attIter++;
 		}
 
+
 		double gain = calculateGain(S, l, totalEntropy, *attIter);
-//		cout << "Gain: " << gain << "\n\n" << endl;
+
+//		if (gain == 0) {
+//			zeroData.insert(maxFeat);
+//		}
+
 		if (gain > maxGain) {
 //			cout << "New max gain " << gain << " @ " << *attIter << endl;
 			maxGain = gain;
 			maxFeat = *attIter;
 		}
+
+		if(count >= 300){
+			return maxFeat;
+		}
+
+		count ++;
 	}
 	return maxFeat;
 }
@@ -234,7 +250,7 @@ TreeNode ID3::recurse(vector<map<double, double>> * S, set<int> * attributes,
 
 	int A = bestAttributeThatClassifiesS(S, attributes, l, totalEntropy);
 
-	cout << "The best attirubte is  " << A << endl;
+//	cout << "The best attirubte is  " << A << endl;
 
 	/**
 	 *
@@ -245,7 +261,6 @@ TreeNode ID3::recurse(vector<map<double, double>> * S, set<int> * attributes,
 	 */
 
 //	attributes->erase(A);
-
 	root.attributeNum = A;
 	root.leaf = false;
 
@@ -273,18 +288,18 @@ TreeNode ID3::recurse(vector<map<double, double>> * S, set<int> * attributes,
 
 			int pC = 0;
 			int nC = 0;
-			for(int z = 0; z < labels_sv.size(); z++){
+			for (int z = 0; z < labels_sv.size(); z++) {
 //				cout << "l : " << labels_sv.at(z) << endl;
-				if(labels_sv.at(z) == 1){
-					pC ++;
-				}else{
-					nC ++;
+				if (labels_sv.at(z) == 1) {
+					pC++;
+				} else {
+					nC++;
 				}
 			}
-			bool temp ;
-			if(nC > pC){
+			bool temp;
+			if (nC > pC) {
 				temp = false;
-			}else{
+			} else {
 				temp = true;
 			}
 			child.label_value = temp;
@@ -325,15 +340,27 @@ void ID3::run(int depth) {
 }
 
 void ID3::go() {
+//	stream("data/speeches.train.liblinear", false); //training map consists of the entire file now with positives.
+
+	for (int i = 0; i < 100; i++) {
+
 	stream(trainingFiles.at(0), false); //training map consists of the entire file now with positives.
-	stream(trainingFiles.at(1), false); //training map consists of the entire file now with positives.
-	stream(trainingFiles.at(2), false); //training map consists of the entire file now with positives.
-	stream(trainingFiles.at(3), false); //training map consists of the entire file now with positives.
+//	stream(trainingFiles.at(1), false); //training map consists of the entire file now with positives.
+//	stream(trainingFiles.at(2), false); //training map consists of the entire file now with positives.
+//	stream(trainingFiles.at(3), false); //training map consists of the entire file now with positives.
 
 	run(3);
 
 	test(trainingFiles.at(4));
 
-	cout << "done" << endl;
+	trainingMap.clear();
+	labels.clear();
+	featuresMentioned.clear();
+	zeroData.clear();
+//		cout << i << endl;
+//	test("data/speeches.test.liblinear");
 
+	}
+
+	cout << "done" << endl;
 }

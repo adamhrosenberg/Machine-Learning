@@ -59,11 +59,12 @@ private:
 			"data/CVSplits/training02.data", "data/CVSplits/training03.data",
 			"data/CVSplits/training04.data" };
 	vector<map<double, double>> trainingMap;
+	set<double> zeroData;
 	vector<double> labels;
 	bool allLabelsTrue = true;
 	set<int> featuresMentioned;
 	int possibleValuesForA = 2;
-	int maxDepth = 4;
+	int maxDepth = 3;
 	bool seeIfAllTrue(vector<double> * l);
 	TreeNode _root;
 
