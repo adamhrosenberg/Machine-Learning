@@ -41,7 +41,7 @@ public:
 	void test(string filepath);
 	void run(int depth);
 
-	double ML(vector<double> * l);
+	bool ML(vector<double> * l);
 
 
 	TreeNode recurse(vector<map<double, double>> * S, set<int> * attributes, vector<double> * labels, int currentDepth);
@@ -51,6 +51,8 @@ public:
 	double calculateGain(vector<map<double, double>> * S, vector<double> * l, double totalEntropy, int featureNumber);
 
 	double calculateTotalEntropy(vector<double> * l);
+
+
 
 	double calculateEntropy(vector<map<double,double>> * S, vector<double> * l, int featureNumber);
 private:

@@ -50,11 +50,8 @@ void ID3::stream(string filepath, bool isTest) {
 //				weights[key] = 0;
 			trainingMap.push_back(example);
 		} else {
-//				double dot = dotP(example, weights);
-
-
-
 			TreeNode current = _root;
+
 			while (current.leaf == false) {
 				int attr = current.attributeNum;
 				if (example.find(attr) == example.end()) {
@@ -63,6 +60,7 @@ void ID3::stream(string filepath, bool isTest) {
 					current = current.branches[1];
 				}
 			}
+
 			double guess;
 			if(current.label_value){
 				guess = 1;
@@ -112,7 +110,7 @@ double ID3::calculateTotalEntropy(vector<double> * l) {
 	return totalEntropy;
 }
 
-double ID3::ML(vector<double> * l) {
+bool ID3::ML(vector<double> * l) {
 	double pos = 0, neg = 0;
 	for (unsigned i = 0; i < l->size(); i++) {
 		if (l->at(i) == 1)
@@ -120,7 +118,8 @@ double ID3::ML(vector<double> * l) {
 		else
 			neg++;
 	}
-	if (pos >= neg)
+
+	if (pos > neg)
 		return 1;
 	else
 		return -1;
@@ -226,7 +225,7 @@ int ID3::bestAttributeThatClassifiesS(vector<map<double, double>> * S,
 		double gain = calculateGain(S, l, totalEntropy, *attIter);
 //		cout << "Gain: " << gain << "\n\n" << endl;
 		if (gain > maxGain) {
-			cout << "New max gain " << gain << " @ " << *attIter << endl;
+//			cout << "New max gain " << gain << " @ " << *attIter << endl;
 			maxGain = gain;
 			maxFeat = *attIter;
 		}
@@ -238,7 +237,7 @@ TreeNode ID3::recurse(vector<map<double, double>> * S, set<int> * attributes,
 		vector<double> * l, int currentDepth) {
 
 	currentDepth++;
-	cout << "S.size " << S->size() << " l.size() " << l->size() << endl;
+//	cout << "S.size " << S->size() << " l.size() " << l->size() << endl;
 	if (seeIfAllTrue(l)) {
 		TreeNode root;
 		root.leaf = true;
@@ -254,7 +253,7 @@ TreeNode ID3::recurse(vector<map<double, double>> * S, set<int> * attributes,
 
 	double totalEntropy = calculateTotalEntropy(l);
 
-	cout << "Total label entropy " << totalEntropy << endl;
+//	cout << "Total label entropy " << totalEntropy << endl;
 
 	int A = bestAttributeThatClassifiesS(S, attributes, l, totalEntropy);
 
@@ -268,7 +267,10 @@ TreeNode ID3::recurse(vector<map<double, double>> * S, set<int> * attributes,
 	 *
 	 */
 
-	attributes->erase(A);
+//	attributes->erase(A);
+
+	root.attributeNum = A;
+	root.leaf = false;
 
 	for (int i = 0; i < 2; i++) {
 		TreeNode child;
@@ -290,14 +292,32 @@ TreeNode ID3::recurse(vector<map<double, double>> * S, set<int> * attributes,
 		}
 //		cout << "sv size: " << sv.size() << endl;
 		//if sv is empty create l or past current depth
-		if (sv.size() == 0 || currentDepth >= 3) {
+		if (sv.size() == 0 || currentDepth >= maxDepth) {
 			child.leaf = true;
-//			double maj_lab = majority_label(&labels_sv);
-			double ml = ML(&labels_sv);
-			child.label_value = ml;
+
+			int pC = 0;
+			int nC = 0;
+			for(int z = 0; z < labels_sv.size(); z++){
+//				cout << "l : " << labels_sv.at(z) << endl;
+				if(labels_sv.at(z) == 1){
+					pC ++;
+				}else{
+					nC ++;
+				}
+			}
+			bool temp ;
+			if(nC > pC){
+				temp = false;
+			}else{
+				temp = true;
+			}
+			child.label_value = temp;
+//			cout << "yes " << pC << " no " << nC << endl;
+			cout << "setting child with label " << child.label_value << endl;
 			root.branches.push_back(child);
 			//return new_node;
 		} else {
+			cout << "Pushing back new node " << endl;
 			root.branches.push_back(
 					recurse(&sv, attributes, &labels_sv, ++currentDepth));
 
@@ -330,9 +350,13 @@ void ID3::run(int depth) {
 
 void ID3::go() {
 	stream(trainingFiles.at(0), false); //training map consists of the entire file now with positives.
+	stream(trainingFiles.at(1), false); //training map consists of the entire file now with positives.
+	stream(trainingFiles.at(2), false); //training map consists of the entire file now with positives.
+	stream(trainingFiles.at(3), false); //training map consists of the entire file now with positives.
+
 	run(3);
 
-	test(trainingFiles.at(0));
+	test(trainingFiles.at(4));
 
 	cout << "done" << endl;
 
