@@ -41,6 +41,8 @@ public:
 	void test(string filepath);
 	void run(int depth);
 
+	double ML(vector<double> * l);
+
 
 	TreeNode recurse(vector<map<double, double>> * S, set<int> * attributes, vector<double> * labels, int currentDepth);
 
@@ -63,6 +65,7 @@ private:
 	int possibleValuesForA = 2;
 	int maxDepth = 3;
 	bool seeIfAllTrue(vector<double> * l);
+	TreeNode _root;
 
 
 };
