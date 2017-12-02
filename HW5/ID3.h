@@ -31,6 +31,7 @@ public:
 	bool label_value;
 } TreeNode;
 
+
 class ID3 {
 public:
 	ID3();
@@ -41,7 +42,7 @@ public:
 	void run(int depth);
 
 
-	TreeNode recurse(vector<map<double, double>> S, set<int> attributes, vector<double> labels);
+	TreeNode recurse(vector<map<double, double>> S, set<int> attributes, vector<double> labels, int currentDepth);
 
 	int bestAttributeThatClassifiesS(vector<map<double, double>> * S, set<int> * attributes, vector<double> * l, double totalEntropy);
 
@@ -60,6 +61,7 @@ private:
 	bool allLabelsTrue = true;
 	set<int> featuresMentioned;
 	int possibleValuesForA = 2;
+	int maxDepth = 3;
 	bool seeIfAllTrue(vector<double> l);
 
 

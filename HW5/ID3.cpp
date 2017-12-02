@@ -78,7 +78,7 @@ void ID3::test(string filepath) {
 }
 
 double ID3::calculateTotalEntropy(vector<double> * l){
-	cout << "calculating total entropy " << endl;
+//	cout << "calculating total entropy " << endl;
 	double totalEntropy = 0;
 	double posCount = 0;
 
@@ -173,11 +173,12 @@ double ID3::calculateEntropy(vector<map<double, double>> * S, vector<double> * l
 
 double ID3::calculateGain(vector<map<double, double>> * S, vector<double> * l, double totalEntropy, int featureNumber){
 
+
 //	double calculateEntropy(vector<map<double,double>> S, vector<double> l, int featureNumber);
 
 	double expectedEntropy = calculateEntropy(S, l, featureNumber);
-	if(featureNumber == 0)
-	cout << "expected entropy " << expectedEntropy << " for feat # " << featureNumber << endl;
+//	if(featureNumber == 0)
+//	cout << "expected entropy " << expectedEntropy << " for feat # " << featureNumber << endl;
 	return totalEntropy - expectedEntropy;
 }
 
@@ -206,8 +207,10 @@ int ID3::bestAttributeThatClassifiesS(vector<map<double, double>> * S, set<int> 
 	return maxFeat;
 }
 
-TreeNode ID3::recurse(vector<map<double, double>> S, set<int> attributes, vector<double> l){
+TreeNode ID3::recurse(vector<map<double, double>> S, set<int> attributes, vector<double> l, int currentDepth){
 
+	currentDepth++;
+	cout << "S.size " << S.size() << " l.size() " << l.size()<<endl;
 	if(seeIfAllTrue(l)){
 		TreeNode root;
 		root.leaf = true;
@@ -215,7 +218,7 @@ TreeNode ID3::recurse(vector<map<double, double>> S, set<int> attributes, vector
 		return root;
 	}
 
-	cout << "Not all labels are true"<<endl;
+//	cout << "Not all labels are true"<<endl;
 
 	TreeNode root;
 
@@ -228,11 +231,75 @@ TreeNode ID3::recurse(vector<map<double, double>> S, set<int> attributes, vector
 
 	int A = bestAttributeThatClassifiesS(&S, &attributes, &l, totalEntropy);
 
-	cout << A << endl;
+	cout << "The best attirubte is  " << A << endl;
 
-	for(int v = 0; v < possibleValuesForA; v++){
 
+	//add a true branch
+	//compute subset of attributes
+	TreeNode trueChild;
+	vector<map<double, double>> S_v_true;
+	vector<double> l_v_true;
+
+	for(int row = 0; row < S.size(); row++){
+		map<double, double>::iterator sIter;
+
+		sIter = S.at(row).find(A);
+
+		if(sIter != S.at(row).end()){
+//			cout << "true pushing back row # " << row << endl;
+			map<double, double> toAdd;
+			toAdd.insert(make_pair(sIter->first, sIter->second));
+			l_v_true.push_back(labels.at(row));
+			S_v_true.push_back(toAdd);
+		}
 	}
+
+	if(currentDepth >= maxDepth){
+		cout << "STOP true" <<endl;
+		trueChild.leaf = true;
+//		currentDepth ++;
+		trueChild.attributeNum = A;
+		root.branches.push_back(trueChild);
+
+	}else{
+//		cout << "pushing back true " <<endl;
+		root.branches.push_back(recurse(S_v_true, attributes, l_v_true, currentDepth));
+	}
+
+
+
+
+
+
+	//add a false branch
+	TreeNode falseChild;
+	vector<map<double,double>> S_v_false;
+	vector<double> l_v_false;
+	for(int row = 0; row < S.size(); row++){
+		map<double, double>::iterator sIter;
+
+		sIter = S.at(row).find(A);
+
+		if(sIter == S.at(row).end()){
+//			cout << "false pushing back row # " << row << endl;
+			map<double, double> toAdd;
+			toAdd.insert(make_pair(sIter->first, sIter->second));
+			l_v_false.push_back(labels.at(row));
+			S_v_false.push_back(toAdd);
+		}
+	}
+
+	if(currentDepth >= maxDepth){
+		cout << "STOP false" <<endl;
+		falseChild.leaf = true;
+		falseChild.attributeNum = A;
+//		currentDepth ++;
+		root.branches.push_back(falseChild);
+	}else{
+//		cout << "pushing back false " <<endl;
+		root.branches.push_back(recurse(S_v_false, attributes, l_v_false, currentDepth));
+	}
+
 
 	return root;
 
@@ -245,7 +312,7 @@ void ID3::run(int depth) {
 	vector<double> l = labels;
 	set<int> attributes = featuresMentioned;
 
-	recurse(S, attributes, l);
+	TreeNode root =	recurse(S, attributes, l, 0);
 
 
 }
@@ -253,8 +320,9 @@ void ID3::run(int depth) {
 void ID3::go() {
 	stream(trainingFiles.at(0), false); //training map consists of the entire file now with positives.
 	run(3);
+
 //	test(trainingFiles.at(against));
 
-	cout << "done";
+	cout << "done" << endl;
 
 }
