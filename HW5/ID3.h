@@ -39,8 +39,10 @@ public:
 	void go();
 	void stream(string filepath, bool isTest);
 	void test(string filepath);
-	void run(int depth);
+	void run(vector<map<double, double>> * S, vector<double> * l, set<int> * attributes);
 
+
+	void bagged();
 
 	TreeNode recurse(vector<map<double, double>> * S, set<int> * attributes, vector<double> * labels, int currentDepth);
 
@@ -50,7 +52,7 @@ public:
 
 	double calculateTotalEntropy(vector<double> * l);
 
-
+	TreeNode _root;
 
 	double calculateEntropy(vector<map<double,double>> * S, vector<double> * l, int featureNumber);
 private:
@@ -66,7 +68,7 @@ private:
 	int possibleValuesForA = 2;
 	int maxDepth = 3;
 	bool seeIfAllTrue(vector<double> * l);
-	TreeNode _root;
+
 
 
 };

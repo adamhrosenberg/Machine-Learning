@@ -323,19 +323,45 @@ void ID3::test(string filepath) {
 	stream(filepath, true);
 }
 
-void ID3::run(int depth) {
 
-	vector<map<double, double>> S = trainingMap;
-	vector<double> l = labels;
-	set<int> attributes = featuresMentioned;
+void ID3::run(vector<map<double, double>> * S, vector<double> * l, set<int> * attributes){
 
-	_root = recurse(&S, &attributes, &l, 0);
+//	vector<map<double, double>> _S = S;
+//	vector<double> _l = l;
+//	set<int> _attributes = attributes;
+
+	_root = recurse(S, attributes, l, 0);
 
 //	cout <<"0 child " <<endl;
 //	cout << root.branches.at(0).branches.at(1).label_value << endl;
 
 //	cout <<"1 child " <<endl;
 //	cout << root.branches.at(1).attributeNum << endl;
+
+}
+
+void ID3::bagged(){
+
+	stream(trainingFiles.at(0), false); //training map consists of the entire file now with positives.
+
+
+	//now split up the data 1000 ways
+	vector<map<double, double>> S = trainingMap;
+	vector<double> l = labels;
+	set<int> attributes = featuresMentioned;
+
+	run(&S, &l, &attributes);
+
+
+
+
+
+	test(trainingFiles.at(1));
+
+	trainingMap.clear();
+	labels.clear();
+	featuresMentioned.clear();
+	zeroData.clear();
 
 }
 
@@ -349,9 +375,9 @@ void ID3::go() {
 //	stream(trainingFiles.at(2), false); //training map consists of the entire file now with positives.
 //	stream(trainingFiles.at(3), false); //training map consists of the entire file now with positives.
 
-	run(3);
+//	run(3);
 
-	test(trainingFiles.at(4));
+	test(trainingFiles.at(1));
 
 	trainingMap.clear();
 	labels.clear();
@@ -362,5 +388,5 @@ void ID3::go() {
 
 	}
 
-	cout << "done" << endl;
+
 }
