@@ -66,15 +66,26 @@ void ID3::stream(string filepath, bool isTest) {
 					}
 				}
 
+
+
 				if (current.label_value == 1) {
+					//TODO added a bagged boolean so you dont always do this.
+					map<double, double> toAddToSVM;
+					toAddToSVM.insert(make_pair(current.attributeNum, 1));
+					mapSVM.push_back(toAddToSVM);
+					labelsSVM.push_back(label);
 					groupYesVote++;
 				} else if (current.label_value == 0) {
 					groupNoVote++;
 				}
 
+
+
+				numpre ++;
+
 			}
 			double guess = 0;
-			cout << "group yes / no " << groupYesVote << " " <<groupNoVote <<endl;
+//			cout << "group yes / no " << groupYesVote << " " <<groupNoVote <<endl;
 			if (groupYesVote > groupNoVote) {
 				guess = 1;
 			} else {
@@ -91,12 +102,15 @@ void ID3::stream(string filepath, bool isTest) {
 			} else {
 				wrong++;
 			}
-
+			//num predictions should be the # of trees.
+//			cout << "numpre " << numpre << endl;
+//			numpre = 0;
 		}
 	}
 	if (isTest) {
+
 //			percentageCross = right / (right + wrong);
-		cout << "Accuracy " << right / (right + wrong) << endl;
+//		cout << "Accuracy " << right / (right + wrong) << endl;
 //		cout << "Group decision, yes: " << groupYesVote << " and the no " << groupNoVote << endl;
 		//		cout << "Right: " << right << " wrong: " << wrong << endl;
 	}
@@ -237,7 +251,7 @@ int ID3::bestAttributeThatClassifiesS(vector<map<double, double>> * S,
 			maxFeat = *attIter;
 		}
 
-		if (count >= 300) {
+		if (count >= 325) {
 			return maxFeat;
 		}
 
@@ -340,7 +354,15 @@ TreeNode ID3::recurse(vector<map<double, double>> * S, set<int> * attributes,
 }
 
 void ID3::test(string filepath) {
+
 	stream(filepath, true);
+
+	//just finished bag forests.
+	//now running SVM over bagged
+	cout << "***\n***\nBeginning SVM over bagged forest" << endl;
+
+
+
 }
 
 void ID3::run(vector<map<double, double>> * S, vector<double> * l,
@@ -359,14 +381,15 @@ void ID3::bagged() {
 	/* initialize random seed: */
 	srand(time(NULL));
 
-	for (int treeNumber = 0; treeNumber < 1000; treeNumber++) {
+	for (int treeNumber = 0; treeNumber < 40; treeNumber++) {
 		vector<map<double, double>> S;
 		vector<double> l;
 		set<int> attributes = featuresMentioned;
 
-		cout << "True num " << treeNumber << endl;
+//		cout << "Tree num " << treeNumber << endl;
 		for (int example = 0; example < 100; example++) {
 			int randomRow = rand() % trainingMap.size();
+//			cout << "random row " << randomRow << endl;
 			S.push_back(trainingMap.at(randomRow));
 			l.push_back(labels.at(randomRow));
 		}
@@ -380,10 +403,18 @@ void ID3::bagged() {
 
 	test(trainingFiles.at(3));
 
+	//if running SVM over bagged.
+	BaggedSVM svm;
+	svm.trainingMap = mapSVM;
+	svm.labels = labelsSVM;
+
 	trainingMap.clear();
 	labels.clear();
 	featuresMentioned.clear();
 	zeroData.clear();
+
+
+	svm.go();
 
 	cout << "done";
 
@@ -392,7 +423,8 @@ void ID3::bagged() {
 void ID3::go() {
 //	stream("data/speeches.train.liblinear", false); //training map consists of the entire file now with positives.
 
-	for (int i = 0; i < 100; i++) {
+//	for (int i = 0; i < 100; i++) {
+
 
 		stream(trainingFiles.at(0), false); //training map consists of the entire file now with positives.
 //	stream(trainingFiles.at(1), false); //training map consists of the entire file now with positives.
@@ -410,6 +442,6 @@ void ID3::go() {
 //		cout << i << endl;
 //	test("data/speeches.test.liblinear");
 
-	}
+//	}
 
 }

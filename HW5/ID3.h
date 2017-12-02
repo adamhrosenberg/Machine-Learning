@@ -16,6 +16,7 @@
 #include <sstream>
 #include <map>
 #include <set>
+#include "BaggedSVM.h"
 
 #ifndef ID3_H_
 #define ID3_H_
@@ -67,6 +68,11 @@ private:
 	set<double> zeroData;
 	vector<double> labels;
 	bool allLabelsTrue = true;
+	int numpre =0;
+
+	vector<map<double, double>> mapSVM;
+	vector<double> labelsSVM;
+
 	set<int> featuresMentioned;
 	int possibleValuesForA = 2;
 	int maxDepth = 3;
