@@ -34,7 +34,7 @@ double BaggedSVM::dotP(map<double, double> row, map<double, double> weights) {
 void BaggedSVM::shuffle() {
 	for (int line = labels.size() - 1; line > 0; line--) {
 //		srand(time(NULL));
-		srand(31);
+		srand(50);
 
 		int rnd = rand() % (line + 1);
 
@@ -60,15 +60,15 @@ void BaggedSVM::scale(double scalar, map<double, double> * vector) {
 }
 
 void BaggedSVM::run(double rate, double tradeoff) {
-	shuffle();
+
 	for (int row = 0; row < labels.size(); row++) {
 //		cout << "row " << row << endl;
 
 		double result = dotP(trainingMap.at(row), weights);
 
 		if (labels.at(row) * result <= 1) {
-//			cout << "LESS"<<endl;
-			gamma_t = rate / (1 + (rate * row / tradeoff));
+//			gamma_t = rate / (1 + (rate * row / tradeoff));
+			gamma_t = rate/ (1 + tradeoff);
 			//first term
 
 			scale(1 - gamma_t, &weights);
@@ -84,10 +84,7 @@ void BaggedSVM::run(double rate, double tradeoff) {
 				double index = witer->first;
 				auto search = trainingMap.at(row).find(index);
 				if (search != trainingMap.at(row).end()) {
-//					witer->second += trainingMap.at(row).find(index)->second;
 					witer->second += search->second;
-				} else {
-//					count++;
 				}
 				witer++;
 			}
@@ -105,7 +102,6 @@ void BaggedSVM::stream(string filepath, bool isTest) {
 	for (string line; getline(pipein, line);) {
 		map<double, double> example;
 		double label = ((line.at(0) == '-') ? -1 : 1);
-//		labels.push_back(label);
 		line = line.substr(2); //2 was og 1
 		std::string token;
 		std::istringstream tokenStream(line);
@@ -126,9 +122,6 @@ void BaggedSVM::stream(string filepath, bool isTest) {
 			} else {
 				temp = 1;
 			}
-//			cout << "guess: " << temp << " label: " << label << " dot: " << dot
-//					<< endl;
-
 			if (temp == label) {
 				right++;
 			} else {
@@ -139,38 +132,35 @@ void BaggedSVM::stream(string filepath, bool isTest) {
 	if (isTest) {
 
 		percentageCross = right / (right + wrong);
-//		cout << "\tAccuracy " << percentageCross << endl;
-//		cout << "Right: " << right << " wrong: " << wrong << endl;
 	}
 }
 
 void BaggedSVM::test(string filepath) {
 //	stream(filepath, true);
 	double right = 0, wrong = 0;
-	for(int row = 0 ; row < trainingMap.size(); row++){
+	for (int row = 0; row < trainingMap.size(); row++) {
 		map<double, double> example = trainingMap.at(row);
 		double label = labels.at(row);
 		double dot = dotP(example, weights);
-//		cout << weights.size() << " " << example.size() << endl;
+
 		double temp = 0;
 		if (dot < 0) {
 			temp = -1;
 		} else {
 			temp = 1;
 		}
-//			cout << "guess: " << temp << " label: " << label << " dot: " << dot
-//					<< endl;
 
 		if (temp == label) {
 			right++;
 		} else {
 			wrong++;
 		}
+//					cout << "guess: " << temp << " label: " << label << " dot: " << dot
+//							<< endl;
 	}
 
-	count ++;
+	count++;
 	percentageCross = right / (right + wrong);
-//		cout << "\tAccuracy " << percentageCross << endl;
 
 }
 
@@ -196,44 +186,14 @@ string BaggedSVM::pickTraining(int against) {
 }
 void BaggedSVM::crossValidate(double rate, double tradeoff) {
 	//train on 0, 1, 2, 3, test against 4 etc.
-	cout << "Cross validating with gamme = " << rate << " and C = "
-			<< tradeoff << endl;
-	string training;
+	cout << "Cross validating with gamme = " << rate << " and C = " << tradeoff
+			<< endl;
 
-//	for (int against = 0; against < trainingFiles.size(); against++) {
-//
-//
-//
-//		training = pickTraining(against);
-//		cout << "Training on files: " << training
-//				<< " and testing against file: " << trainingFiles.at(against)
-//				<< endl;
-//
-//		for (int train = 0; train < trainingFiles.size(); train++) {
-//
-//			if (train != against) {
-//
-////				stream(trainingFiles.at(train), false); //training map consists of the entire file now with positives.
-////				cout << trainingMap.size() << endl;
-//
-//			}
-//
-//		}
-		run(rate, tradeoff);
-		test(trainingFiles.at(1)); //doesnt matter what i pass it. test is soelf contained
-		averagePercentage += percentageCross;
-		averageOfCross += percentageCross;
-		numberOfCross ++ ;
-
-		//reset
-//		trainingMap.clear();
-//		labels.clear();
-//		weights.clear();
-//		gamma_t = 0;
-
-//	cout << averagePercentage << " = sum. " << endl;
-//	averagePercentage = averagePercentage;
-//	cout << "Average percentage " << averagePercentage << endl;
+	run(rate, tradeoff);
+	test(trainingFiles.at(1)); //doesnt matter what i pass it. test is soelf contained
+	averagePercentage += percentageCross;
+	averageOfCross += percentageCross;
+	numberOfCross++;
 }
 void BaggedSVM::go() {
 
@@ -242,14 +202,13 @@ void BaggedSVM::go() {
 	for (int rate = 0; rate < rates.size(); rate++) {
 		for (int sigma = 0; sigma < tradeoff.size(); sigma++) {
 			crossValidate(rates.at(rate), tradeoff.at(sigma));
-//			cout << "Average percentage for 5 fold validation with a rate of "
-//					<< rates.at(rate) << " and a sigma of "
-//					<< tradeoff.at(sigma) << " = " << averagePercentage << endl;
 
 			pair<double, double> p;
 			p.first = rates.at(rate);
 			p.second = tradeoff.at(sigma);
-
+//			cout << "Average percentage for 5 fold validation with a rate of "
+//								<< rates.at(rate) << " and a sigma of "
+//								<< tradeoff.at(sigma) << " = " << averagePercentage << endl;
 			accuracyPoints.insert(make_pair(p, averagePercentage));
 			averagePercentage = 0;
 			percentageCross = 0;
@@ -258,8 +217,8 @@ void BaggedSVM::go() {
 
 	double maxAccuracy = 0;
 	pair<double, double> optimizedHyperParams;
-	for (map<pair<double, double>, double>::iterator iter = accuracyPoints.begin();
-			iter != accuracyPoints.end(); iter++) {
+	for (map<pair<double, double>, double>::iterator iter =
+			accuracyPoints.begin(); iter != accuracyPoints.end(); iter++) {
 		if (iter->second > maxAccuracy) {
 			maxAccuracy = iter->second;
 			optimizedHyperParams.first = iter->first.first;
@@ -270,19 +229,18 @@ void BaggedSVM::go() {
 	cout << "Optimized hyper params: gamme = " << optimizedHyperParams.first
 			<< " and C = " << optimizedHyperParams.second << endl;
 
+	averageOfCross /= numberOfCross;
 
-	averageOfCross /= count;
-
-//	cout << "Average accuracy during cross validation:  " << averageOfCross << endl;
-//	cout << "Running optimized hyper params on speeches train and test file"
-//			<< endl;
-
+	cout << "Average accuracy during cross validation:  " << averageOfCross
+			<< endl;
+	cout << "Running optimized hyper params on speeches train and test file"
+			<< endl;
 
 	stream("data/speeches.train.liblinear", false); //training map consists of the entire file now with positives.
 	run(optimizedHyperParams.first, optimizedHyperParams.second);
 
 	test("data/speeches.test.liblinear");
-	cout << "\n***\nAccuracy with optimal hyper params: " << percentageCross << endl;
-
+	cout << "\n***\nAccuracy with optimal hyper params: " << percentageCross
+			<< endl;
 
 }
