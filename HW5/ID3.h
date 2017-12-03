@@ -17,6 +17,7 @@
 #include <map>
 #include <set>
 #include "BaggedSVM.h"
+#include "BaggedLogistic.h"
 #include "Files.h"
 
 #ifndef ID3_H_
@@ -77,6 +78,10 @@ private:
 	vector<map<double, double>> mapSVM;
 	vector<double> labelsSVM;
 	map<double, double> weightsSVM;
+
+	vector<map<double, double>> mapLog;
+	vector<double> labelsLog;
+	map<double, double> weightsLog;
 
 	set<int> featuresMentioned;
 	int possibleValuesForA = 2;

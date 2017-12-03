@@ -30,7 +30,6 @@ int main(){
 
 
 //	for(int i = 0; i < 100; i++){
-	//this runs bagged and svm over bagged
 	id.bagged(false);
 
 //	ID3 idSVM;

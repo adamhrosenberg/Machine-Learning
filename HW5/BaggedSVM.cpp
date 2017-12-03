@@ -186,7 +186,7 @@ string BaggedSVM::pickTraining(int against) {
 }
 void BaggedSVM::crossValidate(double rate, double tradeoff) {
 	//train on 0, 1, 2, 3, test against 4 etc.
-	cout << "Cross validating with gamme = " << rate << " and C = " << tradeoff
+	cout << "Cross validating with gamma = " << rate << " and C = " << tradeoff
 			<< endl;
 
 	run(rate, tradeoff);

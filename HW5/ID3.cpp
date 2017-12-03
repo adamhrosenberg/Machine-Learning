@@ -75,6 +75,7 @@ void ID3::stream(string filepath, bool isTest) {
 
 					toAddToSVM.insert(make_pair(current.attributeNum, 1));
 					weightsSVM[current.attributeNum] = 0;
+					weightsLog[current.attributeNum] = 0;
 					//where map used to be
 					groupYesVote++;
 				} else if (current.label_value == 0) {
@@ -86,6 +87,9 @@ void ID3::stream(string filepath, bool isTest) {
 			}
 			mapSVM.push_back(toAddToSVM);
 			labelsSVM.push_back(label);
+
+			mapLog.push_back(toAddToSVM);
+			labelsLog.push_back(label);
 			double guess = 0;
 //			cout << "group yes / no " << groupYesVote << " " << groupNoVote
 //					<< "\t " ;
@@ -385,7 +389,7 @@ void ID3::bagged(bool isSVM) {
 	/* initialize random seed: */
 	srand(50);
 
-	for (int treeNumber = 0; treeNumber < 40; treeNumber++) {
+	for (int treeNumber = 0; treeNumber < 1000; treeNumber++) {
 		vector<map<double, double>> S;
 		vector<double> l;
 		set<int> attributes = featuresMentioned;
@@ -411,67 +415,90 @@ void ID3::bagged(bool isSVM) {
 	labels.clear();
 	featuresMentioned.clear();
 	zeroData.clear();
-	cout << "\n\nNow running and cross validating SVM over the training forest " << endl;
+	cout << "\n\nNow running and cross validating Logistic Regression over the training forest " << endl;
 
-		//if running SVM over bagged.
-		BaggedSVM svm;
-		svm.trainingMap = mapSVM;
-		svm.labels = labelsSVM;
-		svm.weights = weightsSVM;
-		svm.go();
+	//if running SVM over bagged.
+	BaggedLogistic log;
+	log.trainingMap = mapLog;
+	log.labels = labelsLog;
+	log.weights = weightsLog;
+	log.go();
 
-	/*
-	 *
-	 *
-	 * running on test data
-	 */
-
+	cout << "\n\nNow running and cross validating SVM over the training forest" << endl;
+	//if running SVM over bagged.
+	BaggedSVM svm;
+	svm.trainingMap = mapSVM;
+	svm.labels = labelsSVM;
+	svm.weights = weightsSVM;
+	svm.go();
+//
+//	/*
+//	 *
+//	 *
+//	 * running on test data
+//	 */
+//
 	mapSVM.clear();
 	labelsSVM.clear();
+	weightsSVM.clear();
 
-//	cout << "\nNow running Bagged Forests over test data: " << endl;
-//	stream(testingFiles.at(0), false); //training map consists of the entire file now with positives.
-//	//now split up the data 100 ways
-//
-//	/* initialize random seed: */
-//	srand(50);
-//
-//	for (int treeNumber = 0; treeNumber < 40; treeNumber++) {
-//		vector<map<double, double>> S;
-//		vector<double> l;
-//		set<int> attributes = featuresMentioned;
-//
-//		//		cout << "Tree num " << treeNumber << endl;
-//		for (int example = 0; example < 100; example++) {
-//			int randomRow = rand() % trainingMap.size();
-//			//			cout << "random row " << randomRow << endl;
-//			S.push_back(trainingMap.at(randomRow));
-//			l.push_back(labels.at(randomRow));
-//		}
-//
-//		run(&S, &l, &attributes);
-//
-//		S.clear();
-//		l.clear();
-//
-//	}
-//
-//	test(testingFiles.at(1));
-//
-//	trainingMap.clear();
-//	labels.clear();
-//	featuresMentioned.clear();
-//	zeroData.clear();
-//
-//	cout << "\n\nNow running and cross validating SVM over the forest " << endl;
-//
-//	//if running SVM over bagged.
-//	BaggedSVM svmTest;
-//	svmTest.trainingMap = mapSVM;
-//	svmTest.labels = labelsSVM;
-//	svmTest.go();
+	mapLog.clear();
+	labelsLog.clear();
+	weightsLog.clear();
 
-//	cout << "done";
+	cout << "\nNow running Bagged Forests over test data: " << endl;
+	stream(testingFiles.at(0), false); //training map consists of the entire file now with positives.
+	//now split up the data 100 ways
+
+	/* initialize random seed: */
+	srand(50);
+
+	for (int treeNumber = 0; treeNumber < 1000; treeNumber++) {
+		vector<map<double, double>> S;
+		vector<double> l;
+		set<int> attributes = featuresMentioned;
+
+		//		cout << "Tree num " << treeNumber << endl;
+		for (int example = 0; example < 100; example++) {
+			int randomRow = rand() % trainingMap.size();
+			//			cout << "random row " << randomRow << endl;
+			S.push_back(trainingMap.at(randomRow));
+			l.push_back(labels.at(randomRow));
+		}
+
+		run(&S, &l, &attributes);
+
+		S.clear();
+		l.clear();
+
+	}
+
+	test(testingFiles.at(0));
+
+	trainingMap.clear();
+	labels.clear();
+	featuresMentioned.clear();
+	zeroData.clear();
+
+	cout << "\n\nNow running and cross validating SVM over the forest " << endl;
+
+
+//	if running SVM over bagged.
+	BaggedSVM svmTest;
+	svmTest.trainingMap = mapSVM;
+	svmTest.labels = labelsSVM;
+	svmTest.weights = weightsSVM;
+	svmTest.go();
+
+
+	cout << "\nNow running and cross validating Logistic Regression over the forst" << endl;
+	BaggedLogistic logTest;
+	logTest.trainingMap = mapLog;
+	logTest.labels = labelsLog;
+	logTest.weights = weightsLog;
+	logTest.go();
+
+	cout << "done";
 
 }
 
