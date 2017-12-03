@@ -1,6 +1,6 @@
 CC = g++
-OBJ = SGDSVM.o main.o Bayes.o ID3.o LogisticRegression.o BaggedSVM.o
-DEPS = SGDSVM.h Bayes.h ID3.h LogisticRegression.h BaggedSVM.h
+OBJ = SGDSVM.o main.o Bayes.o ID3.o LogisticRegression.o BaggedSVM.o Files.o
+DEPS = SGDSVM.h Bayes.h ID3.h LogisticRegression.h BaggedSVM.h Files.h
 FLAGS = -g -std=c++11
 all: hw5
 
@@ -20,6 +20,8 @@ ID3.o:ID3.cpp
 	$(CC) $(FLAGS) -c ID3.cpp
 BaggedSVM.o:BaggedSVM.cpp
 	$(CC) $(FLAGS) -c BaggedSVM.cpp
+Files.o:Files.cpp
+	$(CC) $(FLAGS) -c Files.cpp	
 
 clean:
 	rm -f svm $(OBJ)

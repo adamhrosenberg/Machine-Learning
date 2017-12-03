@@ -107,6 +107,9 @@ void LogisticRegression::scale(double scalar, map<double, double> * vector) {
 }
 LogisticRegression::LogisticRegression() {
 	// TODO Auto-generated constructor stub
+	Files f;
+	trainingFiles = f.trainingFiles;
+	testingFiles = f.testingFiles;
 
 }
 
@@ -283,11 +286,12 @@ void LogisticRegression::go() {
 					<< endl;
 
 
-			stream("data/speeches.train.liblinear", false); //training map consists of the entire file now with positives.
+			stream(testingFiles.at(0), false); //training map consists of the entire file now with positives.
 			run(optimizedHyperParams.first, optimizedHyperParams.second);
 
-			test("data/speeches.test.liblinear");
-			cout << "\n***\nAccuracy with optimal hyper params: " << percentageCross << endl;
+			test(testingFiles.at(1));
+			cout << "\nAccuracy with optimal hyper params: " << percentageCross << endl;
+			cout << "\n***" << endl;
 
 }
 

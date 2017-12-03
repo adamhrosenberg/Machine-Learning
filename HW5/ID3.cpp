@@ -9,6 +9,8 @@
 
 ID3::ID3() {
 	// TODO Auto-generated constructor stub
+		Files f;
+		trainingFiles = f.trainingFiles;
 //	forest = new vector<TreeNode>;
 
 }
@@ -110,7 +112,7 @@ void ID3::stream(string filepath, bool isTest) {
 	if (isTest) {
 
 //			percentageCross = right / (right + wrong);
-//		cout << "Accuracy " << right / (right + wrong) << endl;
+		cout << "\tAccuracy " << right / (right + wrong) << endl;
 //		cout << "Group decision, yes: " << groupYesVote << " and the no " << groupNoVote << endl;
 		//		cout << "Right: " << right << " wrong: " << wrong << endl;
 	}
@@ -272,7 +274,6 @@ TreeNode ID3::recurse(vector<map<double, double>> * S, set<int> * attributes,
 		return root;
 	}
 
-//	cout << "Not all labels are true"<<endl;
 
 	TreeNode root;
 
@@ -359,7 +360,7 @@ void ID3::test(string filepath) {
 
 	//just finished bag forests.
 	//now running SVM over bagged
-	cout << "***\n***\nBeginning SVM over bagged forest" << endl;
+//	cout << "***\n***\nBeginning SVM over bagged forest" << endl;
 
 
 
@@ -370,11 +371,17 @@ void ID3::run(vector<map<double, double>> * S, vector<double> * l,
 	forest.push_back(recurse(S, attributes, l, 0));
 }
 
-void ID3::bagged() {
+void ID3::bagged(bool isSVM) {
+
+	cout << "Beginning bagged forests on split training set" << endl;
+
+	if(isSVM){
+		cout << "Will be running SVM over bagged forest" << endl;
+	}
 
 	stream(trainingFiles.at(0), false); //training map consists of the entire file now with positives.
-//	stream(trainingFiles.at(1), false); //training map consists of the entire file now with positives.
-//	stream(trainingFiles.at(2), false); //training map consists of the entire file now with positives.
+	stream(trainingFiles.at(1), false); //training map consists of the entire file now with positives.
+	stream(trainingFiles.at(2), false); //training map consists of the entire file now with positives.
 
 	//now split up the data 100 ways
 
@@ -403,10 +410,6 @@ void ID3::bagged() {
 
 	test(trainingFiles.at(3));
 
-	//if running SVM over bagged.
-	BaggedSVM svm;
-	svm.trainingMap = mapSVM;
-	svm.labels = labelsSVM;
 
 	trainingMap.clear();
 	labels.clear();
@@ -414,9 +417,18 @@ void ID3::bagged() {
 	zeroData.clear();
 
 
+	cout << "Now running and cross validating SVM over the forest " << endl;
+
+	//if running SVM over bagged.
+	BaggedSVM svm;
+	svm.trainingMap = mapSVM;
+	svm.labels = labelsSVM;
 	svm.go();
 
-	cout << "done";
+
+
+
+//	cout << "done";
 
 }
 
@@ -431,7 +443,7 @@ void ID3::go() {
 //	stream(trainingFiles.at(2), false); //training map consists of the entire file now with positives.
 //	stream(trainingFiles.at(3), false); //training map consists of the entire file now with positives.
 
-//	run(3);
+//		run();
 
 		test(trainingFiles.at(1));
 

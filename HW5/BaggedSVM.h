@@ -18,6 +18,7 @@
 #include <algorithm>
 #include <sstream>
 #include <map>
+#include "Files.h"
 using namespace std;
 
 
@@ -35,15 +36,17 @@ public:
 	double averageOfCross = 0;
 	int numberOfCross = 0;
 	map<double, double> weights; //index # to weight.
-	vector<double> rates = {10, 1, 0.1, 0.01, 0.001, 0.0001}; //4
-	vector<double> tradeoff = {10, 1, 0.1, 0.01, 0.001, 0.0001}; //2
-	vector<string> trainingFiles = {
-			"data/CVSplits/training00.data",
-			"data/CVSplits/training01.data",
-			"data/CVSplits/training02.data",
-			"data/CVSplits/training03.data",
-			"data/CVSplits/training04.data"
-	};
+	vector<double> rates = {1, 0.1, 0.01, 0.001, 0.0001, 0.00001}; //
+	vector<double> tradeoff = {10, 1, 0.1, 0.01, 0.001, 0.0001, 0.00001}; //
+//	vector<string> trainingFiles = {
+//			"data/CVSplits/training00.data",
+//			"data/CVSplits/training01.data",
+//			"data/CVSplits/training02.data",
+//			"data/CVSplits/training03.data",
+//			"data/CVSplits/training04.data"
+//	};
+	Files f;
+	vector<string>trainingFiles = f.trainingFiles;
 	BaggedSVM();
 	virtual ~BaggedSVM();
 	void go();

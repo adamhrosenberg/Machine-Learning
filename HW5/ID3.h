@@ -17,6 +17,7 @@
 #include <map>
 #include <set>
 #include "BaggedSVM.h"
+#include "Files.h"
 
 #ifndef ID3_H_
 #define ID3_H_
@@ -43,7 +44,7 @@ public:
 	void run(vector<map<double, double>> * S, vector<double> * l, set<int> * attributes);
 
 
-	void bagged();
+	void bagged(bool isSVM);
 
 	TreeNode recurse(vector<map<double, double>> * S, set<int> * attributes, vector<double> * labels, int currentDepth);
 
@@ -60,10 +61,12 @@ public:
 
 	double calculateEntropy(vector<map<double,double>> * S, vector<double> * l, int featureNumber);
 private:
-	vector<string> trainingFiles = {
-			"data/CVSplits/training00.data", "data/CVSplits/training01.data",
-			"data/CVSplits/training02.data", "data/CVSplits/training03.data",
-			"data/CVSplits/training04.data" };
+//	vector<string> trainingFiles = {
+//			"data/CVSplits/training00.data", "data/CVSplits/training01.data",
+//			"data/CVSplits/training02.data", "data/CVSplits/training03.data",
+//			"data/CVSplits/training04.data" };
+
+	vector<string>trainingFiles;
 	vector<map<double, double>> trainingMap;
 	set<double> zeroData;
 	vector<double> labels;
