@@ -67,6 +67,7 @@ private:
 //			"data/CVSplits/training04.data" };
 
 	vector<string>trainingFiles;
+	vector<string> testingFiles;
 	vector<map<double, double>> trainingMap;
 	set<double> zeroData;
 	vector<double> labels;

@@ -9,8 +9,9 @@
 
 ID3::ID3() {
 	// TODO Auto-generated constructor stub
-		Files f;
-		trainingFiles = f.trainingFiles;
+	Files f;
+	trainingFiles = f.trainingFiles;
+	testingFiles = f.testingFiles;
 //	forest = new vector<TreeNode>;
 
 }
@@ -68,8 +69,6 @@ void ID3::stream(string filepath, bool isTest) {
 					}
 				}
 
-
-
 				if (current.label_value == 1) {
 					//TODO added a bagged boolean so you dont always do this.
 					map<double, double> toAddToSVM;
@@ -81,19 +80,17 @@ void ID3::stream(string filepath, bool isTest) {
 					groupNoVote++;
 				}
 
-
-
-				numpre ++;
+				numpre++;
 
 			}
 			double guess = 0;
-//			cout << "group yes / no " << groupYesVote << " " <<groupNoVote <<endl;
+//			cout << "group yes / no " << groupYesVote << " " << groupNoVote
+//					<< "\t " ;
 			if (groupYesVote > groupNoVote) {
 				guess = 1;
 			} else {
 				guess = -1;
 			}
-
 
 //
 //			cout << "My guess was " << guess << " real label is " << label
@@ -104,16 +101,16 @@ void ID3::stream(string filepath, bool isTest) {
 			} else {
 				wrong++;
 			}
-			//num predictions should be the # of trees.
-//			cout << "numpre " << numpre << endl;
 //			numpre = 0;
 		}
 	}
 	if (isTest) {
 
 //			percentageCross = right / (right + wrong);
-		cout << "\tAccuracy " << right / (right + wrong) << endl;
-//		cout << "Group decision, yes: " << groupYesVote << " and the no " << groupNoVote << endl;
+		cout << "\nGroup decision on the test, yes: " << groupYesVote << " and the no " << groupNoVote << ", ";
+		cout << "\n\tAccuracy " << right / (right + wrong) << endl;
+
+
 		//		cout << "Right: " << right << " wrong: " << wrong << endl;
 	}
 }
@@ -274,7 +271,6 @@ TreeNode ID3::recurse(vector<map<double, double>> * S, set<int> * attributes,
 		return root;
 	}
 
-
 	TreeNode root;
 
 	vector<map<double, double>> S_v;
@@ -362,8 +358,6 @@ void ID3::test(string filepath) {
 	//now running SVM over bagged
 //	cout << "***\n***\nBeginning SVM over bagged forest" << endl;
 
-
-
 }
 
 void ID3::run(vector<map<double, double>> * S, vector<double> * l,
@@ -375,9 +369,9 @@ void ID3::bagged(bool isSVM) {
 
 	cout << "Beginning bagged forests on split training set" << endl;
 
-	if(isSVM){
-		cout << "Will be running SVM over bagged forest" << endl;
-	}
+//	if(isSVM){
+//		cout << "Will be running SVM over bagged forest" << endl;
+//	}
 
 	stream(trainingFiles.at(0), false); //training map consists of the entire file now with positives.
 	stream(trainingFiles.at(1), false); //training map consists of the entire file now with positives.
@@ -386,9 +380,9 @@ void ID3::bagged(bool isSVM) {
 	//now split up the data 100 ways
 
 	/* initialize random seed: */
-	srand(time(NULL));
+	srand(50);
 
-	for (int treeNumber = 0; treeNumber < 40; treeNumber++) {
+	for (int treeNumber = 0; treeNumber < 1000; treeNumber++) {
 		vector<map<double, double>> S;
 		vector<double> l;
 		set<int> attributes = featuresMentioned;
@@ -408,25 +402,60 @@ void ID3::bagged(bool isSVM) {
 
 	}
 
-	test(trainingFiles.at(3));
-
+	test(trainingFiles.at(1));
 
 	trainingMap.clear();
 	labels.clear();
 	featuresMentioned.clear();
 	zeroData.clear();
 
+	/*
+	 *
+	 *
+	 * running on test data
+	 */
 
-	cout << "Now running and cross validating SVM over the forest " << endl;
+	cout << "\nNow running Bagged Forests over test data: " << endl;
+	stream(testingFiles.at(0), false); //training map consists of the entire file now with positives.
+	//now split up the data 100 ways
+
+	/* initialize random seed: */
+	srand(50);
+
+	for (int treeNumber = 0; treeNumber < 1000; treeNumber++) {
+		vector<map<double, double>> S;
+		vector<double> l;
+		set<int> attributes = featuresMentioned;
+
+		//		cout << "Tree num " << treeNumber << endl;
+		for (int example = 0; example < 100; example++) {
+			int randomRow = rand() % trainingMap.size();
+			//			cout << "random row " << randomRow << endl;
+			S.push_back(trainingMap.at(randomRow));
+			l.push_back(labels.at(randomRow));
+		}
+
+		run(&S, &l, &attributes);
+
+		S.clear();
+		l.clear();
+
+	}
+
+	test(testingFiles.at(1));
+
+	trainingMap.clear();
+	labels.clear();
+	featuresMentioned.clear();
+	zeroData.clear();
+
+	cout << "\n\nNow running and cross validating SVM over the forest " << endl;
 
 	//if running SVM over bagged.
 	BaggedSVM svm;
 	svm.trainingMap = mapSVM;
 	svm.labels = labelsSVM;
 	svm.go();
-
-
-
 
 //	cout << "done";
 
@@ -437,20 +466,19 @@ void ID3::go() {
 
 //	for (int i = 0; i < 100; i++) {
 
-
-		stream(trainingFiles.at(0), false); //training map consists of the entire file now with positives.
+	stream(trainingFiles.at(0), false); //training map consists of the entire file now with positives.
 //	stream(trainingFiles.at(1), false); //training map consists of the entire file now with positives.
 //	stream(trainingFiles.at(2), false); //training map consists of the entire file now with positives.
 //	stream(trainingFiles.at(3), false); //training map consists of the entire file now with positives.
 
 //		run();
 
-		test(trainingFiles.at(1));
+	test(trainingFiles.at(1));
 
-		trainingMap.clear();
-		labels.clear();
-		featuresMentioned.clear();
-		zeroData.clear();
+	trainingMap.clear();
+	labels.clear();
+	featuresMentioned.clear();
+	zeroData.clear();
 //		cout << i << endl;
 //	test("data/speeches.test.liblinear");
 

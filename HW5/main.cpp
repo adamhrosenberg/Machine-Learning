@@ -17,9 +17,9 @@ int main(){
 //	svm.go();
 
 
-	cout << "\n\nRunning Bayes " << endl;
-	Bayes bayes;
-	bayes.go();
+//	cout << "\n\nRunning Bayes " << endl;
+//	Bayes bayes;
+//	bayes.go();
 
 //	cout << "\n\nRunning logisitic regression " << endl;
 //	LogisticRegression logic;
@@ -30,7 +30,8 @@ int main(){
 
 
 //	for(int i = 0; i < 100; i++){
-//	id.bagged(false);
+	//this runs bagged and svm over bagged
+	id.bagged(false);
 
 //	ID3 idSVM;
 //	idSVM.bagged(true);
