@@ -62,6 +62,7 @@ void BaggedSVM::scale(double scalar, map<double, double> * vector) {
 void BaggedSVM::run(double rate, double tradeoff) {
 	shuffle();
 	for (int row = 0; row < labels.size(); row++) {
+//		cout << "row " << row << endl;
 
 		double result = dotP(trainingMap.at(row), weights);
 
@@ -144,7 +145,31 @@ void BaggedSVM::stream(string filepath, bool isTest) {
 }
 
 void BaggedSVM::test(string filepath) {
-	stream(filepath, true);
+//	stream(filepath, true);
+	double right = 0, wrong = 0;
+	for(int row = 0 ; row < trainingMap.size(); row++){
+		map<double, double> example = trainingMap.at(row);
+		double label = labels.at(row);
+		double dot = dotP(example, weights);
+		double temp = 0;
+		if (dot < 0) {
+			temp = -1;
+		} else {
+			temp = 1;
+		}
+//			cout << "guess: " << temp << " label: " << label << " dot: " << dot
+//					<< endl;
+
+		if (temp == label) {
+			right++;
+		} else {
+			wrong++;
+		}
+	}
+
+	percentageCross = right / (right + wrong);
+		cout << "\tAccuracy " << percentageCross << endl;
+
 }
 
 string BaggedSVM::pickTraining(int against) {
@@ -173,37 +198,36 @@ void BaggedSVM::crossValidate(double rate, double tradeoff) {
 			<< tradeoff << endl;
 	string training;
 
-	for (int against = 0; against < trainingFiles.size(); against++) {
-
-
-
-		training = pickTraining(against);
-		cout << "Training on files: " << training
-				<< " and testing against file: " << trainingFiles.at(against)
-				<< endl;
-
-		for (int train = 0; train < trainingFiles.size(); train++) {
-
-			if (train != against) {
-
-				stream(trainingFiles.at(train), false); //training map consists of the entire file now with positives.
-
-			}
-
-		}
+//	for (int against = 0; against < trainingFiles.size(); against++) {
+//
+//
+//
+//		training = pickTraining(against);
+//		cout << "Training on files: " << training
+//				<< " and testing against file: " << trainingFiles.at(against)
+//				<< endl;
+//
+//		for (int train = 0; train < trainingFiles.size(); train++) {
+//
+//			if (train != against) {
+//
+////				stream(trainingFiles.at(train), false); //training map consists of the entire file now with positives.
+////				cout << trainingMap.size() << endl;
+//
+//			}
+//
+//		}
 		run(rate, tradeoff);
-		test(trainingFiles.at(against));
+		test(trainingFiles.at(1)); //doesnt matter what i pass it. test is soelf contained
 		averagePercentage += percentageCross;
 		averageOfCross += percentageCross;
 		numberOfCross ++ ;
 
 		//reset
-		trainingMap.clear();
-		labels.clear();
-		weights.clear();
-		gamma_t = 0;
-
-	}
+//		trainingMap.clear();
+//		labels.clear();
+//		weights.clear();
+//		gamma_t = 0;
 
 //	cout << averagePercentage << " = sum. " << endl;
 	averagePercentage = averagePercentage / (trainingFiles.size());
@@ -212,9 +236,6 @@ void BaggedSVM::crossValidate(double rate, double tradeoff) {
 void BaggedSVM::go() {
 
 //	run(.1, .1);
-//	crossValidate()
-
-//	test("data/CVSplits/training00.data");
 
 	for (int rate = 0; rate < rates.size(); rate++) {
 		for (int sigma = 0; sigma < tradeoff.size(); sigma++) {
