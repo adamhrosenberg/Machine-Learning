@@ -275,7 +275,7 @@ void LogisticRegression::go() {
 				}
 			}
 
-			cout << "Optimized hyper params: delta = " << optimizedHyperParams.first
+			cout << "Optimized hyper params: gamma = " << optimizedHyperParams.first
 					<< " and sigma = " << optimizedHyperParams.second << endl;
 
 

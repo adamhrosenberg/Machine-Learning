@@ -51,8 +51,8 @@ public:
 	map<int, ProbPair> probabilityTable; //each feature index has a corresponding pair, which consists of the Probability of it being true / false given the dataset..
 	string pickTraining(int against);
 
-//	vector<double> smoothness = { 2, 1.5, 1, .5 };
-	vector<double> smoothness = {2};
+	vector<double> smoothness = { 2, 1.5, 1, .5 };
+//	vector<double> smoothness = {2};
 //	vector<string> trainingFiles = {
 //			"data/speeches.train.liblinear",
 //			"data/CVSplits/training00.data",

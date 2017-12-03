@@ -152,7 +152,7 @@ void BaggedLogistic::run(double rate, double tradeoff) {
 //		cout << "training on row: " << row << endl;
 //		gamma_t = rate / (1 + (rate * t / sqrt(tradeoff)));
 
-		gamma_t = rate / (1 + t);
+//		gamma_t = rate / (1 + t);
 
 		map<double, double> mid; //large paran value
 		map<double, double> origW = weights;

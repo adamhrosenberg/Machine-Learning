@@ -12,28 +12,22 @@ using namespace std;
 
 int main(){
 
-//	cout << "Running SGD SVM " << endl;
-//	SGD_SVM svm;
-//	svm.go();
+	cout << "Running SGD SVM " << endl;
+	SGD_SVM svm;
+	svm.go();
 
 
-//	cout << "\n\nRunning Bayes " << endl;
-//	Bayes bayes;
-//	bayes.go();
+	cout << "\n\nRunning Bayes " << endl;
+	Bayes bayes;
+	bayes.go();
 
-//	cout << "\n\nRunning logisitic regression " << endl;
-//	LogisticRegression logic;
-//	logic.go();
+	cout << "\n\nRunning logisitic regression " << endl;
+	LogisticRegression logic;
+	logic.go();
 
-	cout << "\n\nRunning bagged forest " << endl;
+	cout << "\n\nRunning bagged forest, svm over the forest, and logistic regression over the forest" << endl;
 	ID3 id;
+	id.bagged(false); //false doesnt matter anymore
 
 
-//	for(int i = 0; i < 100; i++){
-	id.bagged(false);
-
-//	ID3 idSVM;
-//	idSVM.bagged(true);
-//	id.go();
-//	}
 }

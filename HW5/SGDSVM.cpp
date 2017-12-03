@@ -242,8 +242,8 @@ void SGD_SVM::go() {
 		}
 	}
 
-	cout << "Optimized hyper params: delta = " << optimizedHyperParams.first
-			<< " and sigma = " << optimizedHyperParams.second << endl;
+	cout << "Optimized hyper params: gamma = " << optimizedHyperParams.first
+			<< " and C = " << optimizedHyperParams.second << endl;
 
 
 	averageOfCross /= numberOfCross;
