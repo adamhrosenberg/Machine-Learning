@@ -54,6 +54,7 @@ void ID3::stream(string filepath, bool isTest) {
 			}
 			trainingMap.push_back(example);
 		} else {
+			map<double, double> toAddToSVM;
 			groupYesVote = 0, groupNoVote = 0;
 			for (int tree = 0; tree < forest.size(); tree++) {
 				TreeNode current = forest.at(tree);
@@ -71,10 +72,10 @@ void ID3::stream(string filepath, bool isTest) {
 
 				if (current.label_value == 1) {
 					//TODO added a bagged boolean so you dont always do this.
-					map<double, double> toAddToSVM;
+
 					toAddToSVM.insert(make_pair(current.attributeNum, 1));
-					mapSVM.push_back(toAddToSVM);
-					labelsSVM.push_back(label);
+					weightsSVM[current.attributeNum] = 0;
+					//where map used to be
 					groupYesVote++;
 				} else if (current.label_value == 0) {
 					groupNoVote++;
@@ -83,6 +84,8 @@ void ID3::stream(string filepath, bool isTest) {
 				numpre++;
 
 			}
+			mapSVM.push_back(toAddToSVM);
+			labelsSVM.push_back(label);
 			double guess = 0;
 //			cout << "group yes / no " << groupYesVote << " " << groupNoVote
 //					<< "\t " ;
@@ -414,6 +417,7 @@ void ID3::bagged(bool isSVM) {
 		BaggedSVM svm;
 		svm.trainingMap = mapSVM;
 		svm.labels = labelsSVM;
+		svm.weights = weightsSVM;
 		svm.go();
 
 	/*
@@ -425,47 +429,47 @@ void ID3::bagged(bool isSVM) {
 	mapSVM.clear();
 	labelsSVM.clear();
 
-	cout << "\nNow running Bagged Forests over test data: " << endl;
-	stream(testingFiles.at(0), false); //training map consists of the entire file now with positives.
-	//now split up the data 100 ways
-
-	/* initialize random seed: */
-	srand(50);
-
-	for (int treeNumber = 0; treeNumber < 40; treeNumber++) {
-		vector<map<double, double>> S;
-		vector<double> l;
-		set<int> attributes = featuresMentioned;
-
-		//		cout << "Tree num " << treeNumber << endl;
-		for (int example = 0; example < 100; example++) {
-			int randomRow = rand() % trainingMap.size();
-			//			cout << "random row " << randomRow << endl;
-			S.push_back(trainingMap.at(randomRow));
-			l.push_back(labels.at(randomRow));
-		}
-
-		run(&S, &l, &attributes);
-
-		S.clear();
-		l.clear();
-
-	}
-
-	test(testingFiles.at(1));
-
-	trainingMap.clear();
-	labels.clear();
-	featuresMentioned.clear();
-	zeroData.clear();
-
-	cout << "\n\nNow running and cross validating SVM over the forest " << endl;
-
-	//if running SVM over bagged.
-	BaggedSVM svmTest;
-	svmTest.trainingMap = mapSVM;
-	svmTest.labels = labelsSVM;
-	svmTest.go();
+//	cout << "\nNow running Bagged Forests over test data: " << endl;
+//	stream(testingFiles.at(0), false); //training map consists of the entire file now with positives.
+//	//now split up the data 100 ways
+//
+//	/* initialize random seed: */
+//	srand(50);
+//
+//	for (int treeNumber = 0; treeNumber < 40; treeNumber++) {
+//		vector<map<double, double>> S;
+//		vector<double> l;
+//		set<int> attributes = featuresMentioned;
+//
+//		//		cout << "Tree num " << treeNumber << endl;
+//		for (int example = 0; example < 100; example++) {
+//			int randomRow = rand() % trainingMap.size();
+//			//			cout << "random row " << randomRow << endl;
+//			S.push_back(trainingMap.at(randomRow));
+//			l.push_back(labels.at(randomRow));
+//		}
+//
+//		run(&S, &l, &attributes);
+//
+//		S.clear();
+//		l.clear();
+//
+//	}
+//
+//	test(testingFiles.at(1));
+//
+//	trainingMap.clear();
+//	labels.clear();
+//	featuresMentioned.clear();
+//	zeroData.clear();
+//
+//	cout << "\n\nNow running and cross validating SVM over the forest " << endl;
+//
+//	//if running SVM over bagged.
+//	BaggedSVM svmTest;
+//	svmTest.trainingMap = mapSVM;
+//	svmTest.labels = labelsSVM;
+//	svmTest.go();
 
 //	cout << "done";
 

@@ -76,6 +76,7 @@ private:
 
 	vector<map<double, double>> mapSVM;
 	vector<double> labelsSVM;
+	map<double, double> weightsSVM;
 
 	set<int> featuresMentioned;
 	int possibleValuesForA = 2;

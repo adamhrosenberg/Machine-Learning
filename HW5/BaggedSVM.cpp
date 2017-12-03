@@ -87,7 +87,7 @@ void BaggedSVM::run(double rate, double tradeoff) {
 //					witer->second += trainingMap.at(row).find(index)->second;
 					witer->second += search->second;
 				} else {
-					count++;
+//					count++;
 				}
 				witer++;
 			}
@@ -151,6 +151,7 @@ void BaggedSVM::test(string filepath) {
 		map<double, double> example = trainingMap.at(row);
 		double label = labels.at(row);
 		double dot = dotP(example, weights);
+//		cout << weights.size() << " " << example.size() << endl;
 		double temp = 0;
 		if (dot < 0) {
 			temp = -1;
@@ -167,8 +168,9 @@ void BaggedSVM::test(string filepath) {
 		}
 	}
 
+	count ++;
 	percentageCross = right / (right + wrong);
-		cout << "\tAccuracy " << percentageCross << endl;
+//		cout << "\tAccuracy " << percentageCross << endl;
 
 }
 
@@ -194,7 +196,7 @@ string BaggedSVM::pickTraining(int against) {
 }
 void BaggedSVM::crossValidate(double rate, double tradeoff) {
 	//train on 0, 1, 2, 3, test against 4 etc.
-	cout << "\n\nCross validating with rate = " << rate << " and tradeoff ^2 = "
+	cout << "Cross validating with gamme = " << rate << " and C = "
 			<< tradeoff << endl;
 	string training;
 
@@ -230,7 +232,7 @@ void BaggedSVM::crossValidate(double rate, double tradeoff) {
 //		gamma_t = 0;
 
 //	cout << averagePercentage << " = sum. " << endl;
-	averagePercentage = averagePercentage / (trainingFiles.size());
+//	averagePercentage = averagePercentage;
 //	cout << "Average percentage " << averagePercentage << endl;
 }
 void BaggedSVM::go() {
@@ -240,9 +242,9 @@ void BaggedSVM::go() {
 	for (int rate = 0; rate < rates.size(); rate++) {
 		for (int sigma = 0; sigma < tradeoff.size(); sigma++) {
 			crossValidate(rates.at(rate), tradeoff.at(sigma));
-			cout << "Average percentage for 5 fold validation with a rate of "
-					<< rates.at(rate) << " and a sigma of "
-					<< tradeoff.at(sigma) << " = " << averagePercentage << endl;
+//			cout << "Average percentage for 5 fold validation with a rate of "
+//					<< rates.at(rate) << " and a sigma of "
+//					<< tradeoff.at(sigma) << " = " << averagePercentage << endl;
 
 			pair<double, double> p;
 			p.first = rates.at(rate);
@@ -265,15 +267,15 @@ void BaggedSVM::go() {
 		}
 	}
 
-	cout << "Optimized hyper params: delta = " << optimizedHyperParams.first
-			<< " and sigma = " << optimizedHyperParams.second << endl;
+	cout << "Optimized hyper params: gamme = " << optimizedHyperParams.first
+			<< " and C = " << optimizedHyperParams.second << endl;
 
 
-	averageOfCross /= numberOfCross;
+	averageOfCross /= count;
 
-	cout << "Average accuracy during cross validation:  " << averageOfCross << endl;
-	cout << "Running optimized hyper params on speeches train and test file"
-			<< endl;
+//	cout << "Average accuracy during cross validation:  " << averageOfCross << endl;
+//	cout << "Running optimized hyper params on speeches train and test file"
+//			<< endl;
 
 
 	stream("data/speeches.train.liblinear", false); //training map consists of the entire file now with positives.
