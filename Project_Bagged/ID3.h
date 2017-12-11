@@ -66,12 +66,13 @@ private:
 			"data-splits/data.train"};
 
 //	vector<string>trainingFiles;
-	vector<string> testingFiles = { "data-splits/data.test"};
-//	vector<string> testingFiles = { "data-splits/data.eval.anon"};
+//	vector<string> testingFiles = { "data-splits/data.test"};
+	vector<string> testingFiles = { "data-splits/data.eval.anon"};
 
 	vector<map<double, double>> trainingMap;
 	set<double> zeroData;
 	vector<double> labels;
+//	vector<int> predictions;
 	bool allLabelsTrue = true;
 	int numpre =0;
 

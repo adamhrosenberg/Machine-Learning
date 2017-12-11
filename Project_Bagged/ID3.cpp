@@ -14,9 +14,6 @@ ID3::ID3() {
 //	testingFiles = f.testingFiles;
 //	forest = new vector<TreeNode>;
 
-	for (int i = 0; i < 16; i++) {
-		discretizedFeatureValues.push_back(i);
-	}
 }
 
 ID3::~ID3() {
@@ -26,12 +23,19 @@ ID3::~ID3() {
 bool ID3::seeIfAllTrue(vector<double> * l) {
 	for (int i = 0; i < l->size(); i++) {
 		if (l->at(i) == -1) {
+//			cout << "returning a flase"<<endl;
 			return false;
 		}
 	}
+//	cout << "returning all true"<<endl;
 	return true;
 }
+
 void ID3::getAverages(string filepath) {
+
+	for(int i = 0 ; i < 16; i ++){
+		discretizedFeatureValues.push_back(0);
+	}
 
 	int numExamples = 0;
 	ifstream pipein(filepath.c_str());
@@ -39,8 +43,8 @@ void ID3::getAverages(string filepath) {
 	for (string line; getline(pipein, line);) {
 		numExamples++;
 
-		double label = ((line.at(0) == '0') ? -1 : 1);
-		//		labels.push_back(label);
+//		double label = ((line.at(0) == '-') ? -1 : 1);
+		//              labels.push_back(label);
 		line = line.substr(2); //2 was og 1
 		std::string token;
 		std::istringstream tokenStream(line);
@@ -61,14 +65,15 @@ void ID3::getAverages(string filepath) {
 	}
 
 	//now i have the sum of all of the valules. now just divide by line count to get total.
-//	cout << "number of examples " << numExamples<< endl;
+//      cout << "number of examples " << numExamples<< endl;
 	for (int i = 0; i < discretizedFeatureValues.size(); i++) {
 		discretizedFeatureValues.at(i) /= numExamples;
-//		cout << "average feat value for feat #" << i << " is "
-//				<< discretizedFeatureValues.at(i) << endl;
+//              cout << "average feat value for feat #" << i << " is "
+//                              << discretizedFeatureValues.at(i) << endl;
 	}
 
 }
+
 void ID3::stream(string filepath, bool isTest) {
 	ifstream pipein(filepath.c_str());
 	double right = 0, wrong = 0, pos = 0, neg = 0;
@@ -103,50 +108,72 @@ void ID3::stream(string filepath, bool isTest) {
 			}
 			trainingMap.push_back(example);
 		} else {
-			groupYesVote = 0;
-			groupNoVote = 0;
+			map<double, double> toAddToSVM;
+			groupYesVote = 0, groupNoVote = 0;
 			for (int tree = 0; tree < forest.size(); tree++) {
 				TreeNode current = forest.at(tree);
+//				cout << forest.size() << endl;
+
 				while (current.leaf == false) {
 					int attr = current.attributeNum;
+//					cout << "Attr num" << attr << endl;
 					if (example.find(attr) == example.end()) {
 						current = current.branches[0];
 					} else {
 						current = current.branches[1];
 					}
 				}
-//			cout << "leaf value " << current.label_value << endl;
 
-				if (current.label_value) {
-//					guess = 1;
+				if (current.label_value == 1) {
+					//TODO added a bagged boolean so you dont always do this.
+
+					toAddToSVM.insert(make_pair(current.attributeNum, 1));
+					weightsSVM[current.attributeNum] = 0;
+					weightsLog[current.attributeNum] = 0;
+					//where map used to be
 					groupYesVote++;
-				} else {
-//					guess = -1;
+				} else if (current.label_value == 0) {
 					groupNoVote++;
 				}
-			}
-			double guess;
 
+				numpre++;
+
+			}
+			mapSVM.push_back(toAddToSVM);
+			labelsSVM.push_back(label);
+
+			mapLog.push_back(toAddToSVM);
+			labelsLog.push_back(label);
+			double guess = 0;
 //			cout << "group yes / no " << groupYesVote << " " << groupNoVote
-//			                                      << "\t " ;
-			if (groupYesVote > groupNoVote) {
+//					<< "\t " ;
+			if (groupYesVote/2 > groupNoVote) {
 				guess = 1;
 			} else {
 				guess = -1;
 			}
 
-//			predictions.push_back(guess);
-//			cout << "my guess : " << guess << " label: " << label << endl;
-			if (guess == label)
+			predictions.push_back(guess);
+//
+//			cout << "My guess was " << guess << " real label is " << label
+//					<< endl;
+
+			if (guess == label) {
 				right++;
-			else
+			} else {
 				wrong++;
-
+			}
+//			numpre = 0;
 		}
-
 	}
 	if (isTest) {
-		cout << "\n\tAccuracy " << right / (right + wrong) << endl;
+
+//			percentageCross = right / (right + wrong);
+//		cout << "\nGroup decision on the test, yes: " << groupYesVote
+//				<< " and the no " << groupNoVote << ", ";
+//		cout << "\n\tAccuracy " << right / (right + wrong) << endl;
+
+		//		cout << "Right: " << right << " wrong: " << wrong << endl;
 	}
 }
 
@@ -299,6 +326,7 @@ TreeNode ID3::recurse(vector<map<double, double>> * S, set<int> * attributes,
 
 //	currentDepth++;
 //	cout << "S.size " << S->size() << " l.size() " << l->size() << endl;
+
 	if (seeIfAllTrue(l)) {
 		TreeNode root;
 		root.leaf = true;
@@ -317,6 +345,14 @@ TreeNode ID3::recurse(vector<map<double, double>> * S, set<int> * attributes,
 	int A = bestAttributeThatClassifiesS(S, attributes, l, totalEntropy);
 
 //	cout << "The best attirubte is  " << A << endl;
+
+	/**
+	 *
+	 *
+	 *
+	 *
+	 *
+	 */
 
 //	attributes->erase(A);
 	root.attributeNum = A;
@@ -341,7 +377,7 @@ TreeNode ID3::recurse(vector<map<double, double>> * S, set<int> * attributes,
 			}
 		}
 
-		if (sv.size() == 0 || currentDepth >= 3) {
+		if (sv.size() == 0 || currentDepth >= maxDepth) {
 			child.leaf = true;
 
 			int pC = 0;
@@ -350,10 +386,8 @@ TreeNode ID3::recurse(vector<map<double, double>> * S, set<int> * attributes,
 //				cout << "l : " << labels_sv.at(z) << endl;
 				if (labels_sv.at(z) == 1) {
 					pC++;
-//					cout << "pc"<<endl;
 				} else {
 					nC++;
-//					cout<<"nc"<<endl;
 				}
 			}
 			bool temp;
@@ -362,13 +396,13 @@ TreeNode ID3::recurse(vector<map<double, double>> * S, set<int> * attributes,
 			} else {
 				temp = true;
 			}
-//			cout << "child leaf label value " << temp << endl;
 			child.label_value = temp;
-			cout << "yes " << pC << " no " << nC << endl;
-			cout << "setting child with label " << child.label_value << endl;
+//			cout << "yes " << pC << " no " << nC << endl;
+//			cout << "setting child with label " << child.label_value << endl;
+			currentDepth++;
 			root.branches.push_back(child);
+			//return new_node;
 		} else {
-			cout << currentDepth<<endl;
 //			cout << "Pushing back new node " << endl;
 			root.branches.push_back(
 					recurse(&sv, attributes, &labels_sv, ++currentDepth));
@@ -392,23 +426,23 @@ void ID3::test(string filepath) {
 
 void ID3::run(vector<map<double, double>> * S, vector<double> * l,
 		set<int> * attributes) {
-//	_root = recurse(S, attributes, l, 0);
 	forest.push_back(recurse(S, attributes, l, 0));
 }
 
 void ID3::bagged(bool isSVM) {
 
-	cout << "Beginning bagged forests on training set" << endl;
+//	cout << "Beginning bagged forests on training set" << endl;
 
 //	if(isSVM){
 //		cout << "Will be running SVM over bagged forest" << endl;
 //	}
+
+//	cout << "test"<<endl;
 	getAverages(trainingFiles.at(0));
 
 	stream(trainingFiles.at(0), false); //training map consists of the entire file now with positives.
 //	stream(trainingFiles.at(1), false); //training map consists of the entire file now with positives.
 //	stream(trainingFiles.at(2), false); //training map consists of the entire file now with positives.
-
 	//now split up the data 100 ways
 
 	/* initialize random seed: */
@@ -416,7 +450,7 @@ void ID3::bagged(bool isSVM) {
 
 	for (int treeNumber = 0; treeNumber < 1000; treeNumber++) {
 		vector<map<double, double>> S;
-		vector<double> l(1000);
+		vector<double> l;
 		set<int> attributes = featuresMentioned;
 
 //		cout << "Tree num " << treeNumber << endl;
@@ -425,7 +459,6 @@ void ID3::bagged(bool isSVM) {
 //			cout << "random row " << randomRow << endl;
 			S.push_back(trainingMap.at(randomRow));
 			l.push_back(labels.at(randomRow));
-//			cout << labels.at(randomRow)<<endl;
 		}
 
 		run(&S, &l, &attributes);
@@ -437,13 +470,32 @@ void ID3::bagged(bool isSVM) {
 
 	test(testingFiles.at(0));
 
+    vector<string> userIDs;
+//      ifstream pipein();
+
+    ifstream pipein("data-splits/data.eval.id");
+
+    //read in the file.
+    for (string line; getline(pipein, line);) {
+            //now that we have a line, we need to create a vector. first value in examples is the label. then its each value of the attributes.
+//              cout << line << endl;
+            userIDs.push_back(line);
+    }
+
+    cout << "Id,Prediction" << endl;
+
+    for (int i = 0; i < predictions.size(); i++) {
+            int guess = (predictions.at(i) == -1) ? 0 : 1;
+            cout << userIDs.at(i) << "," << guess << endl;
+    }
+
 	trainingMap.clear();
 	labels.clear();
 	featuresMentioned.clear();
 	zeroData.clear();
 //	cout << "\n\nNow running and cross validating Logistic Regression over the training forest " << endl;
-//
-//	//if running SVM over bagged.
+
+	//if running SVM over bagged.
 //	BaggedLogistic log;
 //	log.trainingMap = mapLog;
 //	log.labels = labelsLog;
@@ -457,7 +509,7 @@ void ID3::bagged(bool isSVM) {
 //	svm.labels = labelsSVM;
 //	svm.weights = weightsSVM;
 //	svm.go();
-//
+////
 //	/*
 //	 *
 //	 *
@@ -471,7 +523,7 @@ void ID3::bagged(bool isSVM) {
 //	mapLog.clear();
 //	labelsLog.clear();
 //	weightsLog.clear();
-
+//
 //	cout << "\nNow running Bagged Forests over test data: " << endl;
 //	stream(testingFiles.at(0), false); //training map consists of the entire file now with positives.
 //	//now split up the data 100 ways
@@ -505,10 +557,11 @@ void ID3::bagged(bool isSVM) {
 //	labels.clear();
 //	featuresMentioned.clear();
 //	zeroData.clear();
-
+//
 //	cout << "\n\nNow running and cross validating SVM over the forest " << endl;
-
-//	if running SVM over bagged.
+//
+//
+////	if running SVM over bagged.
 //	BaggedSVM svmTest;
 //	svmTest.trainingMap = mapSVM;
 //	svmTest.labels = labelsSVM;
@@ -523,6 +576,8 @@ void ID3::bagged(bool isSVM) {
 //	logTest.weights = weightsLog;
 //	logTest.go();
 
+//	cout << "done";
+
 }
 
 void ID3::go() {
@@ -530,45 +585,10 @@ void ID3::go() {
 
 //	for (int i = 0; i < 100; i++) {
 
-	getAverages(trainingFiles.at(0));
-	stream(trainingFiles.at(0), false); //training map consists of the entire file now with positives.
 
-	vector<map<double, double>> S = trainingMap;
-	vector<double> l = labels;
-	set<int> attributes = featuresMentioned;
-
-//	run(3);
-	run(&S, &l, &attributes);
-
-	test(testingFiles.at(0));
-
-//	trainingMap.clear();
-//	labels.clear();
-//	featuresMentioned.clear();
-//	zeroData.clear();
 //		cout << i << endl;
 //	test("data/speeches.test.liblinear");
 
 //	}
-
-	vector<string> userIDs;
-	//      ifstream pipein();
-
-	ifstream pipein("data-splits/data.eval.id");
-
-	//read in the file.
-	for (string line; getline(pipein, line);) {
-		//now that we have a line, we need to create a vector. first value in examples is the label. then its each value of the attributes.
-		//              cout << line << endl;
-		userIDs.push_back(line);
-	}
-
-	cout << "Id,Prediction" << endl;
-//	cout << predictions.size()<<endl;
-
-	for (int i = 0; i < predictions.size(); i++) {
-		int guess = (predictions.at(i) == -1) ? 0 : 1;
-//		cout << userIDs.at(i) << "," << guess << endl;
-	}
 
 }
