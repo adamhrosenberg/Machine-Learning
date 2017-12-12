@@ -10,22 +10,24 @@
 #include "ID3.h"
 #include "KNN.h"
 #include "Perceptron.h"
+#include "KMeans.h"
 
 
 int main(){
 
+//	Bagged forests;
+//	forests.bagged(false);
+//
+//	ID3 id;
+//	id.go();
+//
+//	Perceptron per;
+//	per.go();
+//
+//	KNN knn;
+//	knn.go();
 
+	KMeans km;
+	km.go();
 
-
-	Bagged forests;
-	forests.bagged(false);
-
-	ID3 id;
-	id.go();
-
-	Perceptron per;
-	per.go();
-
-	KNN knn;
-	knn.go();
 }
