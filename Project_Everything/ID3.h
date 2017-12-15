@@ -88,6 +88,7 @@ private:
 	set<int> featuresMentioned;
 	int possibleValuesForA = 2;
 	int maxDepth = 10;
+	int newDimension = 16;
 	bool seeIfAllTrue(vector<double> * l);
 	vector<double> discretizedFeatureValues;
 	vector<int> predictions;

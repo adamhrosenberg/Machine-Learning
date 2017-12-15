@@ -28,6 +28,14 @@ double KNN::computeDistance(vector<double> p1, vector<double> p2) {
 	return distance;
 }
 
+double computeManhattanDistance(vector<double> p1, vector<double> p2){
+	double distance = 0;
+	for (int i = 0; i < p1.size(); i++) {
+//		distance += abs(p1.);
+	}
+	return distance;
+}
+
 void KNN::createTrainingData(string filepath, bool isTest) {
 	//file path is train file.
 
@@ -98,7 +106,7 @@ void KNN::NN(string filepath) {
 		int freq1 = 0;   // Frequency of group 0
 		int freq2 = 0;   // Frequency of group 1
 
-		for (int i = 0; i < 11; i++) {
+		for (int i = 0; i < 33; i++) {
 			if (trainingData.at(i).coordinates.at(0) == -1)
 				freq1++;
 			else if (trainingData.at(i).coordinates.at(0) == 1)

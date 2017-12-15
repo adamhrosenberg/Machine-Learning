@@ -326,7 +326,7 @@ BaggedTreeNode Bagged::recurse(vector<map<double, double>> * S, set<int> * attri
 		vector<double> * l, int currentDepth) {
 
 //	currentDepth++;
-//	cout << "S.size " << S->size() << " l.size() " << l->size() << endl;
+	//cout << "S.size " << S->size() << " l.size() " << l->size() << endl;
 
 	if (seeIfAllTrue(l)) {
 		BaggedTreeNode root;
@@ -341,11 +341,11 @@ BaggedTreeNode Bagged::recurse(vector<map<double, double>> * S, set<int> * attri
 
 	double totalEntropy = calculateTotalEntropy(l);
 
-//	cout << "Total label entropy " << totalEntropy << endl;
+	//cout << "Total label entropy " << totalEntropy << endl;
 
 	int A = bestAttributeThatClassifiesS(S, attributes, l, totalEntropy);
 
-//	cout << "The best attirubte is  " << A << endl;
+	//cout << "The best attirubte is  " << A << endl;
 
 	/**
 	 *
@@ -432,7 +432,7 @@ void Bagged::run(vector<map<double, double>> * S, vector<double> * l,
 
 void Bagged::bagged(bool isSVM) {
 
-//	cout << "Beginning bagged forests on training set" << endl;
+	cout << "Beginning bagged forests on training set" << endl;
 
 //	if(isSVM){
 //		cout << "Will be running SVM over bagged forest" << endl;
@@ -465,6 +465,8 @@ void Bagged::bagged(bool isSVM) {
 			S.push_back(trainingMap.at(randomRow));
 			l.push_back(labels.at(randomRow));
 		}
+
+		
 
 		run(&S, &l, &attributes);
 

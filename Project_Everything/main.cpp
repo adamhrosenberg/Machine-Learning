@@ -11,23 +11,33 @@
 #include "KNN.h"
 #include "Perceptron.h"
 #include "KMeans.h"
+#include "LogisticRegression.h"
+#include "SGDSVM.h"
 
 
 int main(){
 
-//	Bagged forests;
-//	forests.bagged(false);
-//
-//	ID3 id;
-//	id.go();
-//
-//	Perceptron per;
-//	per.go();
-//
-//	KNN knn;
-//	knn.go();
+	Bagged forests;
+	forests.bagged(false);
+
+	ID3 id;
+	id.go();
+
+	Perceptron per;
+	per.go();
+
 
 	KMeans km;
 	km.go();
+
+	KNN knn;
+	knn.go();
+
+	LogisticRegression log;
+	log.go();
+
+	SGDSVM svm;
+	svm.go();
+
 
 }

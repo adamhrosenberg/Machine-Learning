@@ -28,6 +28,15 @@ double KMeans::computeDistance(vector<double> p1, vector<double> p2) {
 	return distance;
 }
 
+double KMeans::computeManhattanDistance(vector<double> p1, vector<double> p2) {
+	double distance = 0;
+	for (int i = 0; i < p1.size(); i++) {
+		double s = p1.at(i) - p2.at(i);
+		distance += abs(s);
+	}
+	return distance;
+}
+
 void KMeans::createTrainingData(string filepath, bool isTest) {
 	//file path is train file.
 	double right = 0;
@@ -73,7 +82,7 @@ void KMeans::createTrainingData(string filepath, bool isTest) {
 			int minClusterID = 0;
 			bool guess;
 			for (int mean = 0; mean < centroids.size(); mean++) {
-				int distance = computeDistance(example,
+				int distance = computeManhattanDistance(example,
 						centroids.at(mean).coordinates);
 				if (distance < minDistance) {
 					minDistance = distance;
@@ -103,7 +112,10 @@ void KMeans::createTrainingData(string filepath, bool isTest) {
 	}
 
 	if (isTest) {
-//		cout << "Accuracy : " << right / (right + wrong) << endl;
+		accuracy = right / (right + wrong);
+//		if(accuracy > .55) //guessed all 1s. bad rng.
+		cout << "Accuracy : " << accuracy << endl;
+
 	}
 }
 
@@ -157,7 +169,10 @@ void KMeans::KM() {
 		minDistance = 2147483647;
 		minClusterID = 0;
 		for (int mean = 0; mean < centroids.size(); mean++) {
-			int distance = computeDistance(trainingData.at(item).coordinates,
+//			int distance = computeDistance(trainingData.at(item).coordinates,
+//					centroids.at(mean).coordinates);
+			int distance = computeManhattanDistance(
+					trainingData.at(item).coordinates,
 					centroids.at(mean).coordinates);
 //			cout << "Distance " << distance << endl;
 			if (distance < minDistance) {
@@ -217,51 +232,71 @@ void KMeans::KM() {
 }
 
 void KMeans::test() {
-	createTrainingData("data-splits/data.eval.anon", true);
+	createTrainingData("data-splits/data.test", true);
+
+//	createTrainingData("data-splits/data.eval.anon", true);
 }
 
 void KMeans::go() {
 
 	//populate k centroids.
-	k = 3;
-	createTrainingData("data-splits/data.train", false); //created training data vector.
-	populateCentroids();
+//	for(int i = 1; i < 15; i++)
+//	{
+	k = 40;
 
-//	for (int i = 0; i < 5; i++) {
-	KM();
+	double iterAccuracy = 0;
 
-//		cout << endl;
-//		for(int mean = 0; mean < centroids.size(); mean++){
-//			cout << "centroid # " << mean << " coordinates: ";
-//			for(int element = 0; element < centroids.at(mean).coordinates.size(); element++){
-//				cout << centroids.at(mean).coordinates.at(element) << " , ";
-//			}
-//			cout << endl;
+//	for (int iter = 0; iter < 10; iter++) {
+
+		createTrainingData("data-splits/data.train", false); //created training data vector.
+		populateCentroids();
+		//loop over KMeans i number of times.
+//		for (int i = 0; i < 10; i++) {
+			KM();
 //		}
+
+		cout << "accuracy for k = " << k << endl;
+		test();
+
+		//see how many twitter users were spam
+		int posGuess = 0;
+		int wrongPosGuess = 0;
+
+		for(int guess = 0 ; guess < predictions.size(); guess++){
+			if(labels.at(guess) == predictions.at(guess))
+				posGuess++;
+			else if(predictions.at(guess) == 1 && labels.at(guess) == -1)
+				wrongPosGuess++;
+		}
+
+//		cout << "Pos guesses: " << posGuess << " " << wrongPosGuess<< endl;
+
+		iterAccuracy += accuracy;
+
+		trainingData.clear();
+		centroids.clear();
+		labels.clear();
 //	}
 
-//	cout << labels.size() << endl;
-	test();
+//	iterAccuracy /= 10;
+//	cout << iterAccuracy<<endl;
+//	}
 
-	vector<string> userIDs;
-	//      ifstream pipein();
+	//kaggle writing data. ./a.out > output.csv
+//	vector<string> userIDs;
+//
+//	ifstream pipein("data-splits/data.eval.id");
+//
+//	//read in the file.
+//	for (string line; getline(pipein, line);) {
+//		userIDs.push_back(line);
+//	}
+//
+//	    cout << "Id,Prediction" << endl;
+//
+//	for (int i = 0; i < predictions.size(); i++) {
+//		int guess = (predictions.at(i) == -1) ? 0 : 1;
+////		            cout << userIDs.at(i) << "," << guess << endl;
+//	}
 
-	ifstream pipein("data-splits/data.eval.id");
-
-	//read in the file.
-	for (string line; getline(pipein, line);) {
-		//now that we have a line, we need to create a vector. first value in examples is the label. then its each value of the attributes.
-		//              cout << line << endl;
-		userIDs.push_back(line);
-	}
-
-	    cout << "Id,Prediction" << endl;
-
-	for (int i = 0; i < predictions.size(); i++) {
-		int guess = (predictions.at(i) == -1) ? 0 : 1;
-		            cout << userIDs.at(i) << "," << guess << endl;
-	}
-
-//	KM("data-splits/data.eval.anon"); //testing
-//	KM("data-splits/data.test"); //testing
 }

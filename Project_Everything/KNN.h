@@ -28,6 +28,7 @@ public:
 	void NN(string filepath);
 	void createTrainingData(string filepath, bool isTest);
 	double computeDistance(vector<double> p1, vector<double> p2);
+	double computeManhattanDistance(vector<double> p1, vector<double> p2);
 	static bool comparison(point a, point b);
 
 	vector<string> userIDs;

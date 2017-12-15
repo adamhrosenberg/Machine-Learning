@@ -36,6 +36,7 @@ public:
 	virtual ~KMeans();
 	static bool comparison(mPoint a, mPoint b);
 	double computeDistance(vector<double> p1, vector<double> p2);
+	double computeManhattanDistance(vector<double> p1, vector<double> p2);
 	void createTrainingData(string filepath, bool isTest);
 	void go();
 	void KM();
@@ -47,6 +48,8 @@ public:
 
 	vector<string> userIDs;
 	int userCount = 0;
+
+	double accuracy;
 
 	vector<int> predictions;
 	vector<double> labels;

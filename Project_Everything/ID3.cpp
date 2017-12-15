@@ -510,10 +510,13 @@ void ID3::bagged(bool isSVM) {
 void ID3::go() {
 //	stream("data/speeches.train.liblinear", false); //training map consists of the entire file now with positives.
 
+	maxDepth = 8;
 //	for (int i = 0; i < 100; i++) {
 
+	//maxDepth = 3
 	getAverages(trainingFiles.at(0));
 	stream(trainingFiles.at(0), false); //training map consists of the entire file now with positives.
+
 
 	vector<map<double, double>> S = trainingMap;
 	vector<double> l = labels;
@@ -523,6 +526,10 @@ void ID3::go() {
 	run(&S, &l, &attributes);
 
 	test(testingFiles.at(0));
+
+//	for(int i=0; i<discretizedFeatureValues.size();i++){
+//		cout << discretizedFeatureValues.at(i)<<endl;
+//	}
 
 //	trainingMap.clear();
 //	labels.clear();

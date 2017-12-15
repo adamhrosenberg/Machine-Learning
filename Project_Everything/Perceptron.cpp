@@ -99,8 +99,8 @@ void Perceptron::go() {
 	populateWeights();
 	//start perceptron on training file.
 	stream("data-splits/data.train", false); //training
-	stream("data-splits/data.eval.anon", true); //testing
-//	stream("Dataset/data-splits/data.test", true); //testing
+//	stream("data-splits/data.eval.anon", true); //testing
+	stream("Dataset/data-splits/data.test", true); //testing
 
 	vector<string> userIDs;
 //	ifstream pipein();
@@ -114,11 +114,11 @@ void Perceptron::go() {
 		userIDs.push_back(line);
 	}
 
-	cout << "Id,Prediction" << endl;
+//	cout << "Id,Prediction" << endl;
 
 	for (int i = 0; i < predictions.size(); i++) {
 		int guess = (predictions.at(i) == -1) ? 0 : 1;
-		cout << userIDs.at(i) << "," << guess << endl;
+//		cout << userIDs.at(i) << "," << guess << endl;
 	}
 //	return 0;
 }
